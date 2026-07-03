@@ -1,0 +1,2281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#C0607A">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="bloom">
+  <meta name="application-name" content="bloom">
+  <meta name="description" content="plan softly. live fully. — bloom digital planner">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-touch-fullscreen" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <title>bloom — digital planner</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Serif+Display:ital@0;1&display=swap');
+:root {
+  --lav:#C9B8F0;--lav-l:#EDE8FB;--lav-d:#7B5EA7;
+  --blush:#F4C2D0;--blush-l:#FDF0F4;--blush-d:#C0607A;
+  --mint:#B2E4D4;--mint-l:#E8F8F2;--mint-d:#3A8E6E;
+  --peach:#FFD4B8;--peach-l:#FFF4EC;--peach-d:#B85C2A;
+  --sky:#B8D8F0;--sky-l:#EAF4FC;--sky-d:#2A6EA6;
+  --butter:#FAF0B0;--butter-l:#FFFCE8;--butter-d:#8A7210;
+  --cream:#FDF8F2;--text:#2D2235;--muted:#7A6B82;
+  --white:#FFFFFF;--border:#E8E0F0;--border2:#D4C8E8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh}
+
+/* ── COVER ── */
+.cover{min-height:100vh;height:100svh;background:linear-gradient(145deg,#FBF5EC 0%,#FDF8F2 45%,#F7F0E8 100%);display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;padding:48px 28px;text-align:center;position:relative;overflow:hidden;box-sizing:border-box}
+.cover-blobs{position:absolute;inset:0;pointer-events:none}
+.blob{position:absolute;border-radius:50%;opacity:.35}
+.cover h1{font-family:'DM Serif Display',serif;font-size:52px;color:var(--lav-d);letter-spacing:-1px;line-height:1.1;margin-bottom:8px;position:relative}
+.cover h1 span{color:var(--blush-d)}
+.cover-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:24px;color:#A06858;margin-bottom:0;position:relative;letter-spacing:.3px;opacity:.9}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.cover-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:32px;position:relative}
+.pill{padding:6px 18px;border-radius:30px;font-size:12px;font-weight:600;letter-spacing:.4px}
+.pill-lav{background:#DDD0F8;color:#6B4FA8}
+.pill-blush{background:#F7C8D5;color:#B04468}
+.pill-mint{background:#A8DCC8;color:#2E7A5C}
+.pill-peach{background:#FFC8A0;color:#A04820}
+.pill-sky{background:#A8CCEA;color:#1E5E90}
+.pill-butter{background:#F0E080;color:#746010}
+.cover-btn{padding:14px 36px;border-radius:40px;border:none;background:linear-gradient(135deg,#7C4D6A,#C0607A);color:#fff;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;position:relative;letter-spacing:.2px;box-shadow:0 6px 24px rgba(192,96,122,.28)}
+.cover-btn:hover{background:linear-gradient(135deg,#C0607A,#B85C2A);box-shadow:0 8px 28px rgba(192,96,122,.38)}
+.cover-stats{display:flex;gap:40px;margin:0;position:relative}
+.c-stat{text-align:center}
+.c-stat-num{font-family:'DM Serif Display',serif;font-size:28px;color:#7C4D6A}
+.c-stat-label{font-size:11px;color:var(--muted);font-weight:500}
+
+/* ── NAV ── */
+.nav{background:var(--white);border-bottom:1.5px solid var(--border);position:sticky;top:0;z-index:100}
+.nav-top{display:flex;align-items:center;justify-content:space-between;padding:14px 24px}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:22px;color:var(--lav-d)}
+.nav-logo span{color:var(--blush-d)}
+.nav-date{font-size:12px;color:var(--muted);text-align:right;line-height:1.5}
+.nav-scroll{display:flex;gap:3px;padding:8px 16px;overflow-x:auto;scrollbar-width:none}
+.nav-scroll::-webkit-scrollbar{display:none}
+.tab-btn{padding:7px 15px;border-radius:30px;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;white-space:nowrap;transition:all .18s}
+.tab-btn.active{background:var(--lav-l);color:var(--lav-d);font-weight:600}
+.sub-nav{display:none;gap:3px;padding:0 16px 10px;flex-wrap:wrap}
+.sub-nav.visible{display:flex}
+.sub-btn{padding:5px 14px;border-radius:20px;border:1.5px solid var(--border);background:transparent;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;color:var(--muted);cursor:pointer;white-space:nowrap;transition:all .15s}
+.sub-btn.active{background:var(--blush-l);border-color:var(--blush);color:var(--blush-d)}
+
+/* ── PAGES ── */
+.page{display:none;padding:24px;max-width:920px;margin:0 auto}
+.page.active{display:block}
+.sub-page{display:none}
+.sub-page.active{display:block}
+
+/* ── UTILS ── */
+.page-title{font-family:'DM Serif Display',serif;font-size:26px;color:var(--text);margin-bottom:4px}
+.page-sub{font-size:13px;color:var(--muted);margin-bottom:20px}
+.section-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.9px;margin-bottom:10px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:20px}
+.card+.card{margin-top:14px}
+.al{border-left:4px solid var(--lav);border-radius:0 18px 18px 0}
+.ab{border-left:4px solid var(--blush);border-radius:0 18px 18px 0}
+.am{border-left:4px solid var(--mint);border-radius:0 18px 18px 0}
+.ap{border-left:4px solid var(--peach);border-radius:0 18px 18px 0}
+.as{border-left:4px solid var(--sky);border-radius:0 18px 18px 0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.span2{grid-column:1/-1}
+textarea,input[type=text]{border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);outline:none;width:100%;resize:none}
+textarea::placeholder,input::placeholder{color:var(--border2)}
+.lined{background-image:repeating-linear-gradient(transparent,transparent 25px,var(--border) 26px);line-height:26px}
+.inp-row{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--cream);border-radius:10px;border:1px solid var(--border)}
+.inp-lbl{font-size:11px;font-weight:600;color:var(--muted);min-width:40px}
+.check-circle{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--border2);flex-shrink:0;cursor:pointer;transition:all .15s}
+.check-circle.done{background:var(--mint);border-color:var(--mint-d)}
+.check-sq{width:16px;height:16px;border-radius:5px;border:1.5px solid var(--border2);flex-shrink:0;cursor:pointer;transition:all .15s}
+.check-sq.done{background:var(--lav);border-color:var(--lav-d)}
+.stat-card{background:var(--lav-l);border-radius:14px;padding:14px 16px;text-align:center}
+.stat-num{font-family:'DM Serif Display',serif;font-size:28px;color:var(--lav-d)}
+.stat-lbl{font-size:11px;color:var(--muted);font-weight:500;margin-top:2px}
+.progress-bar-wrap{background:var(--border);border-radius:30px;height:8px;overflow:hidden;margin-top:6px}
+.progress-bar{height:100%;border-radius:30px;background:var(--lav);transition:width .3s}
+.tag{display:inline-block;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:600}
+.tag-lav{background:var(--lav-l);color:var(--lav-d)}
+.tag-mint{background:var(--mint-l);color:var(--mint-d)}
+.tag-blush{background:var(--blush-l);color:var(--blush-d)}
+.tag-peach{background:var(--peach-l);color:var(--peach-d)}
+.tag-sky{background:var(--sky-l);color:var(--sky-d)}
+.tag-butter{background:var(--butter-l);color:var(--butter-d)}
+.row-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+.row-item:last-child{border-bottom:none}
+
+/* ── BUDGET ── */
+.budget-hero{background:var(--mint-l);border:1px solid var(--mint);border-radius:18px;padding:22px;margin-bottom:14px}
+.budget-total{font-family:'DM Serif Display',serif;font-size:40px;color:var(--mint-d)}
+.budget-bar-row{display:flex;gap:3px;height:12px;border-radius:30px;overflow:hidden;margin:12px 0}
+.b-seg{height:100%;transition:width .4s}
+.expense-row{display:grid;grid-template-columns:20px 1fr 80px 70px 28px;gap:8px;align-items:center;padding:9px 12px;border-radius:10px;margin-bottom:5px;border:1px solid var(--border);background:var(--white)}
+.expense-cat-dot{width:10px;height:10px;border-radius:50%}
+.expense-input{border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);outline:none;width:100%}
+.expense-amount{border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--text);outline:none;width:100%;text-align:right}
+.del-btn{border:none;background:none;color:var(--blush-d);font-size:16px;cursor:pointer;line-height:1;padding:0}
+.add-btn{display:flex;align-items:center;gap:6px;padding:8px 18px;border-radius:30px;border:1.5px dashed var(--border2);background:transparent;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--muted);cursor:pointer;margin-top:8px}
+.add-btn:hover{border-color:var(--lav);color:var(--lav-d)}
+.cat-legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.cat-pill{display:flex;align-items:center;gap:5px;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;border:1.5px solid transparent}
+.cat-pill.sel{border-color:var(--lav-d)}
+select.expense-select{border:none;background:var(--cream);font-family:'DM Sans',sans-serif;font-size:11px;color:var(--muted);border-radius:6px;padding:2px 4px;outline:none;cursor:pointer}
+
+/* ── READING ── */
+.book-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;gap:14px;margin-bottom:10px}
+.book-spine{width:44px;min-height:64px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:1px;flex-shrink:0;text-align:center}
+.book-info{flex:1;min-width:0}
+.book-title-input{font-size:14px;font-weight:600;color:var(--text);border:none;background:transparent;outline:none;width:100%;font-family:'DM Sans',sans-serif}
+.book-author-input{font-size:12px;color:var(--muted);border:none;background:transparent;outline:none;width:100%;font-family:'DM Sans',sans-serif;margin-top:2px}
+.book-meta{display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap}
+.rating-stars span{cursor:pointer;font-size:14px;color:var(--border2)}
+.rating-stars span.lit{color:#F4C2D0}
+.pages-input{width:80px;border:1px solid var(--border);border-radius:8px;padding:4px 8px;font-size:12px;font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);outline:none}
+.status-sel{border:1px solid var(--border);border-radius:8px;padding:4px 8px;font-size:11px;font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--muted);outline:none;cursor:pointer}
+.read-progress{margin-top:8px}
+
+/* ── MOOD ── */
+.mood-btn{padding:10px 16px;border-radius:30px;border:1.5px solid var(--border);background:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .15s}
+.mood-btn.active{background:var(--lav-l);border-color:var(--lav);color:var(--lav-d);font-weight:600}
+.mood-week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:12px}
+.mood-day-cell{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:10px 6px;text-align:center;cursor:pointer;transition:all .15s}
+.mood-day-cell:hover{border-color:var(--lav)}
+.mood-day-cell.picked{background:var(--lav-l);border-color:var(--lav)}
+.mood-emoji-big{font-size:20px;display:block;margin-bottom:4px}
+.mood-day-name{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase}
+
+/* ── HABIT ── */
+.habit-wrap{overflow-x:auto}
+.habit-tbl{border-collapse:separate;border-spacing:3px;min-width:600px}
+.habit-tbl th{font-size:9px;font-weight:700;color:var(--muted);text-align:center;padding:3px 2px;text-transform:uppercase}
+.habit-tbl td{padding:2px}
+.hc{width:24px;height:24px;border-radius:7px;border:1.5px solid var(--border);background:var(--cream);cursor:pointer;transition:all .12s;display:flex;align-items:center;justify-content:center;font-size:11px}
+.hc.done{background:var(--mint);border-color:var(--mint-d)}
+.habit-name-inp{border:none;background:transparent;font-size:13px;color:var(--text);font-family:'DM Sans',sans-serif;outline:none;width:110px}
+.habit-name-inp::placeholder{color:var(--border2)}
+
+/* ── WATER / SLEEP / FITNESS ── */
+.water-cup{display:flex;flex-direction:column;align-items:center;gap:6px}
+.cup{width:36px;height:44px;border:2px solid var(--sky);border-radius:0 0 8px 8px;position:relative;overflow:hidden;cursor:pointer;background:var(--white)}
+.cup-fill{position:absolute;bottom:0;left:0;right:0;background:var(--sky);transition:height .3s}
+.sleep-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px}
+.sleep-input{width:70px;border:1.5px solid var(--border);border-radius:10px;padding:8px 12px;font-size:16px;font-weight:600;color:var(--lav-d);font-family:'DM Serif Display',serif;text-align:center;background:var(--cream);outline:none}
+.fitness-row{display:flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--border);border-radius:12px;background:var(--cream);margin-bottom:8px}
+.fitness-icon{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px}
+
+/* ── SAVINGS GOAL ── */
+.savings-goal-card{border:1px solid var(--mint);background:var(--mint-l);border-radius:18px;padding:18px;margin-bottom:12px}
+.savings-bar-outer{background:rgba(0,0,0,.08);border-radius:30px;height:14px;overflow:hidden;margin:10px 0}
+.savings-bar-inner{height:100%;border-radius:30px;background:var(--mint-d);transition:width .4s}
+
+/* ── FOOTER ── */
+.footer{text-align:center;padding:32px 20px;font-family:'DM Serif Display',serif;font-style:italic;font-size:14px;color:var(--muted)}
+
+/* ── CONTENTEDITABLE PLACEHOLDER ── */
+[contenteditable]:empty:before{content:attr(data-placeholder);color:var(--muted);opacity:.55;pointer-events:none;font-style:italic;font-size:.9em}
+
+/* ── NAV EXTRA BUTTONS ── */
+.print-btn{padding:6px 14px;border-radius:20px;border:1.5px solid var(--mint);background:transparent;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:var(--mint-d);cursor:pointer;transition:all .15s}
+.print-btn:hover{background:var(--mint-l)}
+.reset-btn{padding:6px 14px;border-radius:20px;border:1.5px solid var(--blush);background:transparent;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;color:var(--blush-d);cursor:pointer;transition:all .15s;margin-left:4px}
+.reset-btn:hover{background:var(--blush-l)}
+.saved-badge{font-size:10px;font-weight:700;color:var(--mint-d);letter-spacing:.3px;opacity:0;transition:opacity .4s;margin-left:6px}
+.saved-badge.show{opacity:1}
+
+/* ── PRINT STYLESHEET ── */
+@media print{
+  .cover,.nav,.add-btn,.del-btn,.reset-btn,.print-btn,.saved-badge{display:none!important}
+  #main-footer{display:block!important;text-align:center;padding:16px}
+  body{background:#fff!important}
+  .page{display:block!important;max-width:100%!important;padding:14px!important;margin:0!important}
+  .page+.page{page-break-before:always}
+  .card{border:1px solid #e0e0e0!important;box-shadow:none!important;break-inside:avoid;border-radius:6px!important;margin-bottom:10px!important}
+  .grid2,.grid3,.grid4{display:block!important}
+  .grid2>*+*,.grid3>*+*,.grid4>*+*{margin-top:10px}
+  textarea,input[type=text]{border-bottom:1px solid #ccc!important}
+  .habit-wrap{overflow:visible!important}
+  .habit-tbl{min-width:unset!important;font-size:8px;width:100%}
+  .sub-page:not(.active){display:none!important}
+  .progress-bar-wrap{border:1px solid #ddd!important}
+}
+
+/* ── PAGE NAVIGATOR ── */
+.nav-pager{display:flex;align-items:center;gap:10px;margin-bottom:18px;justify-content:center;flex-wrap:wrap}
+.nav-pager-btn{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--lav);background:var(--white);color:var(--lav-d);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;font-family:'DM Sans',sans-serif;font-weight:600}
+.nav-pager-btn:hover{background:var(--lav-l);transform:scale(1.05)}
+.nav-pager-label{min-width:200px;text-align:center;font-family:'DM Serif Display',serif;font-size:18px;color:var(--text)}
+.nav-today-btn{padding:6px 16px;border-radius:20px;border:1.5px solid var(--mint);background:var(--white);color:var(--mint-d);font-size:11px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-left:6px;transition:all .15s}
+.nav-today-btn:hover{background:var(--mint-l)}
+@media print{.nav-pager{display:none!important}}
+
+/* ── WRITABLE CALENDAR CELLS ── */
+.cal-cell{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:6px 8px;min-height:84px;display:flex;flex-direction:column;overflow:hidden;transition:border-color .15s,background .15s}
+.cal-cell.today{background:var(--lav-l);border-color:var(--lav)}
+.cal-cell.has-content:not(.today){border-color:var(--blush);background:linear-gradient(180deg,var(--white) 70%,var(--blush-l))}
+.cal-cell-num{font-size:11px;font-weight:600;color:var(--muted);margin-bottom:3px;flex-shrink:0}
+.cal-cell.today .cal-cell-num{color:var(--lav-d)}
+.cal-cell-body{flex:1;font-size:10px;line-height:1.4;color:var(--text);outline:none;overflow-y:auto;cursor:text;font-family:'DM Sans',sans-serif}
+.cal-cell-body:empty:before{content:attr(data-placeholder);color:var(--border2);font-style:italic;font-size:9px;pointer-events:none}
+@media print{
+  .cal-cell{min-height:64px}
+  .cal-cell-body:empty:before{display:none}
+}
+
+/* ── CALENDAR CELL — MARK + WRITE ── */
+.cal-cell.marked{background:var(--lav-l)!important;border-color:var(--lav)!important}
+.cal-cell.marked .cal-cell-num{color:var(--lav-d);font-weight:700}
+.cal-cell-num{cursor:pointer;padding:2px 5px;border-radius:5px;display:inline-flex;align-items:center;gap:4px;transition:background .15s;user-select:none}
+.cal-cell-num:hover{background:var(--lav-l)}
+.cal-cell-num::after{content:'✦';font-size:7px;opacity:0;color:var(--lav-d);transition:opacity .15s}
+.cal-cell.marked .cal-cell-num::after{opacity:1}
+.cal-cell-body{cursor:text}
+
+/* ── MOBILE RESPONSIVE ── */
+@media (max-width:640px){
+  .grid2,.grid3,.grid4{display:block!important}
+  .grid2>*+*,.grid3>*+*,.grid4>*+*{margin-top:12px!important}
+  .habit-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px}
+  .habit-tbl{font-size:9px}
+  .habit-tbl th,.habit-tbl td{padding:2px 1px}
+  .nav-tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:2px;scrollbar-width:none}
+  .nav-tabs::-webkit-scrollbar{display:none}
+  .tab-btn{flex-shrink:0;font-size:11px;padding:6px 11px}
+  .page{padding:14px 12px!important}
+  .card{padding:14px!important;border-radius:14px!important}
+  .page-title{font-size:22px!important}
+  .nav-pager-label{min-width:140px!important;font-size:15px!important}
+  .cover{padding:32px 18px!important;height:100svh;min-height:100svh;justify-content:space-evenly!important}
+  .cover-title{font-size:52px!important}
+  .c-stats{flex-wrap:wrap;gap:12px}
+  .c-stat{min-width:80px}
+  .mood-btn{padding:8px 10px!important;font-size:12px!important}
+  #month-cal{grid-template-columns:repeat(7,1fr)!important}
+  .cal-cell{min-height:52px!important;padding:4px!important}
+  .cal-cell-body{font-size:9px!important}
+  .budget-table{font-size:11px}
+  textarea{font-size:13px}
+  .week-grid{grid-template-columns:repeat(7,1fr)!important;min-width:480px}
+  #week-grid-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+}
+
+/* ── SOUND TOGGLE ── */
+.sound-btn{padding:6px 12px;border-radius:20px;border:1.5px solid var(--sky);background:transparent;font-size:13px;cursor:pointer;transition:all .15s;margin-left:4px;line-height:1}
+.sound-btn:hover{background:var(--sky-l)}
+.sound-btn.muted{border-color:var(--border);opacity:.5}
+</style>
+</head>
+<body>
+<h2 class="sr-only">bloom — softly productive, beautifully organized. plan softly, live fully.</h2>
+
+<!-- COVER -->
+<div class="cover" id="cover-page">
+  <div class="cover-blobs">
+    <div class="blob" style="width:420px;height:420px;background:var(--peach);top:-100px;left:-80px;opacity:.28"></div>
+    <div class="blob" style="width:260px;height:260px;background:var(--mint);top:-60px;right:-60px;opacity:.25"></div>
+    <div class="blob" style="width:280px;height:280px;background:var(--sky);bottom:-60px;left:-40px;opacity:.22"></div>
+    <div class="blob" style="width:320px;height:320px;background:var(--blush);bottom:-80px;right:-60px;opacity:.3"></div>
+    <div class="blob" style="width:160px;height:160px;background:var(--butter);top:50%;right:60px;transform:translateY(-50%);opacity:.28"></div>
+  </div>
+  <div style="position:relative;margin-bottom:6px">
+    <div style="font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#A07060;margin-bottom:14px;opacity:.9">softly productive · beautifully organized</div>
+    <div style="font-family:'DM Serif Display',serif;font-size:80px;font-style:italic;background:linear-gradient(135deg,#C0607A 0%,#7C4D6A 55%,#B85C2A 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;letter-spacing:-2px;margin-bottom:2px">bloom</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:4px">
+      <div style="height:1px;width:48px;background:var(--blush)"></div>
+      <span style="font-size:13px;color:#C0607A;letter-spacing:3px">✦ ✦ ✦</span>
+      <div style="height:1px;width:48px;background:var(--blush)"></div>
+    </div>
+    <div style="font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:#B89880">digital planner</div>
+  </div>
+  <p class="cover-tagline" style="margin-top:10px">plan softly. live fully.</p>
+  <div class="cover-pills">
+    <span class="pill pill-lav">✦ daily planner</span>
+    <span class="pill pill-blush">✦ weekly view</span>
+    <span class="pill pill-mint">✦ monthly calendar</span>
+    <span class="pill pill-peach">✦ quarterly goals</span>
+    <span class="pill pill-sky">✦ budget tracker</span>
+    <span class="pill pill-butter">✦ reading tracker</span>
+    <span class="pill pill-lav">✦ habit tracker</span>
+    <span class="pill pill-blush">✦ mood journal</span>
+    <span class="pill pill-mint">✦ wellness log</span>
+    <span class="pill pill-peach">✦ goal setting</span>
+    <span class="pill pill-sky">✦ vision board</span>
+    <span class="pill pill-butter">✦ notes & journal</span>
+    <span class="pill pill-sky">✦ travel tracker</span>
+  </div>
+  <button class="cover-btn" onclick="startPlanner()">open my planner →</button>
+  <div class="cover-stats">
+    <div class="c-stat"><div class="c-stat-num" style="color:#C0607A">12</div><div class="c-stat-label">tracker sections</div></div>
+    <div class="c-stat"><div class="c-stat-num" style="color:#3A8E6E">40+</div><div class="c-stat-label">planner pages</div></div>
+    <div class="c-stat"><div class="c-stat-num" style="color:#B85C2A">∞</div><div class="c-stat-label">soft potential</div></div>
+  </div>
+  <div id="pwa-tip" style="display:none;margin-top:20px;font-size:12px;color:var(--muted);background:rgba(255,255,255,0.75);backdrop-filter:blur(8px);border-radius:24px;padding:10px 22px;max-width:400px;line-height:1.7;text-align:center;border:1px solid rgba(255,255,255,0.9);position:relative"></div>
+</div>
+
+<!-- MAIN APP (hidden until cover CTA) -->
+<div id="main-app" style="display:none">
+
+<nav class="nav">
+  <div class="nav-top">
+    <div class="nav-logo">bloom<span>.</span></div>
+    <div style="display:flex;align-items:center;gap:2px"><button class="print-btn" onclick="window.print()">🖨️ print</button><button class="reset-btn" onclick="resetAll()">↺ reset</button><button id="sound-btn" class="sound-btn" onclick="toggleSound()" title="toggle sounds">🔊</button><span class="saved-badge" id="saved-badge">saved ✓</span></div><div class="nav-date" id="nav-date"></div>
+  </div>
+  <div class="nav-scroll">
+    <button class="tab-btn active" onclick="showPage('daily',this)">🌸 daily</button>
+    <button class="tab-btn" onclick="showPage('weekly',this)">📅 weekly</button>
+    <button class="tab-btn" onclick="showPage('monthly',this)">🗓️ monthly</button>
+    <button class="tab-btn" onclick="showPage('quarterly',this)">🎯 quarterly</button>
+    <button class="tab-btn" onclick="showPage('habits',this)">✅ habits</button>
+    <button class="tab-btn" onclick="showPage('wellness',this)">🌿 wellness</button>
+    <button class="tab-btn" onclick="showPage('budget',this)">💸 budget</button>
+    <button class="tab-btn" onclick="showPage('reading',this)">📚 reading</button>
+    <button class="tab-btn" onclick="showPage('goals',this)">⭐ goals</button>
+    <button class="tab-btn" onclick="showPage('mood',this)">💜 mood</button>
+    <button class="tab-btn" onclick="showPage('notes',this)">✏️ notes</button>
+    <button class="tab-btn" onclick="showPage('vision',this)">🔮 vision</button>
+    <button class="tab-btn" onclick="showPage('travel',this)">✈️ travel</button>
+  </div>
+  <div class="sub-nav" id="sub-nav"></div>
+</nav>
+
+<!-- ══════════════ DAILY ══════════════ -->
+<div class="page active" id="page-daily">
+  <h1 class="page-title">today's plan ✦</h1>
+  <p class="page-sub" id="daily-sub"></p>
+  <div class="grid2">
+    <div>
+      <div class="card al">
+        <div class="section-label">⏰ time blocks</div>
+        <div id="time-blocks"></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="card ab">
+        <div class="section-label">🌸 top 3 priorities</div>
+        <div id="priorities"></div>
+      </div>
+      <div class="card am">
+        <div class="section-label">✨ i'm grateful for...</div>
+        <div id="gratitude"></div>
+      </div>
+      <div class="card">
+        <div class="section-label">🧠 brain dump</div>
+        <textarea style="min-height:80px" placeholder="get it all out... thoughts, worries, ideas, random stuff ☁️"></textarea>
+      </div>
+      <div class="card ap">
+        <div class="section-label">🌙 tonight's intention</div>
+        <textarea style="min-height:50px" placeholder="how do i want to feel by end of day?"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ WEEKLY ══════════════ -->
+<div class="page" id="page-weekly">
+  <h1 class="page-title">this week ✦</h1>
+  <p class="page-sub" id="weekly-sub"></p>
+  <div class="nav-pager">
+    <button class="nav-pager-btn" onclick="navWeek(-1)">◀</button>
+    <div class="nav-pager-label" id="week-pager-label">this week</div>
+    <button class="nav-pager-btn" onclick="navWeek(1)">▶</button>
+    <button class="nav-today-btn" onclick="navWeek(0,true)">today</button>
+  </div>
+  <div class="card" style="margin-bottom:14px">
+    <div class="section-label" style="margin-bottom:12px">📅 week at a glance</div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:7px" id="week-grid"></div>
+  </div></div>
+  <div class="grid3">
+    <div class="card al"><div class="section-label">🎯 week focus</div><textarea style="min-height:70px" placeholder="this week's main theme..."></textarea></div>
+    <div class="card am"><div class="section-label">💫 wins so far</div><textarea style="min-height:70px" placeholder="celebrate everything!"></textarea></div>
+    <div class="card ab"><div class="section-label">🔁 carry over</div><textarea style="min-height:70px" placeholder="didn't finish yet..."></textarea></div>
+  </div>
+</div>
+
+<!-- ══════════════ MONTHLY ══════════════ -->
+<div class="page" id="page-monthly">
+  <h1 class="page-title" id="month-title"></h1>
+  <p class="page-sub">click any day to start planning ✦</p>
+  <div class="nav-pager">
+    <button class="nav-pager-btn" onclick="navMonth(-1)">◀</button>
+    <div class="nav-pager-label" id="month-pager-label">this month</div>
+    <button class="nav-pager-btn" onclick="navMonth(1)">▶</button>
+    <button class="nav-today-btn" onclick="navMonth(0,true)">today</button>
+  </div>
+  <div class="card" style="margin-bottom:14px">
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px" id="month-cal"></div>
+  </div>
+  <div class="grid2">
+    <div class="card al"><div class="section-label">🌷 monthly intentions</div><div id="month-intentions"></div></div>
+    <div class="card am"><div class="section-label">✨ wins & reflection</div><textarea style="min-height:120px" placeholder="what went well? what did i learn?"></textarea></div>
+  </div>
+</div>
+
+<!-- ══════════════ QUARTERLY ══════════════ -->
+<div class="page" id="page-quarterly">
+  <h1 class="page-title">this quarter ✦</h1>
+  <p class="page-sub" id="q-sub"></p>
+  <div class="nav-pager">
+    <button class="nav-pager-btn" onclick="navQuarter(-1)">◀</button>
+    <div class="nav-pager-label" id="q-pager-label">this quarter</div>
+    <button class="nav-pager-btn" onclick="navQuarter(1)">▶</button>
+    <button class="nav-today-btn" onclick="navQuarter(0,true)">today</button>
+  </div>
+  <div class="card" style="background:var(--lav-l);border-color:var(--lav);margin-bottom:14px">
+    <div class="section-label">🌟 quarter vision</div>
+    <input type="text" style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--lav-d);width:100%" placeholder="my big goal this quarter...">
+  </div>
+  <div class="grid2" id="q-months"></div>
+  <div class="card" style="margin-top:14px">
+    <div class="section-label">💭 quarter reflection</div>
+    <textarea style="min-height:80px" placeholder="what do i want to achieve? how do i want to feel by end of quarter?"></textarea>
+  </div>
+</div>
+
+<!-- ══════════════ HABITS ══════════════ -->
+<div class="page" id="page-habits">
+  <h1 class="page-title">habit tracker ✦</h1>
+  <p class="page-sub">build the life you want, one day at a time 🌱</p>
+  <div class="card">
+    <div class="habit-wrap"><table class="habit-tbl" id="habit-tbl"></table></div>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="card" style="background:var(--mint-l);border-color:var(--mint)">
+      <div class="section-label">🏆 current streak</div>
+      <div id="streak-display" style="font-family:'DM Serif Display',serif;font-size:40px;color:var(--mint-d)">0 days</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">keep going — you're doing amazing ✨</div>
+    </div>
+    <div class="card al"><div class="section-label">💭 habit reflection</div><textarea style="min-height:80px" placeholder="which habits are sticking? what needs adjusting?"></textarea></div>
+  </div>
+</div>
+
+<!-- ══════════════ WELLNESS ══════════════ -->
+<div class="page" id="page-wellness">
+  <h1 class="page-title">wellness ✦</h1>
+  <p class="page-sub">your body is your home, take care of it 🌿</p>
+  <div class="grid2">
+    <div>
+      <div class="card as">
+        <div class="section-label">💧 water intake — daily goal: 8 cups</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px" id="water-cups"></div>
+        <div style="margin-top:10px;font-size:13px;color:var(--muted)">today: <span id="water-count" style="color:var(--sky-d);font-weight:600">0</span> / 8 cups</div>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <div class="section-label">😴 sleep log</div>
+        <div id="sleep-log"></div>
+      </div>
+      <div class="card am" style="margin-top:14px">
+        <div class="section-label">🌿 self-care check-in</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px" id="selfcare"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card ab">
+        <div class="section-label">🏃 fitness tracker</div>
+        <div id="fitness-log"></div>
+        <button class="add-btn" onclick="addFitness()">+ add workout</button>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <div class="section-label">🥗 nutrition notes</div>
+        <textarea style="min-height:100px" placeholder="how am i eating? energy levels? meals i loved..."></textarea>
+      </div>
+      <div class="card al" style="margin-top:14px">
+        <div class="section-label">🧘 mindfulness log</div>
+        <textarea style="min-height:80px" placeholder="meditation, breathwork, journaling, walks in nature..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ BUDGET ══════════════ -->
+<div class="page" id="page-budget">
+  <h1 class="page-title">budget tracker ✦</h1>
+  <p class="page-sub">your money, your rules 💸</p>
+  <div class="sub-nav visible" id="budget-subnav" style="padding:0 0 14px;gap:6px">
+    <button class="sub-btn active" onclick="showBudget('overview',this)">overview</button>
+    <button class="sub-btn" onclick="showBudget('expenses',this)">expenses</button>
+    <button class="sub-btn" onclick="showBudget('savings',this)">savings goals</button>
+    <button class="sub-btn" onclick="showBudget('subscriptions',this)">subscriptions</button>
+    <button class="sub-btn" onclick="showBudget('monthly-budget',this)">monthly budget</button>
+  </div>
+
+  <!-- Overview -->
+  <div class="sub-page active" id="budget-overview">
+    <div class="budget-hero">
+      <div class="section-label">💰 money left this month</div>
+      <div class="budget-total" id="budget-left">₹0</div>
+      <div class="budget-bar-row" id="budget-bar"></div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap" id="budget-legend"></div>
+    </div>
+    <div class="grid3">
+      <div class="stat-card"><div class="stat-num" id="ov-income" style="color:var(--mint-d)">₹0</div><div class="stat-lbl">total income</div></div>
+      <div class="stat-card" style="background:var(--blush-l)"><div class="stat-num" id="ov-spent" style="color:var(--blush-d)">₹0</div><div class="stat-lbl">total spent</div></div>
+      <div class="stat-card" style="background:var(--sky-l)"><div class="stat-num" id="ov-saved" style="color:var(--sky-d)">0%</div><div class="stat-lbl">saving rate</div></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="section-label">📊 spending by category</div>
+      <div id="cat-breakdown"></div>
+    </div>
+  </div>
+
+  <!-- Expenses -->
+  <div class="sub-page" id="budget-expenses">
+    <div class="card" style="margin-bottom:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div class="section-label" style="margin-bottom:0">💳 income</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--mint-d)" id="income-total">₹0</div>
+      </div>
+      <div id="income-list"></div>
+      <button class="add-btn" onclick="addIncome()">+ add income</button>
+    </div>
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div class="section-label" style="margin-bottom:0">🛍️ expenses</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--blush-d)" id="expense-total">₹0</div>
+      </div>
+      <div style="display:grid;grid-template-columns:20px 1fr 80px 80px 28px;gap:8px;padding:0 12px;margin-bottom:6px">
+        <div></div>
+        <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase">item</div>
+        <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;text-align:right">category</div>
+        <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;text-align:right">amount</div>
+        <div></div>
+      </div>
+      <div id="expense-list"></div>
+      <button class="add-btn" onclick="addExpense()">+ add expense</button>
+    </div>
+  </div>
+
+  <!-- Savings Goals -->
+  <div class="sub-page" id="budget-savings">
+    <div id="savings-list"></div>
+    <button class="add-btn" onclick="addSavingsGoal()">+ add savings goal</button>
+    <div class="card" style="margin-top:14px">
+      <div class="section-label">💡 savings tips for me</div>
+      <div id="savings-tips"></div>
+    </div>
+  </div>
+
+  <!-- Subscriptions -->
+  <div class="sub-page" id="budget-subscriptions">
+    <div class="card" style="margin-bottom:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div class="section-label" style="margin-bottom:0">📱 active subscriptions</div>
+        <div style="font-family:'DM Serif Display',serif;font-size:18px;color:var(--blush-d)">₹<span id="sub-total">0</span>/mo</div>
+      </div>
+      <div style="margin-top:12px" id="sub-list"></div>
+      <button class="add-btn" onclick="addSubscription()">+ add subscription</button>
+    </div>
+  </div>
+
+  <!-- Monthly Budget -->
+  <div class="sub-page" id="budget-monthly-budget">
+    <div class="card">
+      <div class="section-label">🗓️ set monthly budget by category</div>
+      <div id="budget-cats"></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="section-label">📝 budget notes & reflections</div>
+      <textarea style="min-height:100px" placeholder="what worked this month? where did i overspend? what will i do differently?"></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ READING ══════════════ -->
+<div class="page" id="page-reading">
+  <h1 class="page-title">reading tracker ✦</h1>
+  <p class="page-sub">a reader lives a thousand lives 📚</p>
+  <div class="sub-nav visible" id="reading-subnav" style="padding:0 0 14px;gap:6px">
+    <button class="sub-btn active" onclick="showReading('shelf',this)">my shelf</button>
+    <button class="sub-btn" onclick="showReading('currently',this)">currently reading</button>
+    <button class="sub-btn" onclick="showReading('wishlist',this)">wish list</button>
+    <button class="sub-btn" onclick="showReading('log',this)">reading log</button>
+    <button class="sub-btn" onclick="showReading('stats',this)">stats</button>
+  </div>
+
+  <!-- Shelf -->
+  <div class="sub-page active" id="reading-shelf">
+    <div class="grid3" style="margin-bottom:14px">
+      <div class="stat-card"><div class="stat-num" id="r-read" style="color:var(--lav-d)">0</div><div class="stat-lbl">books read</div></div>
+      <div class="stat-card" style="background:var(--blush-l)"><div class="stat-num" id="r-reading" style="color:var(--blush-d)">0</div><div class="stat-lbl">reading now</div></div>
+      <div class="stat-card" style="background:var(--mint-l)"><div class="stat-num" id="r-wish" style="color:var(--mint-d)">0</div><div class="stat-lbl">want to read</div></div>
+    </div>
+    <div class="section-label">📖 all books</div>
+    <div id="shelf-list"></div>
+    <button class="add-btn" onclick="addBook()">+ add book</button>
+  </div>
+
+  <!-- Currently Reading -->
+  <div class="sub-page" id="reading-currently">
+    <div id="current-books"></div>
+    <div class="card" style="margin-top:14px">
+      <div class="section-label">📝 reading notes & highlights</div>
+      <textarea style="min-height:120px" placeholder="favourite quotes, passages, thoughts while reading..."></textarea>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="section-label">🤔 questions this book raised</div>
+      <textarea style="min-height:80px" placeholder="ideas to explore, things i want to research..."></textarea>
+    </div>
+  </div>
+
+  <!-- Wish List -->
+  <div class="sub-page" id="reading-wishlist">
+    <div id="wishlist-items"></div>
+    <button class="add-btn" onclick="addWishBook()">+ add to wish list</button>
+  </div>
+
+  <!-- Reading Log -->
+  <div class="sub-page" id="reading-log">
+    <div class="card">
+      <div class="section-label">📅 daily reading log</div>
+      <div id="reading-log-list"></div>
+      <button class="add-btn" onclick="addReadingLog()">+ log today's reading</button>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="section-label">🌟 reading challenge <span class="tag tag-lav" style="margin-left:6px" id="challenge-badge">2025</span></div>
+      <div style="margin:10px 0">
+        <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px">
+          <span style="color:var(--muted)">goal: <input type="text" style="width:40px;color:var(--lav-d);font-weight:600" id="challenge-goal" value="24"> books</span>
+          <span style="color:var(--lav-d);font-weight:600"><span id="challenge-read">0</span> / <span id="challenge-goal2">24</span></span>
+        </div>
+        <div class="progress-bar-wrap"><div class="progress-bar" id="challenge-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="sub-page" id="reading-stats">
+    <div class="grid4">
+      <div class="stat-card"><div class="stat-num" style="color:var(--lav-d)" id="stat-total">0</div><div class="stat-lbl">total books</div></div>
+      <div class="stat-card" style="background:var(--mint-l)"><div class="stat-num" style="color:var(--mint-d)" id="stat-pages">0</div><div class="stat-lbl">pages read</div></div>
+      <div class="stat-card" style="background:var(--peach-l)"><div class="stat-num" style="color:var(--peach-d)" id="stat-avg">—</div><div class="stat-lbl">avg rating</div></div>
+      <div class="stat-card" style="background:var(--sky-l)"><div class="stat-num" style="color:var(--sky-d)" id="stat-streak">0</div><div class="stat-lbl">day streak</div></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="section-label">📚 favourite genres</div>
+      <div id="genre-tags" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"></div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <div class="section-label">✍️ top authors read</div>
+      <div id="top-authors"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ GOALS ══════════════ -->
+<div class="page" id="page-goals">
+  <h1 class="page-title">goal setting ✦</h1>
+  <p class="page-sub">dream big, start small 🌸</p>
+  <div class="grid2">
+    <div class="card" style="grid-column:1/-1;background:var(--lav-l);border-color:var(--lav)">
+      <div class="section-label">🌟 my dream goal</div>
+      <input type="text" style="font-family:'DM Serif Display',serif;font-size:22px;color:var(--lav-d);width:100%" placeholder="write your biggest dream here...">
+      <div id="goal-steps" style="display:flex;flex-direction:column;gap:8px;margin-top:14px"></div>
+    </div>
+    <div class="card al"><div class="section-label">💼 career / school</div><div class="goal-rows" id="g-career"></div></div>
+    <div class="card am"><div class="section-label">🌿 health & wellness</div><div class="goal-rows" id="g-health"></div></div>
+    <div class="card ab"><div class="section-label">🎨 creative & personal</div><div class="goal-rows" id="g-creative"></div></div>
+    <div class="card as"><div class="section-label">💰 financial</div><div class="goal-rows" id="g-financial"></div></div>
+    <div class="card" style="grid-column:1/-1">
+      <div class="section-label">🔮 vision — what does my ideal life look like?</div>
+      <textarea style="min-height:100px" placeholder="describe it in full detail — how do you feel, where are you, who's around you, what are you doing every day..."></textarea>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ MOOD ══════════════ -->
+<div class="page" id="page-mood">
+  <h1 class="page-title">mood tracker ✦</h1>
+  <p class="page-sub">your emotions are valid, all of them 💜</p>
+  <div class="grid2">
+    <div>
+      <div class="card al">
+        <div class="section-label">✨ today's vibe</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px" id="mood-options"></div>
+        <div class="section-label">💭 what's going on?</div>
+        <textarea style="min-height:80px" placeholder="vent, celebrate, reflect... this is your safe space ☁️"></textarea>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <div class="section-label">🌱 self-care check-in</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px" id="mood-selfcare"></div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="section-label">📅 week's mood</div>
+        <div class="mood-week-grid" id="mood-week"></div>
+      </div>
+      <div class="card" style="margin-top:14px">
+        <div class="section-label">🎨 emotion wheel — what am i feeling?</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px" id="emotion-tags"></div>
+      </div>
+      <div class="card am" style="margin-top:14px">
+        <div class="section-label">📈 mood patterns this month</div>
+        <div id="mood-patterns"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ NOTES ══════════════ -->
+<div class="page" id="page-notes">
+  <h1 class="page-title">notes & journal ✦</h1>
+  <p class="page-sub">your space to think, dream, plan, or just be 🌸</p>
+  <div class="grid2">
+    <div class="card"><div class="section-label">📝 free write</div><textarea class="lined" style="min-height:260px;line-height:26px;padding-top:2px" placeholder="start writing..."></textarea></div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="card al"><div class="section-label">💡 ideas & inspo</div><textarea style="min-height:80px" placeholder="capture ideas before they vanish..."></textarea></div>
+      <div class="card am"><div class="section-label">📚 learning notes</div><textarea style="min-height:80px" placeholder="what did i learn today?"></textarea></div>
+      <div class="card ab"><div class="section-label">💌 reminders & to-dos</div><textarea style="min-height:80px" placeholder="quick notes & things to remember..."></textarea></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ VISION ══════════════ -->
+<div class="page" id="page-vision">
+  <h1 class="page-title">vision board ✦</h1>
+  <p class="page-sub">manifest the life you want 🔮</p>
+  <div class="grid2">
+    <div class="card" style="background:var(--lav-l);border-color:var(--lav)">
+      <div class="section-label">🌟 my word of the year</div>
+      <input type="text" style="font-family:'DM Serif Display',serif;font-size:32px;color:var(--lav-d);width:100%" placeholder="bloom">
+    </div>
+    <div class="card" style="background:var(--blush-l);border-color:var(--blush)">
+      <div class="section-label">💫 affirmations</div>
+      <div id="affirmations"></div>
+    </div>
+    <div class="card as span2">
+      <div class="section-label">🔮 my dream life — in 1 year</div>
+      <textarea style="min-height:80px" placeholder="where am i living? what does my morning look like? who am i becoming?"></textarea>
+    </div>
+    <div class="card am">
+      <div class="section-label">🎯 non-negotiables</div>
+      <div id="non-negs"></div>
+    </div>
+    <div class="card ap">
+      <div class="section-label">🌸 things i'm calling in</div>
+      <div id="calling-in"></div>
+    </div>
+    <div class="card" style="grid-column:1/-1">
+      <div class="section-label">📸 vision board words & themes</div>
+      <div id="vision-tags" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"></div>
+      <input type="text" id="vision-tag-inp" style="margin-top:12px;border-bottom:1px solid var(--border2);padding:6px 0;width:100%" placeholder="type a word and press enter to add...">
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TRAVEL ══════════════ -->
+<div class="page" id="page-travel">
+  <h1 class="page-title">travel tracker ✦</h1>
+  <p class="page-sub">collect moments, not things ✈️</p>
+  <div class="sub-nav visible" id="travel-subnav" style="padding:0 0 14px;gap:6px">
+    <button class="sub-btn active" onclick="showTravel('overview',this)">overview</button>
+    <button class="sub-btn" onclick="showTravel('trips',this)">my trips</button>
+    <button class="sub-btn" onclick="showTravel('planner',this)">trip planner</button>
+    <button class="sub-btn" onclick="showTravel('packing',this)">packing list</button>
+    <button class="sub-btn" onclick="showTravel('bucket',this)">bucket list</button>
+    <button class="sub-btn" onclick="showTravel('memories',this)">memories</button>
+  </div>
+
+  <!-- Overview -->
+  <div class="sub-page active" id="travel-overview">
+    <div class="grid4" style="margin-bottom:14px">
+      <div class="stat-card"><div class="stat-num" id="tv-trips" style="color:var(--lav-d)">0</div><div class="stat-lbl">trips taken</div></div>
+      <div class="stat-card" style="background:var(--blush-l)"><div class="stat-num" id="tv-countries" style="color:var(--blush-d)">0</div><div class="stat-lbl">countries</div></div>
+      <div class="stat-card" style="background:var(--mint-l)"><div class="stat-num" id="tv-cities" style="color:var(--mint-d)">0</div><div class="stat-lbl">cities</div></div>
+      <div class="stat-card" style="background:var(--sky-l)"><div class="stat-num" id="tv-bucket" style="color:var(--sky-d)">0</div><div class="stat-lbl">bucket list</div></div>
+    </div>
+    <div class="card" style="margin-bottom:14px">
+      <div class="section-label">🗺️ places i've been</div>
+      <div id="visited-tags" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px"></div>
+    </div>
+    <div class="grid2">
+      <div class="card al">
+        <div class="section-label">✈️ next adventure</div>
+        <div id="next-trip-preview" style="font-size:13px;color:var(--muted);margin-top:6px">no upcoming trips yet — add one in my trips! 🌍</div>
+      </div>
+      <div class="card am">
+        <div class="section-label">💰 travel fund</div>
+        <div style="margin-top:8px">
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px">
+            <span style="color:var(--muted)">saved: ₹<input type="text" id="travel-saved" style="width:70px;color:var(--mint-d);font-weight:600" value="12000"></span>
+            <span style="color:var(--muted)">goal: ₹<input type="text" id="travel-goal-amt" style="width:70px" value="50000" oninput="updateTravelFund()"></span>
+          </div>
+          <div class="progress-bar-wrap"><div class="progress-bar" id="travel-fund-bar" style="width:24%;background:var(--mint)"></div></div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px" id="travel-fund-txt">₹12,000 saved · ₹38,000 to go</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- My Trips -->
+  <div class="sub-page" id="travel-trips">
+    <div id="trips-list"></div>
+    <button class="add-btn" onclick="addTrip()">+ add trip</button>
+  </div>
+
+  <!-- Trip Planner -->
+  <div class="sub-page" id="travel-planner">
+    <div class="card" style="background:var(--sky-l);border-color:var(--sky);margin-bottom:14px">
+      <div class="section-label">✈️ planning</div>
+      <div class="grid2" style="gap:10px;margin-top:8px">
+        <div><div style="font-size:11px;color:var(--muted);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.6px">destination</div><input type="text" style="border-bottom:1.5px solid var(--sky);padding:4px 0;font-size:16px;font-weight:600;color:var(--sky-d);width:100%" placeholder="where to?"></div>
+        <div><div style="font-size:11px;color:var(--muted);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.6px">dates</div><input type="text" style="border-bottom:1.5px solid var(--sky);padding:4px 0;font-size:14px;color:var(--sky-d);width:100%" placeholder="e.g. Jun 10 – Jun 18"></div>
+        <div><div style="font-size:11px;color:var(--muted);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.6px">travel buddies</div><input type="text" style="border-bottom:1.5px solid var(--sky);padding:4px 0;font-size:14px;color:var(--text);width:100%" placeholder="solo / with who?"></div>
+        <div><div style="font-size:11px;color:var(--muted);margin-bottom:4px;font-weight:600;text-transform:uppercase;letter-spacing:.6px">trip budget</div><input type="text" style="border-bottom:1.5px solid var(--sky);padding:4px 0;font-size:14px;color:var(--text);width:100%" placeholder="₹ estimated total"></div>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card al">
+        <div class="section-label">📋 day-by-day itinerary</div>
+        <div id="itinerary-days"></div>
+        <button class="add-btn" onclick="addItineraryDay()">+ add day</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="card ab">
+          <div class="section-label">🏨 accommodation</div>
+          <div id="accom-list"></div>
+          <button class="add-btn" onclick="addAccom()">+ add</button>
+        </div>
+        <div class="card am">
+          <div class="section-label">🍜 must-try food & places</div>
+          <div id="food-list"></div>
+          <button class="add-btn" onclick="addFood()">+ add</button>
+        </div>
+        <div class="card ap">
+          <div class="section-label">💸 trip expenses</div>
+          <div id="trip-exp-list"></div>
+          <button class="add-btn" onclick="addTripExp()">+ add expense</button>
+          <div style="margin-top:10px;font-size:13px;font-weight:600;color:var(--peach-d)">total: ₹<span id="trip-exp-total">0</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Packing List -->
+  <div class="sub-page" id="travel-packing">
+    <div class="card" style="margin-bottom:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div class="section-label" style="margin-bottom:0">🧳 packing progress</div>
+        <span class="tag tag-mint" id="packing-progress">0 / 0 packed</span>
+      </div>
+      <div class="progress-bar-wrap"><div class="progress-bar" id="packing-bar" style="width:0%;background:var(--mint)"></div></div>
+    </div>
+    <div id="packing-categories"></div>
+    <button class="add-btn" onclick="addPackingItem()">+ add custom item</button>
+  </div>
+
+  <!-- Bucket List -->
+  <div class="sub-page" id="travel-bucket">
+    <div class="grid2" style="margin-bottom:14px">
+      <div class="card" style="background:var(--lav-l);border-color:var(--lav)">
+        <div class="section-label">🌍 dream destinations</div>
+        <div id="bucket-list"></div>
+        <button class="add-btn" onclick="addBucketItem()">+ add destination</button>
+      </div>
+      <div class="card" style="background:var(--peach-l);border-color:var(--peach)">
+        <div class="section-label">🎯 travel experiences to have</div>
+        <div id="experience-list"></div>
+        <button class="add-btn" onclick="addExperience()">+ add experience</button>
+      </div>
+    </div>
+    <div class="card am">
+      <div class="section-label">🌟 travel goals</div>
+      <textarea style="min-height:80px" placeholder="travel more solo... visit all 7 continents... take a 30-day trip... live abroad for a month..."></textarea>
+    </div>
+  </div>
+
+  <!-- Memories -->
+  <div class="sub-page" id="travel-memories">
+    <div id="memories-list"></div>
+    <button class="add-btn" onclick="addMemory()">+ add memory</button>
+  </div>
+</div>
+
+</div><!-- end main-app -->
+<div class="footer" id="main-footer" style="display:none" id="quote-footer"></div>
+
+<script>
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const WDAYS=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const now=new Date();
+const CAT_COLORS=['#C9B8F0','#F4C2D0','#B2E4D0','#FFD4B8','#B8D8F0','#FAF0B0','#D4C8E8'];
+const CAT_NAMES=['housing','food','transport','health','fun','savings','other'];
+const QUOTES=['"she believed she could, so she did"','"soft life is the goal, always"','"romanticize your life, always"','"you are the main character"','"do it with passion or not at all"','"progress, not perfection"','"healing is not linear and that\'s okay"'];
+
+function startPlanner(){
+  document.getElementById('cover-page').style.display='none';
+  document.getElementById('main-app').style.display='block';
+  document.getElementById('main-footer').style.display='block';
+  init();
+}
+
+let expenses=[];
+let incomes=[];
+let savingsGoals=[];
+let subs=[];
+let books=[];
+let wishBooks=[];
+let readingLogs=[];
+let waterCount=0;
+
+function init(){
+  loadStoredArrays();
+  document.getElementById('nav-date').innerHTML=DAYS[now.getDay()]+'<br>'+MONTHS[now.getMonth()]+' '+now.getDate();
+  document.getElementById('daily-sub').textContent=DAYS[now.getDay()]+', '+MONTHS[now.getMonth()]+' '+now.getDate()+', '+now.getFullYear();
+  const wStart=new Date(now);wStart.setDate(now.getDate()-((now.getDay()+6)%7));
+  document.getElementById('weekly-sub').textContent='week of '+MONTHS[wStart.getMonth()]+' '+wStart.getDate();
+  document.getElementById('month-title').textContent=MONTHS[now.getMonth()]+' '+now.getFullYear()+' ✦';
+  const cq=Math.floor(now.getMonth()/3);
+  const qms=[[0,1,2],[3,4,5],[6,7,8],[9,10,11]][cq];
+  document.getElementById('q-sub').textContent='Q'+(cq+1)+' · '+MONTHS[qms[0]]+' – '+MONTHS[qms[2]]+' '+now.getFullYear();
+  document.getElementById('main-footer').textContent=QUOTES[Math.floor(Math.random()*QUOTES.length)];
+  const _cb=document.getElementById('challenge-badge');if(_cb)_cb.textContent=now.getFullYear();
+  SOUND.init();
+  const _sb=document.getElementById('sound-btn');
+  if(_sb){_sb.textContent=SOUND.isMuted()?'🔇':'🔊';if(SOUND.isMuted())_sb.classList.add('muted');}
+  buildDaily();buildWeekly();buildMonthly();buildQuarterly();buildHabits();buildWellness();buildBudget();buildReading();buildGoals();buildMood();buildVision();updateTravelOverview();
+  setTimeout(()=>{restoreStaticFields();restoreCEFields();restoreHabitState();restoreWaterState();restoreMoodState();restoreQGoals();updateCalCellHighlights();},120);
+}
+
+function showPage(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  btn.classList.add('active');
+  const sn=document.getElementById('sub-nav');
+  sn.innerHTML='';sn.className='sub-nav';
+  SOUND.navigate();
+}
+
+function showBudget(sub,btn){
+  document.querySelectorAll('#page-budget .sub-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('#budget-subnav .sub-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('budget-'+sub).classList.add('active');
+  btn.classList.add('active');
+  if(sub==='overview')updateBudgetOverview();
+}
+
+function showReading(sub,btn){
+  document.querySelectorAll('#page-reading .sub-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('#reading-subnav .sub-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('reading-'+sub).classList.add('active');
+  btn.classList.add('active');
+  if(sub==='stats')updateReadingStats();
+}
+
+/* ─── DAILY ─── */
+function buildDaily(){
+  const times=['6 AM','7 AM','8 AM','9 AM','10 AM','11 AM','12 PM','1 PM','2 PM','3 PM','4 PM','5 PM','6 PM','7 PM','8 PM','9 PM'];
+  const tb=document.getElementById('time-blocks');
+  times.forEach(t=>{
+    const r=document.createElement('div');r.className='inp-row';r.style.marginBottom='5px';
+    r.innerHTML='<span class="inp-lbl">'+t+'</span><input type="text" placeholder="...">';
+    tb.appendChild(r);
+  });
+  const colors=['#F4C2D0','#C9B8F0','#B2E4D4'];
+  const pr=document.getElementById('priorities');
+  ['#1 most important','#2 second thing','#3 third thing'].forEach((p,i)=>{
+    const r=document.createElement('div');r.className='row-item';
+    r.innerHTML='<div style="width:10px;height:10px;border-radius:50%;background:'+colors[i]+';flex-shrink:0"></div><input type="text" placeholder="'+p+'">';
+    pr.appendChild(r);
+  });
+  const gr=document.getElementById('gratitude');
+  ["i'm grateful for...","today i'm excited about...","one thing that would make today great..."].forEach(p=>{
+    const r=document.createElement('div');r.className='row-item';
+    r.innerHTML='<input type="text" placeholder="'+p+'">';
+    gr.appendChild(r);
+  });
+}
+
+/* ─── WEEKLY ─── */
+function buildWeekly(){
+  const wg=document.getElementById('week-grid');
+  const ws=getViewWeekStart();
+  const wkey=ws.getFullYear()+'-'+(ws.getMonth()+1)+'-'+ws.getDate();
+  for(let i=0;i<7;i++){
+    const d=new Date(ws);d.setDate(ws.getDate()+i);
+    const isT=d.toDateString()===now.toDateString();
+    const col=document.createElement('div');
+    col.style.cssText='background:var(--white);border:1px solid '+(isT?'var(--lav)':'var(--border)')+';border-radius:12px;padding:10px 8px;min-height:200px';
+    col.innerHTML='<div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:4px">'+WDAYS[i]+'</div>'
+      +'<div style="font-family:\'DM Serif Display\',serif;font-size:20px;color:'+(isT?'var(--lav-d)':'var(--text)')+'">'+d.getDate()+'</div>'
+      +'<div contenteditable="true" data-placeholder="add tasks..." data-sid="wk_'+wkey+'_'+i+'_0" style="margin-top:8px;font-size:11px;min-height:30px;color:var(--muted);outline:none"></div>'
+      +'<div contenteditable="true" data-placeholder="quick notes..." data-sid="wk_'+wkey+'_'+i+'_1" style="margin-top:6px;font-size:11px;min-height:30px;color:var(--muted);outline:none"></div>'
+      +'<div contenteditable="true" data-placeholder="✓ done" data-sid="wk_'+wkey+'_'+i+'_2" style="margin-top:6px;font-size:11px;min-height:30px;color:var(--muted);outline:none"></div>';
+    wg.appendChild(col);
+  }
+  const wEnd=new Date(ws);wEnd.setDate(ws.getDate()+6);
+  const subTxt='week of '+MONTHS[ws.getMonth()]+' '+ws.getDate()+(wEnd.getMonth()!==ws.getMonth()?' – '+MONTHS[wEnd.getMonth()]+' '+wEnd.getDate():' – '+wEnd.getDate());
+  const ws_el=document.getElementById('weekly-sub');
+  if(ws_el)ws_el.textContent=subTxt;
+  const wpl=document.getElementById('week-pager-label');
+  if(wpl)wpl.textContent=subTxt;
+  document.querySelectorAll('#page-weekly .grid3 textarea').forEach((el,i)=>{
+    const labels=['focus','wins','carry'];
+    el.dataset.sid='wk_'+labels[i]+'_'+wkey;
+  });
+}
+
+/* ─── MONTHLY ─── */
+function buildMonthly(){
+  const vd=getViewMonth();
+  const mkey=vd.getMonth()+'_'+vd.getFullYear();
+  const year=vd.getFullYear(),mon=vd.getMonth();
+  const cal=document.getElementById('month-cal');
+  ['S','M','T','W','T','F','S'].forEach(d=>{
+    const h=document.createElement('div');
+    h.style.cssText='text-align:center;font-size:10px;font-weight:700;color:var(--muted);padding:4px 0;text-transform:uppercase';
+    h.textContent=d;cal.appendChild(h);
+  });
+  const fd=new Date(year,mon,1).getDay();
+  const dim=new Date(year,mon+1,0).getDate();
+  for(let i=0;i<fd;i++){const e=document.createElement('div');cal.appendChild(e);}
+  const isCurMonth=mon===now.getMonth()&&year===now.getFullYear();
+  for(let d=1;d<=dim;d++){
+    const cell=document.createElement('div');
+    cell.className='cal-cell';
+    const isT=isCurMonth&&d===now.getDate();
+    if(isT)cell.classList.add('today');
+    const sid='cal_'+year+'_'+mon+'_'+d;
+    cell.innerHTML='<div class="cal-cell-num" title="click to mark / unmark" onclick="toggleDayMark(this.parentElement,'+mon+','+year+');event.stopPropagation()">'+d+'</div>'
+      +'<div class="cal-cell-body" contenteditable="true" data-sid="'+sid+'" data-placeholder="+ tap to plan..."></div>';
+    cal.appendChild(cell);
+  }
+  document.getElementById('month-title').textContent=MONTHS[mon]+' '+year+' ✦';
+  const pl=document.getElementById('month-pager-label');
+  if(pl)pl.textContent=MONTHS[mon]+' '+year;
+  const mi=document.getElementById('month-intentions');
+  for(let i=1;i<=5;i++){
+    const r=document.createElement('div');r.className='row-item';
+    r.innerHTML='<span style="font-size:11px;font-weight:700;color:var(--lav-d);min-width:20px">0'+i+'</span><input type="text" data-sid="m_'+mkey+'_int_'+i+'" placeholder="intention for this month...">';
+    mi.appendChild(r);
+  }
+  const refl=document.querySelector('#page-monthly .grid2 textarea');
+  if(refl)refl.dataset.sid='m_'+mkey+'_refl';
+}
+
+/* ─── QUARTERLY ─── */
+function buildQuarterly(){
+  const v=getViewQuarter();
+  const qms=[[0,1,2],[3,4,5],[6,7,8],[9,10,11]][v.q];
+  const qkey='q'+v.q+'_'+v.year;
+  document.getElementById('q-sub').textContent='Q'+(v.q+1)+' · '+MONTHS[qms[0]]+' – '+MONTHS[qms[2]]+' '+v.year;
+  const qpl=document.getElementById('q-pager-label');
+  if(qpl)qpl.textContent='Q'+(v.q+1)+' '+v.year;
+  const visionInput=document.querySelector('#page-quarterly .card[style*="lav-l"] input[type=text]');
+  if(visionInput)visionInput.dataset.sid=qkey+'_vision';
+  const allTAs=document.querySelectorAll('#page-quarterly textarea');
+  if(allTAs.length)allTAs[allTAs.length-1].dataset.sid=qkey+'_refl';
+  const qg=document.getElementById('q-months');
+  qms.forEach(mi=>{
+    const c=document.createElement('div');c.className='card';
+    let rows='';
+    for(let i=0;i<5;i++){
+      const gsid=qkey+'_m'+mi+'_g'+i;
+      const ccid='qc_'+qkey+'_m'+mi+'_g'+i;
+      rows+='<div class="row-item"><div class="check-circle" data-cid="'+ccid+'" onclick="toggleQGoal(this)"></div><input type="text" data-sid="'+gsid+'" placeholder="goal..."></div>';
+    }
+    c.innerHTML='<div style="font-family:\'DM Serif Display\',serif;font-size:17px;margin-bottom:12px">'+MONTHS[mi]+' '+v.year+'</div>'+rows;
+    qg.appendChild(c);
+  });
+}
+
+/* ─── HABITS ─── */
+function buildHabits(){
+  const habits=['drink water 💧','workout 🏃','meditate 🧘','read 📚','journal ✏️','skincare 🌸','no doom scroll 📵','sleep 8h 🌙','eat veggies 🥗','gratitude 🙏'];
+  const ht=document.getElementById('habit-tbl');
+  let h='<thead><tr><th style="text-align:left;min-width:120px">habit</th>';
+  for(let i=1;i<=31;i++)h+='<th>'+i+'</th>';
+  h+='</tr></thead><tbody>';
+  habits.forEach((hb,hi)=>{
+    const _hn=STORE.load('habitNames',{})[hi];
+    h+='<tr><td style="padding:3px 4px"><input class="habit-name-inp" data-hname="'+hi+'" value="'+(_hn||hb)+'" onchange="saveHabitName(this)"></td>';
+    for(let d=1;d<=31;d++)h+='<td><div class="hc" data-habit="'+hi+'" data-day="'+d+'" onclick="toggleHabit(this)"></div></td>';
+    h+='</tr>';
+  });
+  ht.innerHTML=h+'</tbody>';
+}
+
+/* ─── WELLNESS ─── */
+function buildWellness(){
+  const wc=document.getElementById('water-cups');
+  for(let i=0;i<8;i++){
+    const wrap=document.createElement('div');wrap.className='water-cup';
+    const cup=document.createElement('div');cup.className='cup';cup.dataset.idx=i;
+    const fill=document.createElement('div');fill.className='cup-fill';fill.style.height='0%';
+    cup.appendChild(fill);
+    cup.onclick=()=>toggleWater(i);
+    const lbl=document.createElement('div');lbl.style.cssText='font-size:9px;color:var(--muted);font-weight:700';lbl.textContent=(i+1);
+    wrap.appendChild(cup);wrap.appendChild(lbl);wc.appendChild(wrap);
+  }
+  const sl=document.getElementById('sleep-log');
+  const days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  let sh='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:8px">';
+  days.forEach(d=>{
+    sh+='<div style="text-align:center"><div style="font-size:10px;font-weight:700;color:var(--muted);margin-bottom:4px">'+d+'</div>'
+      +'<input class="sleep-input" type="text" placeholder="8h" style="width:100%"></div>';
+  });
+  sl.innerHTML=sh+'</div>';
+  const sc=['hydrated 💧','slept well 🌙','moved body 🤸','ate well 🥗','touched grass 🌿','me-time 🛁','called fam 📱','felt present ✨'];
+  const scd=document.getElementById('selfcare');
+  sc.forEach(s=>{
+    const b=document.createElement('div');
+    b.style.cssText='padding:8px 10px;border-radius:10px;border:1.5px solid var(--border);font-size:12px;cursor:pointer;text-align:center;background:var(--cream);color:var(--text)';
+    b.textContent=s;
+    b.onclick=()=>{const on=b.dataset.on==='1';b.dataset.on=on?'':'1';b.style.background=on?'var(--cream)':'var(--mint-l)';b.style.borderColor=on?'var(--border)':'var(--mint)';};
+    scd.appendChild(b);
+  });
+  const fl=document.getElementById('fitness-log');
+  [['🏃 morning run','30 min'],['🧘 yoga','20 min']].forEach(([name,dur])=>{
+    fl.appendChild(makeFitnessRow(name,dur));
+  });
+}
+function toggleWater(idx){
+  const cups=document.querySelectorAll('.cup');
+  const fill=cups[idx].querySelector('.cup-fill');
+  const on=fill.style.height==='100%';
+  fill.style.height=on?'0%':'100%';
+  fill.style.background=on?'':'var(--sky)';
+  waterCount=document.querySelectorAll('.cup-fill[style*="100%"]').length;
+  document.getElementById('water-count').textContent=waterCount;
+  const _ws=[...document.querySelectorAll('.cup')].map(c=>c.querySelector('.cup-fill').style.height==='100%');
+  STORE.save('waterState',_ws);
+  if(!on){ SOUND.waterDrop(idx); if(waterCount===8)setTimeout(()=>SOUND.waterFull(),180); }
+  else SOUND.waterEmpty();
+  showSaved();
+}
+function makeFitnessRow(name,dur){
+  const r=document.createElement('div');r.className='fitness-row';
+  r.innerHTML='<input type="text" style="flex:1" value="'+name+'"><input type="text" style="width:70px;text-align:right;color:var(--muted)" value="'+dur+'">';
+  return r;
+}
+function addFitness(){document.getElementById('fitness-log').appendChild(makeFitnessRow('',''));}
+
+/* ─── BUDGET ─── */
+function buildBudget(){renderExpenses();renderIncomes();renderSavings();renderSubs();renderBudgetCats();updateBudgetOverview();}
+function fmt(n){return '₹'+Math.round(n).toLocaleString('en-IN');}
+function updateBudgetOverview(){
+  const totalInc=incomes.reduce((s,i)=>s+i.amount,0);
+  const totalExp=expenses.reduce((s,e)=>s+e.amount,0);
+  const left=totalInc-totalExp;
+  document.getElementById('budget-left').textContent=fmt(left);
+  document.getElementById('ov-income').textContent=fmt(totalInc);
+  document.getElementById('ov-spent').textContent=fmt(totalExp);
+  document.getElementById('ov-saved').textContent=(totalInc>0?Math.round((left/totalInc)*100):0)+'%';
+  const bar=document.getElementById('budget-bar');
+  bar.innerHTML='';
+  const cats={};expenses.forEach(e=>{cats[e.cat]=(cats[e.cat]||0)+e.amount;});
+  Object.entries(cats).forEach(([cat,amt],i)=>{
+    const seg=document.createElement('div');seg.className='b-seg';
+    seg.style.width=Math.round((amt/Math.max(totalInc,1))*100)+'%';
+    seg.style.background=CAT_COLORS[CAT_NAMES.indexOf(cat)%CAT_COLORS.length];
+    bar.appendChild(seg);
+  });
+  const leg=document.getElementById('budget-legend');leg.innerHTML='';
+  Object.entries(cats).forEach(([cat,amt],i)=>{
+    const p=document.createElement('div');p.style.cssText='display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted)';
+    const col=CAT_COLORS[CAT_NAMES.indexOf(cat)%CAT_COLORS.length];
+    p.innerHTML='<div style="width:10px;height:10px;border-radius:50%;background:'+col+'"></div>'+cat+' '+fmt(amt);
+    leg.appendChild(p);
+  });
+  const cb=document.getElementById('cat-breakdown');cb.innerHTML='';
+  Object.entries(cats).forEach(([cat,amt])=>{
+    const pct=Math.round((amt/Math.max(totalInc,1))*100);
+    const col=CAT_COLORS[CAT_NAMES.indexOf(cat)%CAT_COLORS.length];
+    const row=document.createElement('div');row.style.cssText='margin-bottom:10px';
+    row.innerHTML='<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px"><span>'+cat+'</span><span style="color:var(--muted)">'+fmt(amt)+' ('+pct+'%)</span></div>'
+      +'<div style="background:var(--border);border-radius:30px;height:8px;overflow:hidden"><div style="height:100%;border-radius:30px;background:'+col+';width:'+pct+'%"></div></div>';
+    cb.appendChild(row);
+  });
+}
+function renderExpenses(){
+  const el=document.getElementById('expense-list');el.innerHTML='';
+  expenses.forEach(e=>{
+    const row=document.createElement('div');row.className='expense-row';
+    const col=CAT_COLORS[CAT_NAMES.indexOf(e.cat)%CAT_COLORS.length];
+    const catOpts=CAT_NAMES.map(c=>'<option value="'+c+'"'+(c===e.cat?' selected':'')+'>'+c+'</option>').join('');
+    row.innerHTML='<div class="expense-cat-dot" style="background:'+col+'"></div>'
+      +'<input class="expense-input" value="'+e.name+'" onchange="expenses.find(x=>x.id=='+e.id+').name=this.value">'
+      +'<select class="expense-select" onchange="expenses.find(x=>x.id=='+e.id+').cat=this.value;renderExpenses();updateBudgetOverview()">'+catOpts+'</select>'
+      +'<input class="expense-amount" type="number" value="'+e.amount+'" onchange="expenses.find(x=>x.id=='+e.id+').amount=+this.value;updateBudgetOverview()">'
+      +'<button class="del-btn" onclick="expenses=expenses.filter(x=>x.id!='+e.id+');STORE.save(\'expenses\',expenses);renderExpenses();updateBudgetOverview()">×</button>';
+    el.appendChild(row);
+  });
+  document.getElementById('expense-total').textContent=fmt(expenses.reduce((s,e)=>s+e.amount,0));
+}
+function addExpense(){const id=Date.now();expenses.push({id,name:'',cat:'other',amount:0});STORE.save('expenses',expenses);renderExpenses();showSaved();}
+function renderIncomes(){
+  const il=document.getElementById('income-list');il.innerHTML='';
+  incomes.forEach(i=>{
+    const row=document.createElement('div');row.className='expense-row';
+    row.innerHTML='<div class="expense-cat-dot" style="background:var(--mint)"></div>'
+      +'<input class="expense-input" value="'+i.name+'" onchange="incomes.find(x=>x.id=='+i.id+').name=this.value">'
+      +'<span></span>'
+      +'<input class="expense-amount" type="number" value="'+i.amount+'" onchange="incomes.find(x=>x.id=='+i.id+').amount=+this.value;renderIncomes();updateBudgetOverview()">'
+      +'<button class="del-btn" onclick="incomes=incomes.filter(x=>x.id!='+i.id+');STORE.save(\'incomes\',incomes);renderIncomes();updateBudgetOverview()">×</button>';
+    il.appendChild(row);
+  });
+  document.getElementById('income-total').textContent=fmt(incomes.reduce((s,i)=>s+i.amount,0));
+}
+function addIncome(){const id=Date.now();incomes.push({id,name:'',amount:0});STORE.save('incomes',incomes);renderIncomes();showSaved();}
+function renderSavings(){
+  const sl=document.getElementById('savings-list');sl.innerHTML='';
+  savingsGoals.forEach(g=>{
+    const pct=Math.min(Math.round((g.saved/g.target)*100),100);
+    const card=document.createElement('div');card.className='savings-goal-card';
+    card.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center">'
+      +'<input type="text" style="font-size:15px;font-weight:600;color:var(--mint-d);background:transparent;border:none;outline:none" value="'+g.name+'" onchange="savingsGoals.find(x=>x.id=='+g.id+').name=this.value">'
+      +'<button class="del-btn" onclick="savingsGoals=savingsGoals.filter(x=>x.id!='+g.id+');STORE.save(\'savingsGoals\',savingsGoals);renderSavings()">×</button></div>'
+      +'<div style="display:flex;gap:16px;margin-top:8px;font-size:13px">'
+      +'<span style="color:var(--muted)">saved: <input type="number" style="width:80px;color:var(--mint-d);font-weight:600;border:none;background:transparent;outline:none" value="'+g.saved+'" onchange="savingsGoals.find(x=>x.id=='+g.id+').saved=+this.value;renderSavings()"></span>'
+      +'<span style="color:var(--muted)">goal: <input type="number" style="width:80px;color:var(--text);border:none;background:transparent;outline:none" value="'+g.target+'" onchange="savingsGoals.find(x=>x.id=='+g.id+').target=+this.value;renderSavings()"></span>'
+      +'<span class="tag tag-mint">'+pct+'%</span></div>'
+      +'<div class="savings-bar-outer"><div class="savings-bar-inner" style="width:'+pct+'%"></div></div>';
+    sl.appendChild(card);
+  });
+  const tips=['pay yourself first — transfer savings on payday 🌱','the 50/30/20 rule: needs / wants / savings','unsubscribe from one thing this month ✂️','a ₹100/day habit = ₹36,500/year 🤯'];
+  const tt=document.getElementById('savings-tips');tt.innerHTML='';
+  tips.forEach(t=>{const d=document.createElement('div');d.style.cssText='padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;color:var(--text)';d.textContent=t;tt.appendChild(d);});
+}
+function addSavingsGoal(){const id=Date.now();savingsGoals.push({id,name:'new goal',target:10000,saved:0});STORE.save('savingsGoals',savingsGoals);renderSavings();showSaved();}
+function renderSubs(){
+  const sl=document.getElementById('sub-list');sl.innerHTML='';
+  subs.forEach(s=>{
+    const row=document.createElement('div');row.className='expense-row';
+    row.innerHTML='<div class="expense-cat-dot" style="background:var(--lav)"></div>'
+      +'<input class="expense-input" value="'+s.name+'" onchange="subs.find(x=>x.id=='+s.id+').name=this.value">'
+      +'<span></span>'
+      +'<input class="expense-amount" type="number" value="'+s.amount+'" onchange="subs.find(x=>x.id=='+s.id+').amount=+this.value;updateSubTotal()">'
+      +'<button class="del-btn" onclick="subs=subs.filter(x=>x.id!='+s.id+');STORE.save(\'subs\',subs);renderSubs()">×</button>';
+    sl.appendChild(row);
+  });
+  updateSubTotal();
+}
+function updateSubTotal(){document.getElementById('sub-total').textContent=Math.round(subs.reduce((s,x)=>s+x.amount,0)).toLocaleString('en-IN');}
+function addSubscription(){const id=Date.now();subs.push({id,name:'',amount:0});STORE.save('subs',subs);renderSubs();showSaved();}
+function renderBudgetCats(){
+  const bc=document.getElementById('budget-cats');bc.innerHTML='';
+  CAT_NAMES.forEach((cat,i)=>{
+    const row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)';
+    row.innerHTML='<div style="width:10px;height:10px;border-radius:50%;background:'+CAT_COLORS[i]+'"></div>'
+      +'<span style="flex:1;font-size:13px">'+cat+'</span>'
+      +'<span style="font-size:12px;color:var(--muted)">budget: ₹</span>'
+      +'<input type="number" style="width:90px;border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-size:13px;background:var(--cream);outline:none" placeholder="0">'
+      +'<span style="font-size:12px;color:var(--muted)">/mo</span>';
+    bc.appendChild(row);
+  });
+}
+
+/* ─── READING ─── */
+function buildReading(){renderShelf();renderCurrentBooks();renderWishlist();renderReadingLog();}
+function renderShelf(){
+  const sl=document.getElementById('shelf-list');sl.innerHTML='';
+  books.forEach(b=>sl.appendChild(makeBookCard(b)));
+  document.getElementById('r-read').textContent=books.filter(b=>b.status==='read').length;
+  document.getElementById('r-reading').textContent=books.filter(b=>b.status==='reading').length;
+  document.getElementById('r-wish').textContent=wishBooks.length;
+}
+function makeBookCard(b){
+  const card=document.createElement('div');card.className='book-card';
+  const pct=b.pages>0?Math.round((b.read/b.pages)*100):0;
+  const stars=['★','★','★','★','★'].map((s,i)=>'<span class="'+(i<b.rating?'lit':'')+'" onclick="setRating('+b.id+','+(i+1)+')">'+s+'</span>').join('');
+  const statOpts=['reading','read','want to read'].map(s=>'<option value="'+s+'"'+(s===b.status?' selected':'')+'>'+s+'</option>').join('');
+  card.innerHTML='<div class="book-spine" style="background:'+b.color+'"><span style="transform:rotate(180deg);display:block;font-size:9px;color:rgba(0,0,0,.5)">'+b.title.substring(0,8)+'</span></div>'
+    +'<div class="book-info">'
+    +'<input class="book-title-input" value="'+b.title+'" onchange="books.find(x=>x.id=='+b.id+').title=this.value">'
+    +'<input class="book-author-input" value="'+b.author+'" placeholder="author" onchange="books.find(x=>x.id=='+b.id+').author=this.value">'
+    +'<div class="book-meta">'
+    +'<div class="rating-stars" id="stars-'+b.id+'">'+stars+'</div>'
+    +'<select class="status-sel" onchange="books.find(x=>x.id=='+b.id+').status=this.value;renderShelf()">'+statOpts+'</select>'
+    +'<input class="pages-input" type="number" value="'+b.pages+'" placeholder="pages" onchange="books.find(x=>x.id=='+b.id+').pages=+this.value">'
+    +'<button class="del-btn" onclick="books=books.filter(x=>x.id!='+b.id+');STORE.save(\'books\',books);renderShelf()">×</button>'
+    +'</div>'
+    +(b.status==='reading'?'<div class="read-progress"><div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:4px"><span>progress</span><span>pg <input type="number" style="width:45px;border:none;background:transparent;outline:none;font-size:11px;color:var(--lav-d)" value="'+b.read+'" onchange="books.find(x=>x.id=='+b.id+').read=+this.value;renderCurrentBooks()"> / '+b.pages+'</span></div><div class="progress-bar-wrap"><div class="progress-bar" style="width:'+pct+'%;background:'+b.color+'"></div></div></div>':'')
+    +'</div>';
+  return card;
+}
+function setRating(id,r){const b=books.find(x=>x.id===id);if(b){b.rating=r;STORE.save('books',books);renderShelf();}}
+function addBook(){const id=Date.now();const colors=['#C9B8F0','#F4C2D0','#B2E4D4','#FFD4B8','#B8D8F0'];books.push({id,title:'new book',author:'',status:'want to read',pages:0,read:0,rating:0,color:colors[books.length%colors.length]});STORE.save('books',books);renderShelf();showSaved();}
+function renderCurrentBooks(){
+  const cl=document.getElementById('current-books');cl.innerHTML='';
+  books.filter(b=>b.status==='reading').forEach(b=>cl.appendChild(makeBookCard(b)));
+  if(!books.find(b=>b.status==='reading')){cl.innerHTML='<div style="text-align:center;padding:24px;color:var(--muted);font-size:13px">no books in progress — add one from my shelf 📚</div>';}
+}
+function renderWishlist(){
+  const wl=document.getElementById('wishlist-items');wl.innerHTML='';
+  wishBooks.forEach(b=>{
+    const row=document.createElement('div');row.className='row-item';
+    row.innerHTML='<div class="check-sq" onclick="this.classList.toggle(\'done\')"></div>'
+      +'<input type="text" value="'+b.title+'" style="flex:1" onchange="wishBooks.find(x=>x.id=='+b.id+').title=this.value">'
+      +'<input type="text" value="'+b.author+'" style="width:140px;color:var(--muted)" onchange="wishBooks.find(x=>x.id=='+b.id+').author=this.value">'
+      +'<button class="del-btn" onclick="wishBooks=wishBooks.filter(x=>x.id!='+b.id+');STORE.save(\'wishBooks\',wishBooks);renderWishlist()">×</button>';
+    wl.appendChild(row);
+  });
+}
+function addWishBook(){const id=Date.now();wishBooks.push({id,title:'',author:''});STORE.save('wishBooks',wishBooks);renderWishlist();showSaved();}
+function renderReadingLog(){
+  const ll=document.getElementById('reading-log-list');ll.innerHTML='';
+  readingLogs.forEach(l=>{
+    const row=document.createElement('div');row.className='row-item';
+    row.innerHTML='<span style="font-size:11px;font-weight:600;color:var(--muted);min-width:52px">'+l.date+'</span>'
+      +'<input type="text" value="'+l.book+'" style="flex:1" placeholder="book title">'
+      +'<input type="number" value="'+l.pages+'" style="width:55px;text-align:right;color:var(--lav-d);font-weight:600" placeholder="pgs">'
+      +'<button class="del-btn" onclick="readingLogs=readingLogs.filter(x=>x.id!='+l.id+');STORE.save(\'readingLogs\',readingLogs);renderReadingLog()">×</button>';
+    ll.appendChild(row);
+  });
+}
+function addReadingLog(){const id=Date.now();const d=new Date();readingLogs.push({id,date:MONTHS[d.getMonth()].substring(0,3)+' '+d.getDate(),book:'',pages:0,notes:''});STORE.save('readingLogs',readingLogs);renderReadingLog();showSaved();}
+function updateReadingStats(){
+  document.getElementById('stat-total').textContent=books.length;
+  document.getElementById('stat-pages').textContent=books.reduce((s,b)=>s+(b.status==='read'?b.pages:b.read),0);
+  const rated=books.filter(b=>b.rating>0);
+  document.getElementById('stat-avg').textContent=rated.length?'★'+(rated.reduce((s,b)=>s+b.rating,0)/rated.length).toFixed(1):'—';
+  document.getElementById('stat-streak').textContent=readingLogs.length;
+  const genres=['fiction','non-fiction','self-help','romance','thriller','fantasy','biography','sci-fi'];
+  const gt=document.getElementById('genre-tags');gt.innerHTML='';
+  const tagCls=['tag-lav','tag-blush','tag-mint','tag-peach','tag-sky','tag-butter'];
+  genres.forEach((g,i)=>{const t=document.createElement('span');t.className='tag '+tagCls[i%tagCls.length];t.style.cursor='pointer';t.textContent=g;gt.appendChild(t);});
+  const ta=document.getElementById('top-authors');ta.innerHTML='';
+  books.forEach(b=>{const r=document.createElement('div');r.className='row-item';r.innerHTML='<span style="font-size:13px">'+b.author+'</span><span class="tag tag-lav" style="margin-left:auto">'+b.rating+'★</span>';ta.appendChild(r);});
+}
+
+/* ─── GOALS ─── */
+function buildGoals(){
+  const gs=document.getElementById('goal-steps');
+  for(let i=1;i<=5;i++){
+    const r=document.createElement('div');r.style.cssText='display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(255,255,255,.7);border-radius:10px;border:1px solid var(--lav)';
+    r.innerHTML='<span style="font-size:11px;font-weight:700;color:var(--lav-d);min-width:20px">0'+i+'</span><input type="text" placeholder="step '+i+'...">';
+    gs.appendChild(r);
+  }
+  ['g-career','g-health','g-creative','g-financial'].forEach(id=>{
+    const c=document.getElementById(id);
+    for(let i=0;i<4;i++){const r=document.createElement('div');r.className='row-item';r.innerHTML='<div class="check-circle" onclick="this.classList.toggle(\'done\')"></div><input type="text" placeholder="goal...">';c.appendChild(r);}
+  });
+}
+
+/* ─── MOOD ─── */
+function buildMood(){
+  const moods=['🌟 amazing','😊 good','😐 okay','😔 low','😰 anxious','😴 tired','🔥 motivated','🥰 grateful','😤 frustrated','🌈 hopeful'];
+  const mo=document.getElementById('mood-options');
+  moods.forEach(m=>{const b=document.createElement('button');b.className='mood-btn';b.textContent=m;b.onclick=()=>{document.querySelectorAll('#mood-options .mood-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');};mo.appendChild(b);});
+  const mw=document.getElementById('mood-week');
+  const ws=new Date(now);ws.setDate(now.getDate()-((now.getDay()+6)%7));
+  const emojis=['😊','🌟','😐','😔','🥰','😴','😰'];
+  for(let i=0;i<7;i++){
+    const d=new Date(ws);d.setDate(ws.getDate()+i);
+    const cell=document.createElement('div');cell.className='mood-day-cell';
+    cell.innerHTML='<span class="mood-emoji-big">'+emojis[i]+'</span><div class="mood-day-name">'+WDAYS[i]+'</div><div style="font-size:10px;color:var(--muted);margin-top:2px">'+d.getDate()+'</div>';
+    cell.onclick=()=>cell.classList.toggle('picked');
+    mw.appendChild(cell);
+  }
+  const emotions=['joy','peace','love','excitement','gratitude','pride','sadness','anger','fear','loneliness','anxiety','hope'];
+  const et=document.getElementById('emotion-tags');
+  const tagCls=['tag-lav','tag-blush','tag-mint','tag-peach','tag-sky','tag-butter'];
+  emotions.forEach((e,i)=>{const t=document.createElement('span');t.className='tag '+tagCls[i%tagCls.length];t.style.cssText='cursor:pointer;padding:5px 14px;font-size:12px';t.onclick=()=>t.style.opacity=t.style.opacity==='0.4'?'1':'0.4';t.textContent=e;et.appendChild(t);});
+  const msc=['hydrated 💧','slept well 🌙','moved body 🤸','ate well 🥗','touched grass 🌿','me-time 🛁','grateful moment 🙏','kind to self 💜'];
+  const ms=document.getElementById('mood-selfcare');
+  msc.forEach(s=>{const b=document.createElement('div');b.style.cssText='padding:8px 10px;border-radius:10px;border:1.5px solid var(--border);font-size:12px;cursor:pointer;text-align:center;background:var(--cream);color:var(--text)';b.textContent=s;b.onclick=()=>{const on=b.dataset.on==='1';b.dataset.on=on?'':'1';b.style.background=on?'var(--cream)':'var(--lav-l)';b.style.borderColor=on?'var(--border)':'var(--lav)';};ms.appendChild(b);});
+  updateMoodPatterns();
+}
+
+/* ─── VISION ─── */
+/* ─── TRAVEL ─── */
+let trips=[];
+let bucketItems=[];
+let experiences=[];
+let memories=[];
+let itinDays=[];let accomItems=[];let foodItems=[];let tripExps=[];
+const packingCats={
+  'essentials 🪪':['passport / ID','travel insurance','phone charger','power bank','earphones','wallet & cash','hotel bookings saved'],
+  'clothes 👗':['outfits (x days)','comfy shoes','flip flops','jacket / layers','pyjamas','swimwear','sunglasses'],
+  'toiletries 🧴':['shampoo & conditioner','toothbrush & paste','sunscreen ☀️','moisturiser','deodorant','makeup bag','hair ties'],
+  'health 💊':['medications','first aid kit','hand sanitiser','masks','vitamins'],
+  'extras ✨':['journal & pen','snacks for travel','reusable water bottle','tote bag','camera'],
+};
+let packingState={};
+
+function showTravel(sub,btn){
+  document.querySelectorAll('#page-travel .sub-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('#travel-subnav .sub-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('travel-'+sub).classList.add('active');
+  btn.classList.add('active');
+  if(sub==='overview')updateTravelOverview();
+  if(sub==='packing'&&!document.getElementById('packing-categories').children.length)buildPackingList();
+  if(sub==='trips')renderTrips();
+  if(sub==='bucket')renderBucketList();
+  if(sub==='memories')renderMemories();
+  if(sub==='planner')buildPlanner();
+}
+
+function updateTravelOverview(){
+  const done=trips.filter(t=>t.status==='done');
+  document.getElementById('tv-trips').textContent=done.length;
+  document.getElementById('tv-countries').textContent=new Set(done.map(t=>t.country)).size;
+  document.getElementById('tv-cities').textContent=done.length;
+  document.getElementById('tv-bucket').textContent=bucketItems.length;
+  const vt=document.getElementById('visited-tags');vt.innerHTML='';
+  const tagCls=['tag-lav','tag-blush','tag-mint','tag-peach','tag-sky','tag-butter'];
+  done.forEach((t,i)=>{const sp=document.createElement('span');sp.className='tag '+tagCls[i%tagCls.length];sp.style.cssText='padding:5px 14px;font-size:12px';sp.textContent='📍 '+t.dest;vt.appendChild(sp);});
+  const upcoming=trips.find(t=>t.status==='upcoming');
+  const np=document.getElementById('next-trip-preview');
+  if(upcoming)np.innerHTML='<div style="font-family:\'DM Serif Display\',serif;font-size:18px;color:var(--sky-d)">'+upcoming.dest+'</div><div style="font-size:12px;color:var(--muted);margin-top:4px">'+upcoming.dates+' · ₹'+upcoming.budget.toLocaleString('en-IN')+'</div>';
+  else np.innerHTML='<span style="color:var(--muted);font-size:13px">no upcoming trips yet 🌍</span>';
+}
+
+function updateTravelFund(){
+  const saved=+(document.getElementById('travel-saved').value.replace(/,/g,''))||12000;
+  const goal=+(document.getElementById('travel-goal-amt').value.replace(/,/g,''))||50000;
+  const pct=Math.min(Math.round((saved/goal)*100),100);
+  document.getElementById('travel-fund-bar').style.width=pct+'%';
+  document.getElementById('travel-fund-txt').textContent='₹'+saved.toLocaleString('en-IN')+' saved · ₹'+(goal-saved).toLocaleString('en-IN')+' to go';
+}
+
+function renderTrips(){
+  const tl=document.getElementById('trips-list');tl.innerHTML='';
+  const vibeEmoji={beach:'🌊',mountains:'❄️',city:'🌆',nature:'🌿',culture:'🏛️',adventure:'🧗'};
+  trips.forEach(t=>{
+    const card=document.createElement('div');
+    card.style.cssText='background:var(--white);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:12px';
+    const statusTag=t.status==='done'?'<span class="tag tag-mint">done ✓</span>':'<span class="tag tag-sky">upcoming ✈️</span>';
+    card.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">'
+      +'<div style="display:flex;align-items:center;gap:10px">'
+      +'<div style="width:40px;height:40px;border-radius:12px;background:var(--lav-l);display:flex;align-items:center;justify-content:center;font-size:20px">'+(vibeEmoji[t.vibe]||'✈️')+'</div>'
+      +'<div><input type="text" style="font-size:16px;font-weight:600;color:var(--text)" value="'+t.dest+'" onchange="trips.find(x=>x.id=='+t.id+').dest=this.value;updateTravelOverview()"><br>'
+      +'<input type="text" style="font-size:12px;color:var(--muted)" value="'+t.dates+'"></div></div>'
+      +'<div style="display:flex;align-items:center;gap:8px">'+statusTag+'<button class="del-btn" onclick="trips=trips.filter(x=>x.id!='+t.id+');renderTrips();updateTravelOverview()">×</button></div>'
+      +'</div>'
+      +'<div class="grid2" style="gap:8px">'
+      +'<div style="font-size:12px;color:var(--muted)">country: <input type="text" style="color:var(--text)" value="'+t.country+'" onchange="trips.find(x=>x.id=='+t.id+').country=this.value"></div>'
+      +'<div style="font-size:12px;color:var(--muted)">budget: ₹<input type="number" style="color:var(--text);width:80px" value="'+t.budget+'" onchange="trips.find(x=>x.id=='+t.id+').budget=+this.value"></div>'
+      +'</div>'
+      +'<textarea style="margin-top:10px;min-height:44px;font-size:13px;color:var(--text)" placeholder="notes, highlights, memories...">'+t.notes+'</textarea>';
+    tl.appendChild(card);
+  });
+}
+function addTrip(){const id=Date.now();trips.push({id,dest:'new destination',country:'',dates:'',status:'upcoming',vibe:'city',budget:0,notes:''});STORE.save('trips',trips);renderTrips();showSaved();}
+
+function buildPlanner(){
+  if(!document.getElementById('itinerary-days').children.length){
+    for(let i=1;i<=3;i++)addItineraryDay(i);
+    [['hotel / hostel',''],['airbnb','']].forEach(([n,a])=>addAccom(n,a));
+    [['local street food',''],['rooftop restaurant','']].forEach(([n])=>addFood(n));
+    [['flights',''],['accommodation',''],['food',''],['activities','']].forEach(([n])=>addTripExp(n,0));
+  }
+}
+function addItineraryDay(num){
+  const d=document.getElementById('itinerary-days');
+  const row=document.createElement('div');row.style.cssText='margin-bottom:10px;padding:10px 12px;border:1px solid var(--border);border-radius:12px;background:var(--cream)';
+  const n=num||d.children.length+1;
+  row.innerHTML='<div style="font-size:11px;font-weight:700;color:var(--lav-d);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px">day '+n+'</div>'
+    +'<textarea style="min-height:50px;font-size:13px" placeholder="morning... afternoon... evening..."></textarea>';
+  d.appendChild(row);
+}
+function addAccom(name='',addr=''){
+  const al=document.getElementById('accom-list');
+  const r=document.createElement('div');r.className='row-item';
+  r.innerHTML='<span style="font-size:14px">🏨</span><input type="text" value="'+name+'" placeholder="place name" style="flex:1"><button class="del-btn" onclick="this.parentElement.remove()">×</button>';
+  al.appendChild(r);
+}
+function addFood(name=''){
+  const fl=document.getElementById('food-list');
+  const r=document.createElement('div');r.className='row-item';
+  r.innerHTML='<div class="check-circle" onclick="this.classList.toggle(\'done\')"></div><input type="text" value="'+name+'" placeholder="must-try..." style="flex:1"><button class="del-btn" onclick="this.parentElement.remove()">×</button>';
+  fl.appendChild(r);
+}
+let tripExpData=[];
+function addTripExp(name='',amt=0){
+  const id=Date.now()+Math.random();
+  tripExpData.push({id,name,amt});
+  renderTripExps();
+}
+function renderTripExps(){
+  const el=document.getElementById('trip-exp-list');el.innerHTML='';
+  tripExpData.forEach(e=>{
+    const r=document.createElement('div');r.className='row-item';
+    r.innerHTML='<input type="text" value="'+e.name+'" style="flex:1" onchange="tripExpData.find(x=>x.id=='+e.id+').name=this.value">'
+      +'<input type="number" value="'+e.amt+'" style="width:80px;text-align:right;color:var(--peach-d)" onchange="tripExpData.find(x=>x.id=='+e.id+').amt=+this.value;renderTripExps()">'
+      +'<button class="del-btn" onclick="tripExpData=tripExpData.filter(x=>x.id!='+e.id+');STORE.save(\'tripExpData\',tripExpData);renderTripExps()">×</button>';
+    el.appendChild(r);
+  });
+  document.getElementById('trip-exp-total').textContent=Math.round(tripExpData.reduce((s,e)=>s+e.amt,0)).toLocaleString('en-IN');
+}
+
+function buildPackingList(){
+  const pc=document.getElementById('packing-categories');pc.innerHTML='';
+  Object.entries(packingCats).forEach(([cat,items])=>{
+    const card=document.createElement('div');card.className='card';card.style.marginBottom='12px';
+    const catItems=items.map((item,i)=>{
+      const key=cat+':'+i;
+      return '<div class="row-item" style="padding:6px 0"><div class="check-sq '+(packingState[key]?'done':'')+'" onclick="togglePack(this,\''+key+'\')"></div><span style="font-size:13px">'+item+'</span></div>';
+    }).join('');
+    card.innerHTML='<div class="section-label">'+cat+'</div>'+catItems;
+    pc.appendChild(card);
+  });
+  updatePackingProgress();
+}
+function togglePack(el,key){el.classList.toggle('done');packingState[key]=el.classList.contains('done');STORE.save('packingState',packingState);updatePackingProgress();showSaved();}
+function updatePackingProgress(){
+  const all=document.querySelectorAll('#packing-categories .check-sq').length;
+  const done=document.querySelectorAll('#packing-categories .check-sq.done').length;
+  const pct=all?Math.round((done/all)*100):0;
+  document.getElementById('packing-progress').textContent=done+' / '+all+' packed';
+  document.getElementById('packing-bar').style.width=pct+'%';
+}
+function addPackingItem(){
+  const key='custom:'+Date.now();
+  const pc=document.querySelector('#packing-categories .card');
+  if(!pc)return;
+  const r=document.createElement('div');r.className='row-item';
+  r.innerHTML='<div class="check-sq" onclick="togglePack(this,\''+key+'\')"></div><input type="text" placeholder="add item..." style="flex:1"><button class="del-btn" onclick="this.parentElement.remove();updatePackingProgress()">×</button>';
+  pc.appendChild(r);updatePackingProgress();
+}
+
+function renderBucketList(){
+  const bl=document.getElementById('bucket-list');bl.innerHTML='';
+  bucketItems.forEach(b=>{
+    const r=document.createElement('div');r.className='row-item';
+    r.innerHTML='<div class="check-circle '+(b.done?'done':'')+'" onclick="bucketItems.find(x=>x.id=='+b.id+').done=!'+b.done+';renderBucketList()"></div>'
+      +'<input type="text" value="'+b.dest+'" style="flex:1;'+(b.done?'text-decoration:line-through;color:var(--muted)':'')+'">'
+      +'<button class="del-btn" onclick="bucketItems=bucketItems.filter(x=>x.id!='+b.id+');STORE.save(\'bucketItems\',bucketItems);renderBucketList()">×</button>';
+    bl.appendChild(r);
+  });
+  document.getElementById('tv-bucket').textContent=bucketItems.length;
+  const el=document.getElementById('experience-list');el.innerHTML='';
+  experiences.forEach(e=>{
+    const r=document.createElement('div');r.className='row-item';
+    r.innerHTML='<div class="check-circle '+(e.done?'done':'')+'" onclick="experiences.find(x=>x.id=='+e.id+').done=!'+e.done+';renderBucketList()"></div>'
+      +'<input type="text" value="'+e.text+'" style="flex:1;'+(e.done?'text-decoration:line-through;color:var(--muted)':'')+'">'
+      +'<button class="del-btn" onclick="experiences=experiences.filter(x=>x.id!='+e.id+');STORE.save(\'experiences\',experiences);renderBucketList()">×</button>';
+    el.appendChild(r);
+  });
+}
+function addBucketItem(){const id=Date.now();bucketItems.push({id,dest:'',done:false});STORE.save('bucketItems',bucketItems);renderBucketList();showSaved();}
+function addExperience(){const id=Date.now();experiences.push({id,text:'',done:false});STORE.save('experiences',experiences);renderBucketList();showSaved();}
+
+function renderMemories(){
+  const ml=document.getElementById('memories-list');ml.innerHTML='';
+  const palettes=['var(--lav-l)','var(--blush-l)','var(--mint-l)','var(--peach-l)','var(--sky-l)','var(--butter-l)'];
+  const borders=['var(--lav)','var(--blush)','var(--mint)','var(--peach)','var(--sky)','var(--butter)'];
+  memories.forEach((m,i)=>{
+    const card=document.createElement('div');
+    card.style.cssText='background:'+palettes[i%palettes.length]+';border:1px solid '+borders[i%borders.length]+';border-radius:18px;padding:20px;margin-bottom:12px';
+    card.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">'
+      +'<div style="display:flex;align-items:center;gap:10px">'
+      +'<input type="text" style="font-size:22px;width:36px;text-align:center" value="'+m.emoji+'" onchange="memories.find(x=>x.id=='+m.id+').emoji=this.value">'
+      +'<input type="text" style="font-family:\'DM Serif Display\',serif;font-size:17px;color:var(--text);font-weight:500" value="'+m.dest+'" onchange="memories.find(x=>x.id=='+m.id+').dest=this.value">'
+      +'</div><button class="del-btn" onclick="memories=memories.filter(x=>x.id!='+m.id+');renderMemories()">×</button></div>'
+      +'<textarea style="min-height:60px;font-size:13px;font-style:italic;color:var(--text)" placeholder="write a memory...">'+m.highlight+'</textarea>';
+    ml.appendChild(card);
+  });
+}
+function addMemory(){const id=Date.now();memories.push({id,dest:'',emoji:'📍',highlight:''});STORE.save('memories',memories);renderMemories();showSaved();}
+
+function buildVision(){
+  const affirmations=['i am enough','i am becoming my highest self','abundance flows to me naturally','i trust the timing of my life','i am worthy of all good things'];
+  const aff=document.getElementById('affirmations');
+  affirmations.forEach(a=>{const r=document.createElement('div');r.className='row-item';r.innerHTML='<span style="color:var(--lav-d);font-size:14px">✦</span><input type="text" value="'+a+'">';aff.appendChild(r);});
+  const nn=['prioritise my peace daily','move my body every single day','read every night before bed','spend intentionally, save consistently'];
+  const neg=document.getElementById('non-negs');
+  nn.forEach(n=>{const r=document.createElement('div');r.className='row-item';r.innerHTML='<div class="check-circle done"></div><input type="text" value="'+n+'">';neg.appendChild(r);});
+  const ci=['deep friendships','financial freedom','creative work','calm mornings','a life i love'];
+  const calling=document.getElementById('calling-in');
+  ci.forEach(c=>{const r=document.createElement('div');r.className='row-item';r.innerHTML='<span style="color:var(--blush-d)">🌸</span><input type="text" value="'+c+'">';calling.appendChild(r);});
+  const vtags=['abundance','peace','growth','love','freedom','creativity','health','joy','intention','alignment','purpose','ease'];
+  const vt=document.getElementById('vision-tags');
+  const tCls=['tag-lav','tag-blush','tag-mint','tag-peach','tag-sky','tag-butter'];
+  vtags.forEach((t,i)=>{const span=document.createElement('span');span.className='tag '+tCls[i%tCls.length];span.style.cssText='padding:6px 16px;font-size:12px;cursor:pointer';span.textContent=t;vt.appendChild(span);});
+  const vti=document.getElementById('vision-tag-inp');
+  vti.addEventListener('keydown',e=>{if(e.key==='Enter'&&vti.value.trim()){const span=document.createElement('span');span.className='tag tag-lav';span.style.cssText='padding:6px 16px;font-size:12px;cursor:pointer';span.textContent=vti.value.trim();vt.appendChild(span);vti.value='';}});
+}
+
+
+
+/* ══════════════════════════════════════════════════════════
+   BLOOM — TIME NAVIGATION (52 weeks · 12 months)
+══════════════════════════════════════════════════════════ */
+
+let monthOffset = 0;
+let weekOffset = 0;
+
+function getViewMonth() {
+  return new Date(now.getFullYear(), now.getMonth() + monthOffset, 1);
+}
+
+function getViewWeekStart() {
+  const ws = new Date(now);
+  ws.setDate(now.getDate() - ((now.getDay() + 6) % 7) + weekOffset * 7);
+  return ws;
+}
+
+function navMonth(delta, reset) {
+  if (reset) monthOffset = 0;
+  else monthOffset += delta;
+  document.getElementById('month-cal').innerHTML = '';
+  document.getElementById('month-intentions').innerHTML = '';
+  const _refl = document.querySelector('#page-monthly .grid2 textarea');
+  if (_refl) _refl.value = '';
+  buildMonthly();
+  setTimeout(() => {
+    restoreStaticFields();
+    restoreCEFields();
+    restoreCalMarks();
+    updateCalCellHighlights();
+  }, 30);
+}
+
+function navWeek(delta, reset) {
+  if (reset) weekOffset = 0;
+  else weekOffset += delta;
+  document.getElementById('week-grid').innerHTML = '';
+  document.querySelectorAll('#page-weekly .grid3 textarea').forEach(el => el.value = '');
+  buildWeekly();
+  setTimeout(() => {
+    restoreStaticFields();
+    restoreCEFields();
+  }, 30);
+}
+
+
+
+/* ── QUARTERLY NAV ── */
+let quarterOffset = 0;
+
+function getViewQuarter() {
+  let cq = Math.floor(now.getMonth() / 3) + quarterOffset;
+  let year = now.getFullYear();
+  while (cq < 0) { cq += 4; year--; }
+  while (cq > 3) { cq -= 4; year++; }
+  return { q: cq, year: year };
+}
+
+function navQuarter(delta, reset) {
+  if (reset) quarterOffset = 0;
+  else quarterOffset += delta;
+  document.getElementById('q-months').innerHTML = '';
+  const _qVis = document.querySelector('#page-quarterly .card[style*="lav-l"] input[type=text]');
+  if (_qVis) _qVis.value = '';
+  const _qTAs = document.querySelectorAll('#page-quarterly textarea');
+  _qTAs.forEach(t => t.value = '');
+  buildQuarterly();
+  setTimeout(() => {
+    restoreStaticFields();
+    restoreQGoals();
+  }, 30);
+}
+
+function toggleQGoal(el) {
+  el.classList.toggle('done');
+  el.classList.contains('done') ? SOUND.goalCheck() : SOUND.habitUncheck();
+  const state = STORE.load('qGoalsState', {});
+  state[el.dataset.cid] = el.classList.contains('done');
+  STORE.save('qGoalsState', state);
+  showSaved();
+}
+
+function restoreQGoals() {
+  const state = STORE.load('qGoalsState', {});
+  document.querySelectorAll('#page-quarterly .check-circle[data-cid]').forEach(el => {
+    if (state[el.dataset.cid]) el.classList.add('done');
+  });
+}
+
+/* ── CALENDAR CELL HIGHLIGHTS (cells with content get a soft tint) ── */
+function updateCalCellHighlights() {
+  document.querySelectorAll('.cal-cell-body').forEach(el => {
+    const cell = el.parentElement;
+    if (!cell) return;
+    if (el.innerHTML.trim() && el.textContent.trim()) cell.classList.add('has-content');
+    else cell.classList.remove('has-content');
+  });
+}
+
+/* Auto-update cell highlights as user types */
+document.addEventListener('input', function(e) {
+  if (e.target.classList && e.target.classList.contains('cal-cell-body')) {
+    const cell = e.target.parentElement;
+    if (e.target.textContent.trim()) cell.classList.add('has-content');
+    else cell.classList.remove('has-content');
+  }
+});
+
+/* ══════════════════════════════════════════════════════════
+   BLOOM — PERSISTENCE ENGINE  (localStorage)
+══════════════════════════════════════════════════════════ */
+
+const STORE = {
+  save(k, v) { try { localStorage.setItem('bloom_' + k, JSON.stringify(v)); } catch(e) {} },
+  load(k, fb) {
+    try { const d = localStorage.getItem('bloom_' + k); return d !== null ? JSON.parse(d) : fb; }
+    catch(e) { return fb; }
+  },
+  clear() { Object.keys(localStorage).filter(k => k.startsWith('bloom_')).forEach(k => localStorage.removeItem(k)); }
+};
+
+/* ── Saved indicator ── */
+function showSaved() {
+  const b = document.getElementById('saved-badge');
+  if (!b) return;
+  b.classList.add('show');
+  clearTimeout(b._t);
+  b._t = setTimeout(() => b.classList.remove('show'), 2000);
+}
+
+/* ── Reset all ── */
+function resetAll() {
+  if (confirm('Reset everything and start fresh?\nThis cannot be undone 🌸')) {
+    STORE.clear();
+    location.reload();
+  }
+}
+
+/* ── Load all arrays from localStorage ── */
+function loadStoredArrays() {
+  const _e = STORE.load('expenses', null);       if (_e) expenses = _e;
+  const _i = STORE.load('incomes', null);        if (_i) incomes = _i;
+  const _sg = STORE.load('savingsGoals', null);  if (_sg) savingsGoals = _sg;
+  const _sb = STORE.load('subs', null);          if (_sb) subs = _sb;
+  const _bk = STORE.load('books', null);         if (_bk) books = _bk;
+  const _wb = STORE.load('wishBooks', null);     if (_wb) wishBooks = _wb;
+  const _rl = STORE.load('readingLogs', null);   if (_rl) readingLogs = _rl;
+  const _tr = STORE.load('trips', null);         if (_tr) trips = _tr;
+  const _bi = STORE.load('bucketItems', null);   if (_bi) bucketItems = _bi;
+  const _ex = STORE.load('experiences', null);   if (_ex) experiences = _ex;
+  const _mm = STORE.load('memories', null);      if (_mm) memories = _mm;
+  const _ted = STORE.load('tripExpData', null);  if (_ted) tripExpData = _ted;
+  const _ps = STORE.load('packingState', null);  if (_ps) Object.assign(packingState, _ps);
+}
+
+/* ── Habit: toggle + name ── */
+function toggleHabit(el) {
+  el.classList.toggle('done');
+  const isDone = el.classList.contains('done');
+  isDone ? SOUND.habitCheck() : SOUND.habitUncheck();
+  const state = STORE.load('habitState', {});
+  state['h_' + el.dataset.habit + '_' + el.dataset.day] = isDone;
+  STORE.save('habitState', state);
+  updateStreakDisplay();
+  showSaved();
+}
+
+function saveHabitName(el) {
+  const names = STORE.load('habitNames', {});
+  names[el.dataset.hname] = el.value;
+  STORE.save('habitNames', names);
+  showSaved();
+}
+
+/* ── Streak calculation ── */
+function updateStreakDisplay() {
+  const state = STORE.load('habitState', {});
+  const today = new Date().getDate();
+  let streak = 0;
+  for (let day = today; day >= 1; day--) {
+    const anyDone = Object.keys(state).some(k => {
+      const p = k.split('_');
+      return p.length === 3 && p[0] === 'h' && parseInt(p[2]) === day && state[k];
+    });
+    if (anyDone) streak++;
+    else break;
+  }
+  const el = document.getElementById('streak-display');
+  if (el) el.textContent = streak + (streak === 1 ? ' day' : ' days');
+}
+
+/* ── Restore: habit checkboxes + streak ── */
+function restoreHabitState() {
+  const state = STORE.load('habitState', {});
+  document.querySelectorAll('.hc[data-habit]').forEach(el => {
+    const key = 'h_' + el.dataset.habit + '_' + el.dataset.day;
+    if (state[key]) el.classList.add('done');
+  });
+  updateStreakDisplay();
+}
+
+/* ── Static text fields: debounced autosave ── */
+let _sfTimer = null;
+
+function _getSid(el) {
+  if (el.dataset.sid) return el.dataset.sid;
+  const pg = el.closest('.sub-page') || el.closest('.page');
+  if (!pg) return null;
+  const peers = [...pg.querySelectorAll('textarea, input[type=text]')];
+  const idx = peers.indexOf(el);
+  if (idx < 0) return null;
+  return (el.dataset.sid = pg.id + '__' + idx);
+}
+
+function saveStaticFields() {
+  const saved = STORE.load('staticFields', {});
+  document.querySelectorAll('.page textarea, .page input[type=text]').forEach(el => {
+    const sid = _getSid(el);
+    if (sid) saved[sid] = el.value;
+  });
+  STORE.save('staticFields', saved);
+  showSaved();
+}
+
+function restoreStaticFields() {
+  const saved = STORE.load('staticFields', {});
+  if (!Object.keys(saved).length) return;
+  document.querySelectorAll('.page textarea, .page input[type=text]').forEach(el => {
+    const sid = _getSid(el);
+    if (sid && saved[sid] !== undefined) el.value = saved[sid];
+  });
+}
+
+/* ── ContentEditable cells (weekly grid) ── */
+function restoreCEFields() {
+  const saved = STORE.load('ceFields', {});
+  document.querySelectorAll('[contenteditable][data-sid]').forEach(el => {
+    if (saved[el.dataset.sid]) el.innerHTML = saved[el.dataset.sid];
+  });
+}
+
+/* ── Water cups ── */
+function restoreWaterState() {
+  const ws = STORE.load('waterState', []);
+  if (!ws.length) return;
+  document.querySelectorAll('.cup').forEach((cup, i) => {
+    if (ws[i]) {
+      const fill = cup.querySelector('.cup-fill');
+      fill.style.height = '100%';
+      fill.style.background = 'var(--sky)';
+    }
+  });
+  waterCount = ws.filter(Boolean).length;
+  const wc = document.getElementById('water-count');
+  if (wc) wc.textContent = waterCount;
+}
+
+/* ── Monthly calendar marks ── */
+function toggleDayMark(cell, month, year) {
+  cell.classList.toggle('marked');
+  cell.classList.contains('marked') ? SOUND.calMark() : SOUND.softUnmark();
+  const marks = [...document.querySelectorAll('#month-cal .cal-cell.marked')]
+    .map(c => c.querySelector('.cal-cell-num')?.textContent?.trim())
+    .filter(Boolean);
+  STORE.save('calMarks_' + month + '_' + year, marks);
+  showSaved();
+}
+
+function restoreCalMarks() {
+  const vd = getViewMonth();
+  const marks = STORE.load('calMarks_' + vd.getMonth() + '_' + vd.getFullYear(), []);
+  if (!marks.length) return;
+  document.querySelectorAll('#month-cal .cal-cell').forEach(cell => {
+    const num = cell.querySelector('.cal-cell-num')?.textContent?.trim();
+    if (num && marks.includes(num)) cell.classList.add('marked');
+  });
+}
+
+/* ── Mood selection ── */
+function updateMoodPatterns() {
+  const mp = document.getElementById('mood-patterns');
+  if (!mp) return;
+  const log = STORE.load('moodLog', {});
+  const ws = new Date(now);
+  ws.setDate(now.getDate() - ((now.getDay() + 6) % 7));
+  const weekKeys = [];
+  const DAYS_SHORT = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(ws); d.setDate(ws.getDate() + i);
+    weekKeys.push({ key: d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(), label: DAYS_SHORT[i], date: d.getDate() });
+  }
+  const weekMoods = weekKeys.map(k => ({ ...k, mood: log[k.key] })).filter(k => k.mood);
+  if (!weekMoods.length) {
+    mp.innerHTML = '<div style="font-size:13px;color:var(--muted);margin-top:6px">log your moods daily — patterns will appear here 🌱</div>';
+    return;
+  }
+  const freq = {};
+  weekMoods.forEach(({ mood }) => { freq[mood] = (freq[mood] || 0) + 1; });
+  const [[topMood, topCount]] = Object.entries(freq).sort((a,b) => b[1]-a[1]);
+  const dots = weekKeys.map(({ key, label }) => {
+    const mood = log[key];
+    return '<div style="text-align:center;font-size:10px"><div style="font-size:18px">'+(mood ? mood.split(' ')[0] : '·')+'</div><div style="color:var(--muted);margin-top:2px">'+label+'</div></div>';
+  }).join('');
+  mp.innerHTML =
+    '<div style="margin-bottom:12px;font-size:13px">most common this week: <span class="tag tag-lav">'+topMood+'</span>'+(topCount>1?' <span style="font-size:11px;color:var(--muted)">('+topCount+'×)</span>':'')+' </div>'+
+    '<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:6px">'+dots+'</div>';
+}
+
+function restoreMoodState() {
+  const mood = STORE.load('todayMood', '');
+  if (!mood) return;
+  document.querySelectorAll('#mood-options .mood-btn').forEach(b => {
+    if (b.textContent.trim() === mood) b.classList.add('active');
+  });
+}
+
+/* ══ Global event listeners ══ */
+(function setupPersistenceListeners() {
+
+  // Contenteditable cells → save on input
+  document.addEventListener('input', function(e) {
+    if (e.target.contentEditable === 'true' && e.target.dataset.sid) {
+      const saved = STORE.load('ceFields', {});
+      saved[e.target.dataset.sid] = e.target.innerHTML;
+      STORE.save('ceFields', saved);
+      showSaved();
+    }
+  });
+
+  // Static textarea / text inputs → debounced save
+  document.addEventListener('input', function(e) {
+    const t = e.target;
+    if ((t.tagName === 'TEXTAREA' || (t.tagName === 'INPUT' && t.type === 'text')) && t.closest('.page')) {
+      clearTimeout(_sfTimer);
+      _sfTimer = setTimeout(saveStaticFields, 900);
+    }
+  });
+
+  // Mood btn → save selected mood
+  document.addEventListener('click', function(e) {
+    const mb = e.target.closest('#mood-options .mood-btn');
+    if (mb) {
+      const _m = mb.textContent.trim();
+      STORE.save('todayMood', _m);
+      const _todayKey = now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate();
+      const _ml = STORE.load('moodLog', {}); _ml[_todayKey] = _m; STORE.save('moodLog', _ml);
+      SOUND.moodSelect();
+      updateMoodPatterns(); showSaved();
+    }
+  });
+
+  // Array-backed fields: change events from dynamically rendered rows
+  document.addEventListener('change', function(e) {
+    const t = e.target;
+    if (!t.closest('#main-app')) return;
+    if (t.closest('#expense-list'))  { STORE.save('expenses', expenses); showSaved(); }
+    if (t.closest('#income-list'))   { STORE.save('incomes', incomes);   showSaved(); }
+    if (t.closest('#savings-list'))  { STORE.save('savingsGoals', savingsGoals); showSaved(); }
+    if (t.closest('#sub-list'))      { STORE.save('subs', subs); showSaved(); }
+    if (t.closest('#shelf-list') || t.closest('#current-books') || t.closest('#wishlist-items') || t.closest('#reading-log-list')) {
+      STORE.save('books', books);
+      STORE.save('wishBooks', wishBooks);
+      STORE.save('readingLogs', readingLogs);
+      showSaved();
+    }
+    if (t.closest('#trips-list'))    { STORE.save('trips', trips); showSaved(); }
+    if (t.closest('#bucket-list') || t.closest('#experience-list')) {
+      STORE.save('bucketItems', bucketItems);
+      STORE.save('experiences', experiences);
+      showSaved();
+    }
+    if (t.closest('#memories-list'))  { STORE.save('memories', memories); showSaved(); }
+    if (t.closest('#trip-exp-list'))  { STORE.save('tripExpData', tripExpData); showSaved(); }
+  }, true);
+
+})();
+
+
+
+/* ═══════════════════════════════════════════════════════════════
+   BLOOM SOUND ENGINE — soothing Web Audio API tones
+   No external files. Pure synthesis. Works offline.
+═══════════════════════════════════════════════════════════════ */
+const SOUND = (() => {
+  let ctx = null;
+  let _muted = false;
+
+  function getCtx() {
+    if (!ctx) ctx = new (window.AudioContext || window.webkitAudioContext)();
+    if (ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+
+  /* Core tone synthesiser */
+  function tone({ freq = 440, type = 'sine', dur = 0.3, vol = 0.12,
+                  freqEnd = null, attack = 0.006, bpf = null, delay = 0 }) {
+    if (_muted) return;
+    setTimeout(() => {
+      try {
+        const c = getCtx();
+        const osc = c.createOscillator();
+        const g   = c.createGain();
+        if (bpf) {
+          const f = c.createBiquadFilter();
+          f.type = 'bandpass'; f.frequency.value = bpf; f.Q.value = 2.5;
+          osc.connect(f); f.connect(g);
+        } else { osc.connect(g); }
+        g.connect(c.destination);
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, c.currentTime);
+        if (freqEnd) osc.frequency.exponentialRampToValueAtTime(
+          Math.max(freqEnd, 20), c.currentTime + dur * 0.55);
+        g.gain.setValueAtTime(0, c.currentTime);
+        g.gain.linearRampToValueAtTime(vol, c.currentTime + attack);
+        g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + dur);
+        osc.start(c.currentTime);
+        osc.stop(c.currentTime + dur + 0.05);
+      } catch(e) {}
+    }, delay);
+  }
+
+  return {
+    /* ── Initialise from saved preference ── */
+    init() { _muted = STORE.load('soundEnabled', true) === false; },
+    setMuted(v) { _muted = v; },
+    isMuted() { return _muted; },
+
+    /* ── 💧 Water tracker ─────────────────────────────── */
+    /* Pitch rises naturally as the container fills (physics!) */
+    waterDrop(cupIdx = 0) {
+      const f = 420 + cupIdx * 26;          // 420 Hz (empty) → 602 Hz (full)
+      tone({ freq: f, freqEnd: f * 0.38, dur: 0.28, vol: 0.2,  bpf: f * 1.1, attack: 0.002 });
+      tone({ freq: f * 0.64, freqEnd: f * 0.26, dur: 0.22, vol: 0.08, delay: 78 });
+    },
+
+    /* All 8 cups filled — celebratory water cascade */
+    waterFull() {
+      [523, 659, 784, 880, 1047].forEach((f, i) => {
+        tone({ freq: f, freqEnd: f * 0.62, dur: 0.45, vol: 0.09, bpf: f * 1.15, attack: 0.006, delay: i * 95 });
+        tone({ freq: f * 1.5, dur: 0.3, vol: 0.035, delay: i * 95 + 55 });
+      });
+    },
+
+    /* Removing a cup — soft descending drop */
+    waterEmpty() {
+      tone({ freq: 360, freqEnd: 240, dur: 0.2, vol: 0.1, bpf: 430, attack: 0.003 });
+    },
+
+    /* ── ✅ Habit tracker ─────────────────────────────── */
+    habitCheck() {
+      tone({ freq: 830, dur: 0.13, vol: 0.09, attack: 0.003 });
+      tone({ freq: 1046, dur: 0.18, vol: 0.045, delay: 62 });
+    },
+    habitUncheck() {
+      tone({ freq: 620, freqEnd: 480, dur: 0.13, vol: 0.07, attack: 0.002 });
+    },
+
+    /* ── 📅 Calendar mark ────────────────────────────── */
+    calMark() {
+      tone({ freq: 720, dur: 0.22, vol: 0.1, attack: 0.004 });
+      tone({ freq: 900, dur: 0.14, vol: 0.04, delay: 80 });
+    },
+    softUnmark() {
+      tone({ freq: 560, freqEnd: 440, dur: 0.15, vol: 0.07, attack: 0.003 });
+    },
+
+    /* ── 🎯 Goal / quarterly checkbox ────────────────── */
+    goalCheck() {
+      tone({ freq: 698, dur: 0.2,  vol: 0.1,  attack: 0.005 });
+      tone({ freq: 880, dur: 0.24, vol: 0.065, delay: 95  });
+      tone({ freq: 1108, dur: 0.2, vol: 0.03, delay: 185 });
+    },
+
+    /* ── 😊 Mood selection ───────────────────────────── */
+    moodSelect() {
+      tone({ freq: 528, dur: 0.38, vol: 0.09, attack: 0.012 });
+      tone({ freq: 660, dur: 0.28, vol: 0.045, delay: 105 });
+    },
+
+    /* ── 🗂️ Page navigation ──────────────────────────── */
+    navigate() {
+      tone({ freq: 480, freqEnd: 550, dur: 0.11, vol: 0.055, attack: 0.004 });
+    },
+
+    /* ── 💾 Auto-save confirmation ───────────────────── */
+    saved() {
+      tone({ freq: 1047, dur: 0.12, vol: 0.035, attack: 0.003 });
+    }
+  };
+})();
+
+/* ── Sound toggle button ── */
+function toggleSound() {
+  const m = !SOUND.isMuted();
+  SOUND.setMuted(m);
+  STORE.save('soundEnabled', !m);
+  const btn = document.getElementById('sound-btn');
+  if (btn) {
+    btn.textContent = m ? '🔇' : '🔊';
+    m ? btn.classList.add('muted') : btn.classList.remove('muted');
+  }
+  if (!m) SOUND.navigate(); // play a preview tone when unmuting
+}
+
+
+
+/* ═══════════════════════════════════════════════════════════════
+   BLOOM PWA ENGINE
+   — Generates icon from SVG → Canvas → PNG data URI
+   — Creates web manifest as Blob URL
+   — Registers service worker on HTTPS
+   — Shows contextual Add to Home Screen guide
+═══════════════════════════════════════════════════════════════ */
+
+function _createBloomIcon(size) {
+  return new Promise(resolve => {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 512 512">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#FBF5EC"/>
+          <stop offset="100%" stop-color="#F5EDE2"/>
+        </linearGradient>
+        <linearGradient id="gr" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#C0607A"/>
+          <stop offset="50%" stop-color="#8B4A68"/>
+          <stop offset="100%" stop-color="#B85C2A"/>
+        </linearGradient>
+      </defs>
+      <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+      <circle cx="75"  cy="75"  r="98" fill="#FFD4B8" opacity=".27"/>
+      <circle cx="445" cy="445" r="80" fill="#F4C2D0" opacity=".30"/>
+      <circle cx="438" cy="84"  r="58" fill="#B2E4D4" opacity=".24"/>
+      <circle cx="84"  cy="438" r="46" fill="#B8D8F0" opacity=".22"/>
+      <ellipse cx="256" cy="143" rx="22" ry="40" fill="#F4C2D0" opacity=".70"/>
+      <ellipse cx="256" cy="257" rx="22" ry="40" fill="#F4C2D0" opacity=".70"/>
+      <ellipse cx="199" cy="200" rx="40" ry="22" fill="#B2E4D4" opacity=".70"/>
+      <ellipse cx="313" cy="200" rx="40" ry="22" fill="#B2E4D4" opacity=".70"/>
+      <ellipse cx="216" cy="157" rx="21" ry="37" fill="#FFD4B8" opacity=".62" transform="rotate(-45 216 157)"/>
+      <ellipse cx="296" cy="243" rx="21" ry="37" fill="#FFD4B8" opacity=".62" transform="rotate(-45 296 243)"/>
+      <ellipse cx="296" cy="157" rx="21" ry="37" fill="#B8D8F0" opacity=".62" transform="rotate(45 296 157)"/>
+      <ellipse cx="216" cy="243" rx="21" ry="37" fill="#B8D8F0" opacity=".62" transform="rotate(45 216 243)"/>
+      <circle cx="256" cy="200" r="28" fill="url(#gr)" opacity=".92"/>
+      <text x="256" y="350" font-family="Georgia,'Times New Roman',serif" font-style="italic"
+            font-size="90" fill="url(#gr)" text-anchor="middle" letter-spacing="-2">bloom</text>
+      <line x1="186" y1="368" x2="326" y2="368" stroke="#C0607A" stroke-width="1.2" opacity=".35"/>
+      <text x="256" y="394" font-family="Arial,Helvetica,sans-serif" font-size="22"
+            fill="#A07060" text-anchor="middle" letter-spacing="6" font-weight="700">PLANNER</text>
+    </svg>`;
+
+    const img = new Image();
+    const blob = new Blob([svg], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    img.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = c.height = size;
+      c.getContext('2d').drawImage(img, 0, 0, size, size);
+      URL.revokeObjectURL(url);
+      resolve(c.toDataURL('image/png'));
+    };
+    img.onerror = () => resolve('');
+    img.src = url;
+  });
+}
+
+let _deferredInstall = null;
+
+async function setupPWA() {
+  try {
+    const [icon192, icon512] = await Promise.all([
+      _createBloomIcon(192),
+      _createBloomIcon(512)
+    ]);
+
+    // ── Apple touch icon (iOS Add to Home Screen) ──
+    if (icon192) {
+      let el = document.querySelector('link[rel="apple-touch-icon"]');
+      if (!el) {
+        el = document.createElement('link');
+        el.rel = 'apple-touch-icon';
+        document.head.appendChild(el);
+      }
+      el.href = icon192;
+    }
+
+    // ── Web App Manifest ──
+    if (icon192 && icon512) {
+      const manifest = {
+        name: 'bloom — digital planner',
+        short_name: 'bloom',
+        description: 'plan softly. live fully. your beautiful digital life planner.',
+        start_url: '.',
+        scope: '.',
+        display: 'standalone',
+        orientation: 'any',
+        background_color: '#FBF5EC',
+        theme_color: '#C0607A',
+        categories: ['lifestyle', 'productivity'],
+        icons: [
+          { src: icon192, sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
+          { src: icon512, sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
+        ]
+      };
+      const mBlob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+      let mLink = document.querySelector('link[rel="manifest"]');
+      if (!mLink) { mLink = document.createElement('link'); mLink.rel = 'manifest'; document.head.appendChild(mLink); }
+      mLink.href = URL.createObjectURL(mBlob);
+    }
+
+    // ── Show install guidance ──
+    _updatePWATip();
+
+    // ── Service Worker (HTTPS only) ──
+    if ('serviceWorker' in navigator && location.protocol === 'https:') {
+      const swSrc = `
+const CACHE='bloom-v2';
+self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.add('./').catch(()=>{})));});
+self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>clients.claim())));
+self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(res=>{if(res.ok)caches.open(CACHE).then(c=>c.put(e.request,res.clone()));return res;}).catch(()=>r)));});`;
+      const swBlob = new Blob([swSrc], { type: 'application/javascript' });
+      navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(() => {});
+    }
+
+  } catch(e) {}
+}
+
+function _updatePWATip() {
+  const tip = document.getElementById('pwa-tip');
+  if (!tip) return;
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+  if (isStandalone) { tip.style.display = 'none'; return; }
+
+  const ua = navigator.userAgent;
+  const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  const isAndroid = /Android/.test(ua);
+
+  if (isIOS) {
+    tip.innerHTML =
+      '<span style="font-size:15px">📲</span> <strong style="color:var(--text)">Add to Home Screen</strong> &nbsp;—&nbsp; '
+      + 'tap <strong>Share ⬆</strong> then <strong>"Add to Home Screen"</strong> for the full app experience with Apple Pencil';
+  } else if (isAndroid || _deferredInstall) {
+    tip.innerHTML =
+      '<span style="font-size:15px">📲</span> <strong style="color:var(--text)">Install bloom</strong> &nbsp;—&nbsp; '
+      + '<button onclick="triggerInstall()" style="background:linear-gradient(135deg,#C0607A,#8B4A68);color:#fff;border:none;'
+      + 'border-radius:20px;padding:5px 16px;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:.5px;margin-left:4px">'
+      + '✦ Install App</button>';
+  } else {
+    tip.style.display = 'none';
+    return;
+  }
+  tip.style.display = 'block';
+}
+
+function triggerInstall() {
+  if (!_deferredInstall) return;
+  _deferredInstall.prompt();
+  _deferredInstall.userChoice.then(() => { _deferredInstall = null; _updatePWATip(); });
+}
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  _deferredInstall = e;
+  _updatePWATip();
+});
+
+window.addEventListener('appinstalled', () => {
+  const tip = document.getElementById('pwa-tip');
+  if (tip) {
+    tip.innerHTML = '🌸 bloom is installed! Find it on your home screen.';
+    tip.style.color = 'var(--mint-d)';
+    setTimeout(() => { tip.style.display = 'none'; }, 4000);
+  }
+});
+
+// Kick off setup
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', setupPWA);
+} else {
+  setupPWA();
+}
+
+</script>
+</body>
+</html>
