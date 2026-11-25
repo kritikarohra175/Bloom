@@ -1,0 +1,28 @@
+rules_version = '2';
+
+// bloom — Firestore security rules
+// Each signed-in person can read and write ONLY their own planner:
+//   users/{their uid}/keys/{section}
+// Everything else is locked. Paste this into Firebase → Firestore → Rules → Publish.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /users/{uid}/keys/{key} {
+      allow read, delete: if request.auth != null && request.auth.uid == uid;
+
+      // v = the section's data, s = when each part of it last changed (both JSON text)
+      allow create, update: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['v', 's', 't', 'd'])
+        && request.resource.data.v is string
+        && request.resource.data.s is string
+        && request.resource.data.v.size() + request.resource.data.s.size() < 1000000;
+    }
+
+    // Nothing else can be read or written.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
