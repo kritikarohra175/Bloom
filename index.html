@@ -547,6 +547,98 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,[contenteditable
 .mini-btn:disabled{opacity:.4;cursor:not-allowed}
 .install-steps{counter-reset:s;list-style:none;margin:6px 0 10px}
 .install-steps li{counter-increment:s;display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text);line-height:1.6;margin-bottom:10px}
+/* ══════════ LIFE MODULES ══════════ */
+/* editable lists (debts, bills, dates, gifts, assignments, medicines…) */
+.gl-head{display:flex;gap:8px;padding:0 4px 6px;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+.gl-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:8px 10px;border:1px solid var(--border);border-radius:12px;background:var(--white);margin-bottom:6px}
+.gl-row>input,.gl-row>select,.gl-row>textarea,.gl-row>label{min-width:0}
+.gl-row input[type=text],.gl-row input[type=number],.gl-row input[type=date],.gl-row input[type=time],.gl-row select,.gl-row textarea{border:1px solid transparent;border-radius:8px;padding:6px 8px;font-size:13px;background:var(--cream);color:var(--text);font-family:var(--font-body);width:100%}
+.gl-row textarea{min-height:60px;resize:vertical}
+.gl-row .gl-check{display:flex;align-items:center;justify-content:center}
+.gl-row .gl-check input{width:18px;height:18px;accent-color:var(--mint-d)}
+.gl-x{flex:0 0 22px;text-align:center}
+.gl-extra{flex-basis:100%;font-size:12px;color:var(--muted);padding:0 2px}
+.gl-row.overdue{border-color:var(--blush);background:var(--blush-l)}
+.gl-row.soon{border-color:var(--peach)}
+.gl-row.done{opacity:.6}
+@media (max-width:640px){.gl-head{display:none}.gl-row>*{flex-basis:calc(50% - 8px)!important}.gl-row>.gl-x{flex-basis:22px!important;margin-left:auto}}
+.pill-count{display:inline-block;min-width:20px;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:700;background:var(--lav-l);color:var(--lav-d);margin-left:4px}
+.up-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.up-item:last-child{border-bottom:none}
+.up-badge{min-width:54px;text-align:center;border-radius:12px;padding:6px 4px;background:var(--lav-l);color:var(--lav-d);font-weight:700;font-size:15px;line-height:1.1;flex-shrink:0}
+.up-badge small{display:block;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.up-badge.hot{background:var(--blush-l);color:var(--blush-d)}
+.up-main{flex:1;min-width:0;font-size:13px;color:var(--text)}
+.up-main span{display:block;font-size:11px;color:var(--muted)}
+/* meal planner */
+.meal-grid{display:grid;grid-template-columns:80px repeat(4,1fr);gap:6px;overflow-x:auto}
+.meal-grid .mh{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;padding:2px 4px}
+.meal-grid .md{font-size:12px;font-weight:700;color:var(--text);padding:8px 4px}
+.meal-grid .md.today{color:var(--lav-d)}
+.meal-grid input{border:1px solid var(--border);border-radius:10px;padding:8px;font-size:12px;background:var(--cream);width:100%;min-width:90px}
+.meal-grid input.has-recipe{border-color:var(--mint);background:var(--mint-l)}
+@media (max-width:640px){.meal-grid{grid-template-columns:60px repeat(4,minmax(110px,1fr))}}
+.groc-cat{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin:12px 0 4px}
+.groc-item{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:13px;color:var(--text);cursor:pointer}
+.groc-item input{width:17px;height:17px;accent-color:var(--mint-d)}
+.groc-item.got{text-decoration:line-through;color:var(--muted)}
+.groc-item .q{margin-left:auto;font-size:11px;color:var(--muted)}
+/* fitness */
+.fit-q{margin-bottom:12px}
+.fit-q .set-label{margin-bottom:6px}
+.wk-day{border:1.5px solid var(--border);border-radius:16px;padding:14px 16px;background:var(--white);margin-bottom:10px}
+.wk-day.today{border-color:var(--lav-d)}
+.wk-day.rest{background:var(--cream)}
+.wk-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.wk-head b{font-family:var(--font-head);font-size:18px;color:var(--text);font-weight:400}
+.wk-head .tag{font-size:10px}
+.ex-row{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid var(--border)}
+.ex-row:last-child{border-bottom:none}
+.ex-row input{width:18px;height:18px;margin-top:2px;accent-color:var(--mint-d);flex-shrink:0}
+.ex-row .ex-n{font-size:13px;color:var(--text);font-weight:600}
+.ex-row .ex-how{font-size:11px;color:var(--muted)}
+.ex-row .ex-sets{margin-left:auto;font-size:12px;color:var(--lav-d);font-weight:700;white-space:nowrap}
+.ex-row.done .ex-n{text-decoration:line-through;color:var(--muted)}
+.diet-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:10px}
+.diet-table th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);padding:6px 4px;border-bottom:1.5px solid var(--border)}
+.diet-table td{padding:8px 4px;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text)}
+.diet-table td small{display:block;color:var(--muted);font-size:10px}
+.diet-wrap{overflow-x:auto}
+.warn-note{background:var(--peach-l);border:1px solid var(--peach);border-radius:12px;padding:10px 14px;font-size:12px;color:var(--text);line-height:1.6;margin:10px 0}
+/* cycle */
+.cycle-hero{background:linear-gradient(135deg,var(--blush-l),var(--lav-l))!important;border-color:var(--blush)!important}
+.cy-big{font-family:var(--font-head);font-size:34px;color:var(--blush-d);line-height:1.1}
+.cy-phase{display:inline-block;padding:4px 12px;border-radius:20px;background:var(--white);color:var(--lav-d);font-size:12px;font-weight:700;margin:6px 0}
+.cy-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cy-cal .hd{font-size:9px;font-weight:700;color:var(--muted);text-align:center;text-transform:uppercase}
+.cy-day{aspect-ratio:1;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text);position:relative;background:var(--cream);border:1px solid var(--border)}
+.cy-day.period{background:var(--blush-d);color:#fff;border-color:var(--blush-d)}
+.cy-day.pred{background:var(--blush-l);border:1.5px dashed var(--blush-d)}
+.cy-day.fertile{background:var(--mint-l);border-color:var(--mint)}
+.cy-day.ovu::after{content:'✦';position:absolute;top:1px;right:3px;font-size:8px;color:var(--mint-d)}
+.cy-day.today{box-shadow:0 0 0 2px var(--lav-d)}
+.cy-day .mood{position:absolute;bottom:0;right:1px;font-size:8px}
+/* today at a glance */
+.glance{background:linear-gradient(135deg,var(--lav-l),var(--white))!important;border-color:var(--lav)!important;margin-bottom:14px}
+.gl-items{display:flex;flex-wrap:wrap;gap:8px}
+.gl-chip{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:14px;background:var(--white);border:1px solid var(--border);font-size:12px;color:var(--text);cursor:pointer;text-align:left;font-family:var(--font-body)}
+.gl-chip:hover{border-color:var(--lav)}
+.gl-chip b{font-weight:600}
+.gl-chip.hot{border-color:var(--blush);background:var(--blush-l)}
+/* timetable + cornell */
+.tt{border-collapse:separate;border-spacing:4px;min-width:640px;width:100%}
+.tt th{font-size:10px;text-transform:uppercase;color:var(--muted);letter-spacing:.6px;font-weight:700}
+.tt td input{width:100%;border:1px solid var(--border);border-radius:8px;padding:7px;font-size:12px;background:var(--cream)}
+.tt td.now input{border-color:var(--lav-d);background:var(--lav-l)}
+.tt .tlabel input{background:transparent;border:none;font-weight:700;color:var(--muted);font-size:11px;text-align:center}
+.cornell{display:grid;grid-template-columns:1fr 2fr;gap:8px;margin-top:8px}
+.cornell textarea{min-height:140px;border:1px solid var(--border);border-radius:10px;padding:10px;background:var(--cream);font-size:13px}
+.cornell .sum{grid-column:1/-1}
+.cornell .sum textarea{min-height:60px}
+@media (max-width:640px){.cornell{grid-template-columns:1fr}}
+.dose{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:20px;border:1.5px solid var(--border);background:var(--white);font-size:12px;cursor:pointer;margin:0 6px 6px 0;font-family:var(--font-body);color:var(--text)}
+.dose.taken{background:var(--mint-l);border-color:var(--mint-d);color:var(--mint-d);font-weight:600}
+.review-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:14px 16px}
 .install-steps li::before{content:counter(s);flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--lav-l);color:var(--lav-d);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
 </style>
 </head>
@@ -588,10 +680,17 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,[contenteditable
     <span class="pill pill-sky">✦ vision board</span>
     <span class="pill pill-butter">✦ notes & journal</span>
     <span class="pill pill-sky">✦ travel tracker</span>
+    <span class="pill pill-mint">✦ meal planner</span>
+    <span class="pill pill-peach">✦ workouts & diet</span>
+    <span class="pill pill-blush">✦ dates & gifts</span>
+    <span class="pill pill-lav">✦ study planner</span>
+    <span class="pill pill-butter">✦ health records</span>
+    <span class="pill pill-blush">✦ cycle tracker</span>
+    <span class="pill pill-lav">✦ year in review</span>
   </div>
   <button class="cover-btn" onclick="startPlanner()">open my planner →</button>
   <div class="cover-stats">
-    <div class="c-stat"><div class="c-stat-num" style="color:#C0607A">13</div><div class="c-stat-label">tracker sections</div></div>
+    <div class="c-stat"><div class="c-stat-num" style="color:#C0607A">20</div><div class="c-stat-label">tracker sections</div></div>
     <div class="c-stat"><div class="c-stat-num" style="color:#3A8E6E">40+</div><div class="c-stat-label">planner pages</div></div>
     <div class="c-stat"><div class="c-stat-num" style="color:#B85C2A">∞</div><div class="c-stat-label">soft potential</div></div>
   </div>
@@ -623,6 +722,13 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,[contenteditable
     <button class="tab-btn" onclick="showPage('notes',this)">✏️ notes</button>
     <button class="tab-btn" onclick="showPage('vision',this)">🔮 vision</button>
     <button class="tab-btn" onclick="showPage('travel',this)">✈️ travel</button>
+    <button class="tab-btn" onclick="showPage('meals',this)">🍽️ meals</button>
+    <button class="tab-btn" onclick="showPage('fitness',this)">🏋️ fitness</button>
+    <button class="tab-btn" onclick="showPage('dates',this)">🎁 dates & gifts</button>
+    <button class="tab-btn" onclick="showPage('study',this)">🎓 study</button>
+    <button class="tab-btn" onclick="showPage('health',this)">🩺 health</button>
+    <button class="tab-btn" onclick="showPage('cycle',this)">🌙 cycle</button>
+    <button class="tab-btn" onclick="showPage('review',this)">✨ year in review</button>
     <button class="tab-btn" onclick="showPage('insights',this)">📊 insights</button>
   </div>
   </div>
@@ -640,6 +746,7 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,[contenteditable
     <button class="nav-today-btn" onclick="navDay(0,true)">today</button>
     <button class="tpl-btn" onclick="openTemplates('daily')">✨ templates</button>
   </div>
+  <div class="card glance" id="glance" style="display:none" aria-label="today at a glance"></div>
   <div class="grid2">
     <div>
       <div class="card al">
@@ -796,6 +903,8 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,[contenteditable
     <button class="sub-btn" onclick="showBudget('savings',this)">savings goals</button>
     <button class="sub-btn" onclick="showBudget('subscriptions',this)">subscriptions</button>
     <button class="sub-btn" onclick="showBudget('monthly-budget',this)">monthly budget</button>
+    <button class="sub-btn" onclick="showBudget('bills',this)">bills</button>
+    <button class="sub-btn" onclick="showBudget('debts',this)">debt payoff</button>
   </div>
 
   <!-- Overview -->
@@ -863,6 +972,24 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,[contenteditable
       </div>
       <div style="margin-top:12px" id="sub-list"></div>
       <button class="add-btn" onclick="addSubscription()">+ add subscription</button>
+    </div>
+  </div>
+
+  <!-- Bills -->
+  <div class="sub-page" id="budget-bills">
+    <div class="grid3" style="margin-bottom:14px" id="bill-stats"></div>
+    <div class="card" style="margin-bottom:14px"><div class="section-label">⏰ coming up (next 14 days)</div><div id="bill-upcoming"></div></div>
+    <div class="card"><div class="section-label">🧾 my bills — tick when paid this month</div><div id="bill-list"></div></div>
+  </div>
+
+  <!-- Debt payoff -->
+  <div class="sub-page" id="budget-debts">
+    <div class="card" style="margin-bottom:14px"><div class="section-label">💳 my debts</div><div id="debt-list"></div></div>
+    <div class="card" style="margin-bottom:14px">
+      <div class="section-label">🧮 payoff plan</div>
+      <div class="set-row" id="debt-strategy" style="margin-bottom:10px"></div>
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--muted)">extra I can pay each month: <span class="cur-sym"></span><input type="number" id="debt-extra" class="time-in" style="width:110px" min="0" aria-label="extra payment each month" oninput="saveDebtPlan()"></div>
+      <div id="debt-result" style="margin-top:14px"></div>
     </div>
   </div>
 
@@ -1199,6 +1326,118 @@ input:focus-visible,textarea:focus-visible,select:focus-visible,[contenteditable
   </div>
 </div>
 
+<!-- ══════════════ MEALS ══════════════ -->
+<div class="page" id="page-meals">
+  <h1 class="page-title">meal planner ✦</h1>
+  <p class="page-sub">plan your week — the grocery list writes itself 🥗</p>
+  <div class="nav-pager">
+    <button class="nav-pager-btn" onclick="navMealWeek(-1)" aria-label="previous week">◀</button>
+    <div class="nav-pager-label" id="meal-week-label">this week</div>
+    <button class="nav-pager-btn" onclick="navMealWeek(1)" aria-label="next week">▶</button>
+    <button class="nav-today-btn" onclick="navMealWeek(0,true)">this week</button>
+  </div>
+  <div class="card" style="margin-bottom:14px">
+    <div class="section-label">🗓️ week of meals</div>
+    <div class="meal-grid" id="meal-grid"></div>
+    <p class="set-note" style="margin:10px 0 0">tip: start typing a recipe from your recipe box — its ingredients go straight onto the grocery list.</p>
+  </div>
+  <div class="grid2">
+    <div class="card am"><div class="section-label">🛒 grocery list (auto)</div><div id="grocery"></div></div>
+    <div class="card ap"><div class="section-label">📖 recipe box</div><p class="set-note" style="margin:0 0 8px">one ingredient per line, e.g. “2 cups rice”, “200 g paneer”, “1 onion”.</p><div id="recipe-list"></div></div>
+  </div>
+  <datalist id="recipe-names"></datalist>
+</div>
+
+<!-- ══════════════ FITNESS ══════════════ -->
+<div class="page" id="page-fitness">
+  <h1 class="page-title">fitness ✦</h1>
+  <p class="page-sub">tell bloom about you — get a whole week of workouts 🏋️</p>
+  <div class="card al" style="margin-bottom:14px"><div class="section-label">🎯 about me</div><div id="fit-profile"></div></div>
+  <div id="fit-plan"></div>
+  <div class="card" style="margin-top:14px">
+    <div class="toggle" style="border:none;padding:0">
+      <div class="tl"><b>🥗 diet chart</b><span>turn on for a matching weekly meal plan with calorie & protein targets</span></div>
+      <label class="switch"><input type="checkbox" id="diet-toggle" onchange="setDietOn(this.checked)" aria-label="diet chart"><span></span></label>
+    </div>
+    <div id="diet-area"></div>
+  </div>
+</div>
+
+<!-- ══════════════ DATES & GIFTS ══════════════ -->
+<div class="page" id="page-dates">
+  <h1 class="page-title">dates & gifts ✦</h1>
+  <p class="page-sub">never miss a birthday — and always have the perfect gift idea 🎁</p>
+  <div class="card ab" style="margin-bottom:14px"><div class="section-label">⏳ coming up</div><div id="dates-upcoming"></div></div>
+  <div class="card" style="margin-bottom:14px"><div class="section-label">📅 important dates</div><div id="dates-list"></div></div>
+  <div class="card ap"><div class="section-label">🎁 gift planner</div><div id="gift-stats" style="margin-bottom:10px"></div><div id="gift-list"></div><datalist id="people-names"></datalist></div>
+</div>
+
+<!-- ══════════════ STUDY ══════════════ -->
+<div class="page" id="page-study">
+  <h1 class="page-title">study ✦</h1>
+  <p class="page-sub">classes, deadlines, exams and notes — all in one place 🎓</p>
+  <div class="sub-nav visible" id="study-subnav" style="padding:0 0 14px;gap:6px">
+    <button class="sub-btn active" onclick="showStudy('timetable',this)">timetable</button>
+    <button class="sub-btn" onclick="showStudy('assignments',this)">assignments</button>
+    <button class="sub-btn" onclick="showStudy('exams',this)">exams</button>
+    <button class="sub-btn" onclick="showStudy('grades',this)">grades</button>
+    <button class="sub-btn" onclick="showStudy('notes',this)">cornell notes</button>
+  </div>
+  <div class="sub-page active" id="study-timetable"><div class="card"><div class="section-label">🗓️ class timetable</div><div class="habit-wrap"><div id="timetable"></div></div></div></div>
+  <div class="sub-page" id="study-assignments"><div class="card"><div class="section-label">📝 assignments</div><div id="assign-list"></div></div></div>
+  <div class="sub-page" id="study-exams"><div class="card"><div class="section-label">⏳ exam countdown</div><div id="exam-cards" style="margin-bottom:10px"></div><div id="exam-list"></div></div></div>
+  <div class="sub-page" id="study-grades"><div class="card" style="margin-bottom:14px"><div class="section-label">📊 averages by subject</div><div id="grade-avg"></div></div><div class="card"><div class="section-label">💯 scores</div><div id="grade-list"></div></div></div>
+  <div class="sub-page" id="study-notes"><div id="cornell"></div></div>
+</div>
+
+<!-- ══════════════ HEALTH ══════════════ -->
+<div class="page" id="page-health">
+  <h1 class="page-title">health records ✦</h1>
+  <p class="page-sub">your health, organised — for you and your doctor 🩺</p>
+  <div class="grid2" style="margin-bottom:14px">
+    <div class="card as"><div class="section-label">💊 today’s medicines</div><div id="med-today"></div></div>
+    <div class="card al"><div class="section-label">🪪 key info</div>
+      <div class="inp-row" style="margin-bottom:6px"><span class="inp-lbl">blood group</span><input type="text" data-sid="f_health_blood" placeholder="e.g. B+"></div>
+      <div class="inp-row" style="margin-bottom:6px"><span class="inp-lbl">allergies</span><input type="text" data-sid="f_health_allergies" placeholder="none known"></div>
+      <div class="inp-row" style="margin-bottom:6px"><span class="inp-lbl">conditions</span><input type="text" data-sid="f_health_conditions" placeholder="anything a doctor should know"></div>
+      <div class="inp-row"><span class="inp-lbl">emergency</span><input type="text" data-sid="f_health_emergency" placeholder="name & phone"></div>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:14px"><div class="section-label">💊 medicines & supplements</div><div id="med-list"></div></div>
+  <div class="card" style="margin-bottom:14px"><div class="section-label">🤒 symptoms log</div><div id="symptom-list"></div></div>
+  <div class="card" style="margin-bottom:14px"><div class="section-label">👩‍⚕️ doctor visits</div><div id="visit-list"></div></div>
+  <div class="card"><div class="section-label">💉 vaccinations & check-ups</div><div id="vaccine-list"></div></div>
+  <p class="set-note" style="margin-top:12px">bloom helps you keep records — it isn’t medical advice. always follow your doctor’s guidance.</p>
+</div>
+
+<!-- ══════════════ CYCLE ══════════════ -->
+<div class="page" id="page-cycle">
+  <h1 class="page-title">cycle ✦</h1>
+  <p class="page-sub">know your rhythm — predictions get smarter every month 🌙</p>
+  <div class="card cycle-hero" id="cycle-hero" style="margin-bottom:14px"></div>
+  <div class="grid2" style="margin-bottom:14px">
+    <div class="card ab"><div class="section-label">✍️ log</div><div id="cycle-log"></div></div>
+    <div class="card al"><div class="section-label">💜 mood by phase</div><div id="cycle-mood"></div></div>
+  </div>
+  <div class="card" style="margin-bottom:14px"><div class="section-label">🗓️ calendar</div>
+    <div class="nav-pager" style="margin-bottom:8px"><button class="nav-pager-btn" onclick="navCycleMonth(-1)" aria-label="previous month">◀</button><div class="nav-pager-label" id="cycle-month-label"></div><button class="nav-pager-btn" onclick="navCycleMonth(1)" aria-label="next month">▶</button></div>
+    <div id="cycle-cal"></div>
+    <div class="legend-row" style="flex-wrap:wrap"><i style="background:var(--blush-d)"></i> period <i style="background:var(--blush-l);border:1.5px dashed var(--blush-d)"></i> predicted <i style="background:var(--mint-l);border:1px solid var(--mint)"></i> fertile window <span>✦ ovulation (estimate)</span></div>
+  </div>
+  <div class="card"><div class="section-label">📜 history & settings</div><div id="cycle-history"></div></div>
+  <p class="set-note" style="margin-top:12px">predictions are estimates from your own history — not a method of contraception and not medical advice.</p>
+</div>
+
+<!-- ══════════════ YEAR IN REVIEW ══════════════ -->
+<div class="page" id="page-review">
+  <h1 class="page-title" id="review-title">year in review ✦</h1>
+  <p class="page-sub">a look back at everything you grew this year 🌸</p>
+  <div class="nav-pager"><button class="nav-pager-btn" onclick="navReviewYear(-1)" aria-label="previous year">◀</button><div class="nav-pager-label" id="review-year-label"></div><button class="nav-pager-btn" onclick="navReviewYear(1)" aria-label="next year">▶</button></div>
+  <div class="grid4" id="review-stats" style="margin-bottom:14px"></div>
+  <div class="grid2" id="review-highlights" style="margin-bottom:14px"></div>
+  <div class="card"><div class="section-label">💭 reflect</div><div id="review-prompts"></div></div>
+</div>
+
 <!-- ══════════════ INSIGHTS ══════════════ -->
 <div class="page" id="page-insights">
   <h1 class="page-title">insights ✦</h1>
@@ -1400,6 +1639,7 @@ function showPage(id,btn){
   const sn=document.getElementById('sub-nav');
   sn.innerHTML='';sn.className='sub-nav';
   if(id==='insights')buildInsights();
+  if(typeof LIFE_RENDER!=='undefined'&&LIFE_RENDER[id])LIFE_RENDER[id]();
   // phone bottom bar: highlight the section, or "more" for the rest
   document.querySelectorAll('.bb-item[data-page]').forEach(b=>{const on=b.dataset.page===id;b.classList.toggle('active',on);if(on)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
   const more=document.getElementById('bb-more');if(more)more.classList.toggle('active',!['daily','weekly','habits','budget'].includes(id));
@@ -1414,6 +1654,8 @@ function showBudget(sub,btn){
   document.getElementById('budget-'+sub).classList.add('active');
   btn.classList.add('active');
   if(sub==='overview')updateBudgetOverview();
+  if(sub==='bills')renderBills();
+  if(sub==='debts')renderDebts();
 }
 
 function showReading(sub,btn){
@@ -1476,6 +1718,7 @@ function navDay(delta,reset){
   applyDailySids();
   restoreStaticFields();
   updateTomatoes();
+  renderGlance();
   SOUND.navigate();
 }
 
@@ -3144,6 +3387,7 @@ function renderLookSec(){
   el.innerHTML=
      '<div class="set-group"><div class="set-label">quick themes</div><div class="set-row">'+themeCards+'</div></div>'
     +'<div class="set-group"><div class="set-label">day or night</div><div class="set-row">'+chips(MODES,'mode')+'</div></div>'
+    +renderSectionsGroup()
     +'<div class="set-group"><div class="set-label">accent colour</div><div class="set-row">'+accentSw+'</div><div class="set-note">the 🌈 circle lets you pick any colour you like.</div></div>'
     +'<div class="set-group"><div class="set-label">paper colour</div><div class="set-row">'+paperSw+'</div></div>'
     +'<div class="set-group"><div class="set-label">paper pattern</div><div class="set-row">'+chips(PATTERNS,'pattern')+'</div></div>'
@@ -3167,7 +3411,8 @@ function openSettings(){
 
 /* ════════════ SEARCH ════════════ */
 const F_PAGES=[['f_notes_','notes'],['f_goals_','goals'],['f_vision_','vision'],['f_mood_','mood'],['f_reading_','reading'],
-  ['f_wellness_','wellness'],['f_sleep_','wellness'],['f_budget_','budget'],['f_habits_','habits'],['f_trip_plan_','travel'],['f_travel_','travel']];
+  ['f_wellness_','wellness'],['f_sleep_','wellness'],['f_budget_','budget'],['f_habits_','habits'],['f_trip_plan_','travel'],['f_travel_','travel'],
+  ['f_health_','health'],['f_review_','review']];
 function _dailyFieldName(f){
   if(f.startsWith('tb_'))return f.slice(3).replace(/(AM|PM)/,' $1');
   return f.replace(/_(\d)$/,' $1').replace(/_/g,' ').replace('grateful','gratitude');
@@ -3215,6 +3460,18 @@ function _searchIndex(){
   wishBooks.forEach(b=>items.push({text:[b.title,b.author].filter(Boolean).join(' — '),where:'reading · wish list',go:sub('reading','wishlist')}));
   readingLogs.forEach(l=>items.push({text:l.book,where:'reading · log · '+l.date,go:sub('reading','log')}));
   expenses.forEach(e=>items.push({text:e.name+' · '+fmt(e.amount),where:'budget · expenses',go:sub('budget','expenses')}));
+  const L=(k)=>STORE.load(k,[]);
+  L('bills').forEach(b=>items.push({text:[b.name,b.cat].filter(Boolean).join(' · '),where:'budget · bills',go:sub('budget','bills')}));
+  L('debts').forEach(d=>items.push({text:d.name,where:'budget · debt payoff',go:sub('budget','debts')}));
+  L('recipes').forEach(r=>items.push({text:[r.name,(r.ingredients||'').replace(/\n/g,', ')].filter(Boolean).join(' — '),where:'meals · recipe box',go:()=>goToPage('meals')}));
+  L('dates').forEach(x=>items.push({text:[x.name,x.type,x.date].filter(Boolean).join(' · '),where:'dates & gifts',go:()=>goToPage('dates')}));
+  L('gifts').forEach(x=>items.push({text:[x.idea,x.person&&'for '+x.person,x.link].filter(Boolean).join(' · '),where:'dates & gifts · gifts',go:()=>goToPage('dates')}));
+  L('assignments').forEach(a=>items.push({text:[a.title,a.subject].filter(Boolean).join(' · '),where:'study · assignments',go:sub('study','assignments')}));
+  L('exams').forEach(e=>items.push({text:[e.name,e.subject].filter(Boolean).join(' · '),where:'study · exams',go:sub('study','exams')}));
+  L('cornell').forEach(n=>items.push({text:[n.title,n.subject,n.cue,n.notes,n.summary].filter(Boolean).join(' · '),where:'study · notes',go:sub('study','notes')}));
+  L('meds').forEach(m=>items.push({text:[m.name,m.dose].filter(Boolean).join(' · '),where:'health · medicines',go:()=>goToPage('health')}));
+  L('symptoms').forEach(x=>items.push({text:[x.name,x.notes].filter(Boolean).join(' · '),where:'health · symptoms · '+(x.date||''),go:()=>goToPage('health')}));
+  L('visits').forEach(v=>items.push({text:[v.doctor,v.reason,v.notes].filter(Boolean).join(' · '),where:'health · visits · '+(v.date||''),go:()=>goToPage('health')}));
   return items.filter(i=>i.text&&i.text.trim());
 }
 function _highlight(text,terms){
@@ -3422,7 +3679,7 @@ function shufflePrompt(){
 }
 
 /* ════════════ REMINDERS ════════════ */
-const DEFAULT_REMINDERS={on:false,plan:{on:true,time:'08:00'},water:{on:true,every:2,from:'09:00',to:'21:00'},habits:{on:true,time:'20:00'},journal:{on:true,time:'21:30'}};
+const DEFAULT_REMINDERS={on:false,plan:{on:true,time:'08:00'},water:{on:true,every:2,from:'09:00',to:'21:00'},habits:{on:true,time:'20:00'},journal:{on:true,time:'21:30'},life:{on:true,time:'09:00'},meds:{on:true}};
 const REMINDER_TEXT={
   plan:['good morning 🌸','take two minutes to plan your day in bloom.'],
   water:['sip sip 💧','a little reminder to drink some water.'],
@@ -3457,6 +3714,8 @@ function renderRemindSec(){
     +row('water','💧 drink water','regular sips through the day','every <select class="time-in" onchange="setReminder(\'water\',\'every\',+this.value)">'+[1,2,3,4].map(h=>'<option value="'+h+'"'+(r.water.every===h?' selected':'')+'>'+h+' hour'+(h>1?'s':'')+'</option>').join('')+'</select> from '+time('water','from')+' to '+time('water','to'))
     +row('habits','✅ habit check-in','tick off today’s habits','at '+time('habits','time'))
     +row('journal','✍️ journal prompt','a few quiet minutes to write','at '+time('journal','time'))
+    +row('life','📅 bills, birthdays & deadlines','bills due, birthdays coming up, assignments & exams'+(cycleOn()?', your period':''),'daily at '+time('life','time'))
+    +row('meds','💊 medicines','at the times you set for each medicine on the 🩺 health page','')
     +'</div>'
     +'<p class="set-note" style="margin-top:12px">'+permNote+'<br>reminders arrive while bloom is open — in a browser tab, or as an installed app running in the background. phones may pause apps that haven’t been used for a while.</p>'
     +'<button class="mini-btn" onclick="notify(\'this is how reminders look 🌸\',\'soft, simple, and only when you want them.\')">send a test reminder</button>';
@@ -3484,6 +3743,13 @@ function checkReminders(){
   // only fire reminders that came due in the last 10 minutes (not a pile of old ones on opening)
   due.forEach(([id,m])=>{const key=today+'_'+id+'_'+m;
     if(m<=nowM&&nowM-m<10&&!fired[key]){fired[key]=true;notify(REMINDER_TEXT[id][0],REMINDER_TEXT[id][1]);}});
+  // bills, birthdays, deadlines, period — one round a day at the chosen time
+  if(r.life&&r.life.on){const m=_mins(r.life.time),key=today+'_life';
+    if(m<=nowM&&nowM-m<10&&!fired[key]){fired[key]=true;lifeAlerts().forEach(([a,b])=>notify(a,b));}}
+  // medicines at each of their own times (skipped if already ticked as taken)
+  if(r.meds&&r.meds.on){const tk=medTaken();STORE.load('meds',[]).filter(x=>medActive(x)&&x.remind!==false).forEach(med=>medTimes(med).forEach(tm=>{
+    const m=_mins(tm),key=today+'_med_'+med.id+'_'+tm;
+    if(m<=nowM&&nowM-m<10&&!fired[key]&&!tk[med.id+'@'+tm]){fired[key]=true;notify('💊 time for '+med.name,(med.dose?med.dose+' · ':'')+'tick it off in bloom when done');}}));}
   STORE.save('remindersFired',fired);
 }
 
@@ -3512,9 +3778,11 @@ function buildInsights(){
   const calHead='<div class="ins-cal">'+['S','M','T','W','T','F','S'].map(d=>'<div class="hd">'+d+'</div>').join('')+'<div></div>'.repeat(fd);
   // mood
   const mlog=STORE.load('moodLog',{}),counts={};let mc=calHead;
+  const cySt=cycleOn()?cycleStats():null;   // cycle tracking on: show period days + phase on the mood calendar
   for(let d=1;d<=dim;d++){const m=mlog[y+'-'+(mo+1)+'-'+d];if(m)counts[m]=(counts[m]||0)+1;
-    mc+='<div class="ins-day'+(d===t.getDate()?' today':'')+'" title="'+shortDate(new Date(y,mo,d))+(m?' · '+esc(m.split(' ').slice(1).join(' ')):' · no mood logged')+'"><small>'+d+'</small>'+(m?m.split(' ')[0]:'')+'</div>';}
-  mc+='</div>';
+    const ph=cySt&&cySt.ps.length?cyclePhaseOn(new Date(y,mo,d),cySt):null,per=ph&&ph.phase==='menstrual';
+    mc+='<div class="ins-day'+(d===t.getDate()?' today':'')+'"'+(per?' style="box-shadow:inset 0 0 0 2px var(--blush-d)"':'')+' title="'+shortDate(new Date(y,mo,d))+(m?' · '+esc(m.split(' ').slice(1).join(' ')):' · no mood logged')+(ph?' · cycle day '+ph.day+' ('+ph.phase+')':'')+'"><small>'+d+'</small>'+(m?m.split(' ')[0]:'')+'</div>';}
+  mc+='</div>'+(cySt&&cySt.ps.length?'<div class="legend-row"><i style="box-shadow:inset 0 0 0 2px var(--blush-d)"></i> period days · hover a day for its cycle phase · <a href="#" onclick="event.preventDefault();goToPage(\'cycle\')">mood by phase →</a></div>':'');
   const moodRows=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([m,v])=>({label:m,v}));
   document.getElementById('ins-mood').innerHTML=mc+(moodRows.length?'<div style="margin-top:12px">'+_hbars(moodRows,'var(--lav)',v=>v+(v===1?' day':' days'))+'</div>'
     :'<div class="ins-empty">pick a mood on the 💜 mood page each day — your month will fill in here 🌱</div>');
@@ -3558,9 +3826,775 @@ function initFeatures(){
   pa.addEventListener('input',()=>setTimeout(renderPrompt,1000));
   renderPrompt();updateTomatoes();renderFocus();refreshMoney();
   const at=document.querySelector('.tab-btn.active');if(at)at.setAttribute('aria-current','page');
+  initLife();
   updateNavFade();watchA11y();
   checkReminders();setInterval(checkReminders,30000);
 }
+/* ════════════════════════════════════════════════════════════
+   LIFE MODULES — meals & grocery, bills, debt payoff, fitness & diet,
+   dates & gifts, study, health, cycle, year in review, today at a glance
+════════════════════════════════════════════════════════════ */
+function _id(){return Date.now()*100+Math.floor(Math.random()*100);}
+function dk0(d){return new Date(d.getFullYear(),d.getMonth(),d.getDate());}
+function daysBetween(a,b){return Math.round((dk0(b)-dk0(a))/864e5);}
+function fmtDay(k){const d=parseKey(k);return DAYS[d.getDay()].slice(0,3)+', '+shortDate(d);}
+function inDays(n){return n===0?'today':n===1?'tomorrow':n===-1?'yesterday':n<0?(-n)+' days ago':'in '+n+' days';}
+function _rng(seed){let a=seed>>>0;return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+
+/* ── generic editable list (used by bills, debts, dates, gifts, study, health…) ── */
+const GL={};
+function glist(cfg){GL[cfg.el]=cfg;renderGlist(cfg.el);}
+function _glCell(f,it,lid){
+  const v=it[f.k]==null?'':it[f.k],flex=f.w||(f.type==='check'?.4:1);
+  const on=' data-gl="'+lid+'|'+it.id+'|'+f.k+'" onchange="glSet(\''+lid+'\','+it.id+',\''+f.k+'\',this)"';
+  const base=' aria-label="'+esc(f.label)+'" data-nolegacy="1" style="flex:'+flex+'"'+on;
+  if(f.type==='select')return '<select'+base+'>'+f.opts.map(o=>{const val=Array.isArray(o)?o[0]:o,lab=Array.isArray(o)?o[1]:o;return '<option value="'+esc(val)+'"'+(String(v)===String(val)?' selected':'')+'>'+esc(lab)+'</option>';}).join('')+'</select>';
+  if(f.type==='check')return '<label class="gl-check" style="flex:'+flex+'"><input type="checkbox"'+(v?' checked':'')+' aria-label="'+esc(f.label)+'"'+on+'></label>';
+  if(f.type==='textarea')return '<textarea'+base+' placeholder="'+esc(f.ph||f.label)+'">'+esc(v)+'</textarea>';
+  return '<input type="'+(f.type||'text')+'"'+base+' value="'+esc(v)+'" placeholder="'+esc(f.ph||f.label)+'"'+(f.list?' list="'+f.list+'"':'')+(f.type==='number'?' min="0" step="any" inputmode="decimal"':'')+'>';
+}
+function renderGlist(lid){
+  const cfg=GL[lid],box=document.getElementById(lid);if(!cfg||!box)return;
+  const a=document.activeElement,keep=a&&a.dataset&&a.dataset.gl;   // keep focus when the list redraws
+  let items=STORE.load(cfg.key,[]);if(cfg.sort)items=items.slice().sort(cfg.sort);
+  const head='<div class="gl-head" aria-hidden="true">'+cfg.fields.map(f=>'<span style="flex:'+(f.w||(f.type==='check'?.4:1))+'">'+esc(f.label)+'</span>').join('')+'<span class="gl-x"></span></div>';
+  const rows=items.map(it=>'<div class="gl-row '+(cfg.rowClass?cfg.rowClass(it):'')+'">'+cfg.fields.map(f=>_glCell(f,it,lid)).join('')
+    +'<button class="del-btn gl-x" onclick="glDel(\''+lid+'\','+it.id+')" aria-label="delete">×</button>'+(cfg.extra?'<div class="gl-extra">'+cfg.extra(it)+'</div>':'')+'</div>').join('');
+  box.innerHTML=(items.length?head+rows:'<div class="ins-empty">'+(cfg.empty||'nothing here yet')+'</div>')
+    +'<button class="add-btn" onclick="glAdd(\''+lid+'\')">+ '+esc(cfg.addLabel||'add')+'</button>';
+  if(keep){const el=box.querySelector('[data-gl="'+keep+'"]');if(el)el.focus({preventScroll:true});}
+}
+function glAdd(lid){
+  const cfg=GL[lid],items=STORE.load(cfg.key,[]),id=_id();
+  items.push(Object.assign({id},typeof cfg.add==='function'?cfg.add():(cfg.add||{})));
+  STORE.save(cfg.key,items);renderGlist(lid);if(cfg.onChange)cfg.onChange();
+  const first=document.querySelector('#'+lid+' [data-gl^="'+lid+'|'+id+'|"]');if(first)first.focus();
+}
+function glSet(lid,id,k,el){
+  const cfg=GL[lid],items=STORE.load(cfg.key,[]),it=items.find(x=>x.id===id);if(!it)return;
+  it[k]=el.type==='checkbox'?el.checked:el.type==='number'?(el.value===''?'':+el.value):el.value;
+  STORE.save(cfg.key,items);showSaved();
+  if(cfg.sort||cfg.extra||cfg.rowClass)renderGlist(lid);
+  if(cfg.onChange)cfg.onChange();
+}
+function glDel(lid,id){
+  const cfg=GL[lid];STORE.save(cfg.key,STORE.load(cfg.key,[]).filter(x=>x.id!==id));renderGlist(lid);if(cfg.onChange)cfg.onChange();
+}
+
+/* ════════ MEAL PLANNER + AUTOMATIC GROCERY LIST ════════ */
+let mealWeekOffset=0;
+const MEAL_SLOTS=[['b','breakfast'],['l','lunch'],['s','snack'],['d','dinner']];
+function mealWeekStart(){return new Date(now.getFullYear(),now.getMonth(),now.getDate()-((now.getDay()+6)%7)+mealWeekOffset*7);}
+function mealWeekKey(){return dateKey(mealWeekStart());}
+function navMealWeek(d,reset){mealWeekOffset=reset?0:mealWeekOffset+d;renderMeals();}
+function recipes(){return STORE.load('recipes',[]);}
+function findRecipe(text){const t=(text||'').trim().toLowerCase();return t?recipes().find(r=>(r.name||'').trim().toLowerCase()===t)||null:null;}
+function renderMeals(){
+  const ws=mealWeekStart(),plan=(STORE.load('mealPlan',{})[dateKey(ws)])||{},today=dateKey(new Date());
+  const we=new Date(ws);we.setDate(ws.getDate()+6);
+  document.getElementById('meal-week-label').textContent=mealWeekOffset===0?'this week':shortDate(ws)+' – '+shortDate(we);
+  let h='<div></div>'+MEAL_SLOTS.map(s=>'<div class="mh">'+s[1]+'</div>').join('');
+  for(let i=0;i<7;i++){
+    const d=new Date(ws);d.setDate(ws.getDate()+i);
+    h+='<div class="md'+(dateKey(d)===today?' today':'')+'">'+DAYS[d.getDay()].slice(0,3)+' '+d.getDate()+'</div>';
+    MEAL_SLOTS.forEach(([s,name])=>{const v=plan[i+'_'+s]||'';
+      h+='<input type="text" list="recipe-names" data-slot="'+i+'_'+s+'" value="'+esc(v)+'" placeholder="…" aria-label="'+DAYS[d.getDay()]+' '+name+'"'+(findRecipe(v)?' class="has-recipe"':'')+' onchange="setMeal(this)">';});
+  }
+  document.getElementById('meal-grid').innerHTML=h;
+  document.getElementById('recipe-names').innerHTML=recipes().filter(r=>r.name).map(r=>'<option value="'+esc(r.name)+'">').join('');
+  renderGrocery();
+}
+function setMeal(el){
+  const all=STORE.load('mealPlan',{}),wk=mealWeekKey(),p=all[wk]=all[wk]||{},v=el.value.trim();
+  if(v)p[el.dataset.slot]=v;else delete p[el.dataset.slot];
+  STORE.save('mealPlan',all);el.classList.toggle('has-recipe',!!findRecipe(v));renderGrocery();showSaved();
+}
+const ING_UNITS={g:'g',gm:'g',gms:'g',gram:'g',grams:'g',kg:'kg',mg:'mg',ml:'ml',l:'l',litre:'l',liter:'l',litres:'l',liters:'l',cup:'cup',cups:'cup',tbsp:'tbsp',tablespoon:'tbsp',tablespoons:'tbsp',tsp:'tsp',teaspoon:'tsp',teaspoons:'tsp',pinch:'pinch',piece:'pc',pieces:'pc',pc:'pc',pcs:'pc',clove:'clove',cloves:'clove',slice:'slice',slices:'slice',can:'can',cans:'can',pack:'pack',packs:'pack',packet:'pack',bunch:'bunch',oz:'oz',lb:'lb',lbs:'lb',glass:'glass',glasses:'glass',handful:'handful',scoop:'scoop',scoops:'scoop'};
+const ING_FRAC={'½':.5,'¼':.25,'¾':.75,'⅓':1/3,'⅔':2/3};
+function _num(q){q=q.trim().replace(',','.');if(ING_FRAC[q]!=null)return ING_FRAC[q];
+  if(/^\d+\s+\d+\/\d+$/.test(q)){const [w,f]=q.split(/\s+/);const [a,b]=f.split('/');return +w+(+a)/(+b);}
+  if(/^\d+\/\d+$/.test(q)){const [a,b]=q.split('/');return (+a)/(+b);}return parseFloat(q);}
+function parseIng(line){
+  let s=line.trim().replace(/^[-•*·]\s*/,'');if(!s)return null;
+  let qty=null,unit='',m=s.match(/^(\d+\s+\d+\/\d+|\d+\/\d+|\d+(?:[.,]\d+)?|[½¼¾⅓⅔])\s*(.*)$/);
+  if(m){qty=_num(m[1]);s=m[2];}
+  const u=s.match(/^([a-zA-Z]+)\.?\s+(.*)$/)||s.match(/^([a-zA-Z]+)\.?$/);
+  if(qty!=null&&u&&ING_UNITS[u[1].toLowerCase()]){unit=ING_UNITS[u[1].toLowerCase()];s=u[2]||'';}
+  s=s.replace(/^of\s+/i,'').replace(/\(.*?\)/g,'').replace(/,.*$/,'').trim();
+  if(!s)return null;
+  let key=s.toLowerCase();
+  if(/oes$/.test(key))key=key.slice(0,-2);else if(/[^s]s$/.test(key)&&key.length>3)key=key.slice(0,-1);
+  return {qty,unit,name:s,key};
+}
+const GROC_CATS=[
+  ['🥫 pantry & spices',['peanut butter','almond butter','soy sauce','chilli powder','chili powder','coconut milk','garam masala']],
+  ['🥛 dairy & eggs',['milk','curd','yogurt','yoghurt','paneer','cheese','butter','ghee','egg','cream','buttermilk']],
+  ['🍗 protein & pulses',['chicken','fish','mutton','tofu','dal','lentil','chickpea','chana','chole','rajma','bean','soy','prawn','shrimp','tempeh','sprout','moong','hummus']],
+  ['🌾 grains & bread',['rice','oat','flour','atta','maida','bread','pasta','poha','quinoa','roti','noodle','besan','rava','suji','semolina','wrap','tortilla','idli','dosa','cereal','millet','chapati']],
+  ['🥜 nuts & seeds',['almond','cashew','walnut','peanut','nut','seed','chia','flax','makhana','raisin','date']],
+  ['🥫 pantry & spices',['salt','sugar','oil','masala','turmeric','haldi','cumin','jeera','pepper','powder','sauce','honey','jaggery','vinegar','spice','ketchup','stock','chutney','tea','coffee','sambar']],
+  ['🥬 fruit & veg',['onion','tomato','potato','spinach','palak','garlic','ginger','chilli','chili','lemon','lime','banana','apple','carrot','pea','capsicum','cucumber','coriander','cilantro','mint','berr','vegetable','green','lettuce','broccoli','cauliflower','cabbage','mushroom','avocado','orange','mango','grape','fruit','beetroot','okra','bhindi','methi','corn','salad','zucchini','pumpkin','beans']]
+];
+function grocCat(name){const n=name.toLowerCase();for(const [cat,words] of GROC_CATS)if(words.some(w=>n.includes(w)))return cat;return '🧺 other';}
+function groceryItems(){
+  const plan=(STORE.load('mealPlan',{})[mealWeekKey()])||{},agg=new Map(),used=new Set();
+  Object.values(plan).forEach(txt=>{const r=findRecipe(txt);if(!r)return;used.add(r.name);
+    (r.ingredients||'').split(/\n/).forEach(line=>{const p=parseIng(line);if(!p)return;const k=p.key+'|'+p.unit;
+      const cur=agg.get(k)||{name:p.name,unit:p.unit,qty:null,count:0,key:k};
+      if(p.qty!=null)cur.qty=(cur.qty||0)+p.qty;cur.count++;agg.set(k,cur);});});
+  return {items:[...agg.values()],used:[...used]};
+}
+function _fmtQty(q){return String(Math.round(q*100)/100);}
+function renderGrocery(){
+  const box=document.getElementById('grocery');if(!box)return;
+  const wk=mealWeekKey(),all=STORE.load('grocery',{}),g=all[wk]||{got:{},extra:[]},{items,used}=groceryItems();
+  const groups={};
+  items.forEach(it=>{const c=grocCat(it.name);(groups[c]=groups[c]||[]).push(it);});
+  let h=used.length?'<p class="set-note" style="margin:0 0 4px">from '+used.length+' recipe'+(used.length>1?'s':'')+': '+esc(used.join(', '))+'</p>':'<div class="ins-empty">plan a meal using a recipe from your recipe box and its ingredients appear here automatically 🛒</div>';
+  Object.keys(groups).sort().forEach(c=>{
+    h+='<div class="groc-cat">'+c+'</div>'+groups[c].sort((a,b)=>a.name.localeCompare(b.name)).map(it=>{
+      const got=!!g.got[it.key],q=it.qty!=null?_fmtQty(it.qty)+(it.unit?' '+it.unit:''):(it.count>1?'×'+it.count:'');
+      return '<label class="groc-item'+(got?' got':'')+'"><input type="checkbox"'+(got?' checked':'')+' onchange="toggleGroc(\''+esc(it.key).replace(/'/g,'’')+'\',this.checked)" aria-label="'+esc(it.name)+'">'+esc(it.name)+'<span class="q">'+esc(q)+'</span></label>';}).join('');
+  });
+  h+='<div class="groc-cat">➕ extra items</div>'+(g.extra||[]).map(x=>'<label class="groc-item'+(x.got?' got':'')+'"><input type="checkbox"'+(x.got?' checked':'')+' onchange="toggleGrocExtra('+x.id+',this.checked)" aria-label="'+esc(x.text)+'">'+esc(x.text)+'<button class="del-btn" style="margin-left:auto" onclick="event.preventDefault();delGrocExtra('+x.id+')" aria-label="remove">×</button></label>').join('')
+    +'<div style="display:flex;gap:8px;margin-top:6px"><input type="text" id="groc-add" data-nolegacy="1" class="time-in" style="flex:1" placeholder="add something else…" aria-label="add grocery item" onkeydown="if(event.key===\'Enter\')addGrocExtra()"><button class="mini-btn" onclick="addGrocExtra()">add</button></div>'
+    +'<div class="set-row" style="margin-top:12px"><button class="mini-btn" onclick="shareGrocery()">📋 copy / share list</button><button class="mini-btn" onclick="clearGrocTicks()">↺ untick all</button></div>';
+  box.innerHTML=h;
+}
+function _groc(){const all=STORE.load('grocery',{}),wk=mealWeekKey();all[wk]=all[wk]||{got:{},extra:[]};all[wk].got=all[wk].got||{};all[wk].extra=all[wk].extra||[];return [all,all[wk]];}
+function toggleGroc(key,on){const [all,g]=_groc();if(on)g.got[key]=true;else delete g.got[key];STORE.save('grocery',all);renderGrocery();}
+function addGrocExtra(){const i=document.getElementById('groc-add'),t=i.value.trim();if(!t)return;const [all,g]=_groc();g.extra.push({id:_id(),text:t,got:false});STORE.save('grocery',all);renderGrocery();document.getElementById('groc-add').focus();}
+function toggleGrocExtra(id,on){const [all,g]=_groc();const x=g.extra.find(e=>e.id===id);if(x)x.got=on;STORE.save('grocery',all);renderGrocery();}
+function delGrocExtra(id){const [all,g]=_groc();g.extra=g.extra.filter(e=>e.id!==id);STORE.save('grocery',all);renderGrocery();}
+function clearGrocTicks(){const [all,g]=_groc();g.got={};g.extra.forEach(e=>e.got=false);STORE.save('grocery',all);renderGrocery();}
+async function shareGrocery(){
+  const [,g]=_groc(),{items}=groceryItems();
+  const lines=items.filter(it=>!g.got[it.key]).map(it=>'☐ '+it.name+(it.qty!=null?' — '+_fmtQty(it.qty)+(it.unit?' '+it.unit:''):it.count>1?' ×'+it.count:''))
+    .concat(g.extra.filter(x=>!x.got).map(x=>'☐ '+x.text));
+  const text='🛒 grocery list (bloom)\n'+lines.join('\n');
+  try{if(navigator.share&&matchMedia('(pointer:coarse)').matches){await navigator.share({text});return;}await navigator.clipboard.writeText(text);toast('grocery list copied ✓');}
+  catch(e){if(e.name!=='AbortError')toast('couldn’t copy — try again');}
+}
+function initMeals(){
+  glist({el:'recipe-list',key:'recipes',addLabel:'add recipe',empty:'no recipes yet — add your favourites 🍲',
+    fields:[{k:'name',label:'recipe',w:2,ph:'e.g. dal rice'},{k:'servings',label:'serves',type:'number',w:.6},{k:'ingredients',label:'ingredients (one per line)',type:'textarea',w:3,ph:'1 cup toor dal\n3/4 cup rice\n1 tomato'}],
+    add:{name:'',servings:2,ingredients:''},onChange:()=>renderMeals()});
+  renderMeals();
+}
+
+/* ════════ BILLS ════════ */
+function monthKey(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');}
+function billDue(b,from){
+  let y=from.getFullYear(),m=from.getMonth();
+  for(let i=0;i<3;i++){const dim=new Date(y,m+1,0).getDate(),d=new Date(y,m,Math.min(Math.max(1,+b.due||1),dim));if(d>=dk0(from))return d;m++;if(m>11){m=0;y++;}}
+}
+function billThisMonth(b){const t=new Date(),dim=new Date(t.getFullYear(),t.getMonth()+1,0).getDate();return new Date(t.getFullYear(),t.getMonth(),Math.min(Math.max(1,+b.due||1),dim));}
+function billPaid(id){return !!((STORE.load('billsPaid',{})[monthKey(new Date())]||{})[id]);}
+function toggleBillPaid(id){const all=STORE.load('billsPaid',{}),mk=monthKey(new Date()),m=all[mk]=all[mk]||{};if(m[id])delete m[id];else m[id]=true;STORE.save('billsPaid',all);renderBills();renderGlance();}
+function billAlerts(){ // unpaid bills due this month: overdue or within N days
+  // autopay bills whose date has passed have almost certainly paid themselves — don't nag about those
+  const t=dk0(new Date());return STORE.load('bills',[]).filter(b=>b.name&&!billPaid(b.id)).map(b=>({b,days:daysBetween(t,billThisMonth(b))})).filter(x=>!(x.b.autopay&&x.days<0));
+}
+function renderBills(){
+  const bills=STORE.load('bills',[]),t=dk0(new Date());
+  const total=bills.reduce((s,b)=>s+(+b.amount||0),0),paid=bills.filter(b=>billPaid(b.id)).reduce((s,b)=>s+(+b.amount||0),0);
+  const tile=(n,l,bg,c)=>'<div class="stat-card" style="background:'+bg+'"><div class="stat-num" style="color:'+c+';font-size:22px">'+n+'</div><div class="stat-lbl">'+l+'</div></div>';
+  document.getElementById('bill-stats').innerHTML=tile(fmt(total),'bills per month','var(--lav-l)','var(--lav-d)')+tile(fmt(paid),'paid this month','var(--mint-l)','var(--mint-d)')+tile(fmt(total-paid),'still to pay','var(--blush-l)','var(--blush-d)');
+  const up=billAlerts().filter(x=>x.days<=14).sort((a,b)=>a.days-b.days);
+  document.getElementById('bill-upcoming').innerHTML=up.length?up.map(({b,days})=>'<div class="up-item"><div class="up-badge'+(days<=2?' hot':'')+'">'+(days<0?'!':days)+'<small>'+(days<0?'overdue':days===1?'day':'days')+'</small></div><div class="up-main">'+esc(b.name)+' · '+fmt(+b.amount||0)+'<span>'+(days<0?'was due '+shortDate(billThisMonth(b)):'due '+inDays(days)+' · '+shortDate(billThisMonth(b)))+(b.autopay?' · autopay':'')+'</span></div><button class="dose" onclick="toggleBillPaid('+b.id+')">mark paid</button></div>').join('')
+    :'<div class="ins-empty">nothing due in the next two weeks 🌿</div>';
+  renderGlist('bill-list');
+}
+function initBills(){
+  glist({el:'bill-list',key:'bills',addLabel:'add bill',empty:'add rent, phone, internet, insurance, cards… bloom will remind you before they’re due.',
+    fields:[{k:'name',label:'bill',w:2,ph:'e.g. phone'},{k:'amount',label:'amount',type:'number'},{k:'due',label:'due day',type:'number',w:.7,ph:'1–31'},
+      {k:'cat',label:'type',type:'select',opts:['rent','utilities','phone & internet','insurance','loan / EMI','credit card','subscription','school / fees','other']},{k:'autopay',label:'autopay',type:'check'}],
+    add:{name:'',amount:'',due:1,cat:'utilities',autopay:false},
+    extra:b=>{const p=billPaid(b.id),d=billThisMonth(b);return 'this month: due '+shortDate(d)+' · <button class="dose'+(p?' taken':'')+'" style="margin:4px 0 0" onclick="toggleBillPaid('+b.id+')">'+(p?'paid ✓':'mark paid')+'</button>';},
+    rowClass:b=>billPaid(b.id)?'done':(!b.autopay&&daysBetween(new Date(),billThisMonth(b))<0?'overdue':''),
+    onChange:()=>{renderBills();renderGlance();}});
+}
+
+/* ════════ DEBT PAYOFF (snowball / avalanche) ════════ */
+function simulateDebts(list,extra,strategy,roll){
+  const ds=list.filter(d=>+d.balance>0).map(d=>({id:d.id,name:d.name||'debt',bal:+d.balance,apr:+d.apr||0,min:+d.min||0,paid:null,interest:0}));
+  if(!ds.length)return null;
+  let month=0,totalInt=0;const timeline=[ds.reduce((s,d)=>s+d.bal,0)];
+  while(ds.some(d=>d.bal>0.005)&&month<600){
+    month++;
+    ds.forEach(d=>{if(d.bal>0){const i=d.bal*d.apr/1200;d.bal+=i;d.interest+=i;totalInt+=i;}});
+    let pool=+extra||0;
+    ds.forEach(d=>{if(d.bal<=0){if(roll)pool+=d.min;return;}const p=Math.min(d.min,d.bal);d.bal-=p;if(roll)pool+=d.min-p;});
+    const order=ds.filter(d=>d.bal>0.005).sort(strategy==='snowball'?(a,b)=>a.bal-b.bal:(a,b)=>b.apr-a.apr||a.bal-b.bal);
+    for(const d of order){if(pool<=0)break;const p=Math.min(pool,d.bal);d.bal-=p;pool-=p;}
+    ds.forEach(d=>{if(d.bal<=0.005&&d.paid==null){d.bal=0;d.paid=month;}});
+    timeline.push(ds.reduce((s,d)=>s+Math.max(0,d.bal),0));
+  }
+  return {months:month,totalInt,ds,timeline,stuck:month>=600};
+}
+function addMonths(n){const t=new Date();return new Date(t.getFullYear(),t.getMonth()+n,1);}
+function monthName(d){return MONTHS[d.getMonth()].slice(0,3)+' '+d.getFullYear();}
+function saveDebtPlan(){const p=STORE.load('debtPlan',{strategy:'avalanche',extra:0});p.extra=+document.getElementById('debt-extra').value||0;STORE.save('debtPlan',p);renderDebtResult();}
+function setDebtStrategy(s){const p=STORE.load('debtPlan',{strategy:'avalanche',extra:0});p.strategy=s;STORE.save('debtPlan',p);renderDebts();}
+function renderDebts(){
+  const p=STORE.load('debtPlan',{strategy:'avalanche',extra:0});
+  document.getElementById('debt-strategy').innerHTML=[['avalanche','🏔️ avalanche — highest interest first (saves the most)'],['snowball','⛄ snowball — smallest balance first (quick wins)']]
+    .map(([k,l])=>'<button class="chip'+(p.strategy===k?' sel':'')+'" onclick="setDebtStrategy(\''+k+'\')">'+l+'</button>').join('');
+  const ex=document.getElementById('debt-extra');if(document.activeElement!==ex)ex.value=p.extra||'';
+  renderGlist('debt-list');renderDebtResult();
+}
+function renderDebtResult(){
+  const p=STORE.load('debtPlan',{strategy:'avalanche',extra:0}),debts=STORE.load('debts',[]),box=document.getElementById('debt-result');
+  const fmt=x=>formatMoney(Math.round(x));   // whole amounts are easier to read in a plan
+  const r=simulateDebts(debts,p.extra,p.strategy,true);
+  if(!r){box.innerHTML='<div class="ins-empty">add a debt above (balance, interest and minimum payment) to see your debt-free date.</div>';return;}
+  if(r.stuck){box.innerHTML='<div class="warn-note">⚠️ at these payments the balance doesn’t go down — the minimum payments are smaller than the interest. try adding an extra monthly amount.</div>';return;}
+  const base=simulateDebts(debts,0,p.strategy,false),free=addMonths(r.months);
+  const saved=base&&!base.stuck?base.totalInt-r.totalInt:null,faster=base&&!base.stuck?base.months-r.months:null;
+  const order=r.ds.slice().sort((a,b)=>a.paid-b.paid);
+  const step=Math.max(1,Math.ceil(r.timeline.length/14)),cols=[];
+  for(let i=0;i<r.timeline.length;i+=step)cols.push({v:r.timeline[i],label:i===0?'now':monthName(addMonths(i)).slice(0,3),tip:monthName(addMonths(i))+' · '+fmt(r.timeline[i])+' left'});
+  const max=Math.max(...cols.map(c=>c.v),1);
+  box.innerHTML='<div class="ins-big">debt-free by '+monthName(free)+' 🎉</div><div class="ins-sub" style="margin-bottom:10px">'+r.months+' months · '+fmt(r.totalInt)+' total interest'
+    +(saved>0?' · <b style="color:var(--mint-d)">'+fmt(saved)+' less interest and '+faster+' months sooner</b> than paying only the minimums':'')+'</div>'
+    +'<div class="vbars" style="height:110px">'+cols.map(c=>'<div class="vbar" title="'+esc(c.tip)+'"><div class="col" style="height:'+Math.max(2,c.v/max*86)+'px;background:var(--blush-d)"></div><span class="lb">'+esc(c.label)+'</span></div>').join('')+'</div>'
+    +'<div class="section-label" style="margin-top:14px">order to pay them off</div>'+order.map((d,i)=>'<div class="up-item"><div class="up-badge">'+(i+1)+'<small>'+(i===0?'first':'next')+'</small></div><div class="up-main">'+esc(d.name)+'<span>paid off '+monthName(addMonths(d.paid))+' · '+fmt(d.interest)+' interest</span></div></div>').join('')
+    +'<p class="set-note" style="margin-top:10px">when one debt is paid off, its minimum payment rolls onto the next — that’s what makes it speed up. estimates assume a steady interest rate.</p>';
+}
+function initDebts(){
+  glist({el:'debt-list',key:'debts',addLabel:'add debt',empty:'credit cards, loans, EMIs… add them here.',
+    fields:[{k:'name',label:'debt',w:2,ph:'e.g. credit card'},{k:'balance',label:'balance',type:'number'},{k:'apr',label:'interest % / yr',type:'number',w:.8},{k:'min',label:'min / month',type:'number'}],
+    add:{name:'',balance:'',apr:'',min:''},onChange:()=>renderDebtResult()});
+}
+
+/* ════════ FITNESS: automatic weekly workout plan ════════ */
+// [name, pattern, equipment n=none d=dumbbells g=gym, level, knee-friendly, back-friendly, cue]
+const EX=[
+['Bodyweight squat','squat','n',1,0,1,'feet shoulder-width, sit back, chest up'],['Box squat to a chair','squat','n',1,1,1,'sit lightly onto a chair, stand up tall'],['Wall sit','squat','n',1,1,1,'back flat on the wall, knees over ankles'],
+['Goblet squat','squat','d',1,0,1,'hold a dumbbell at your chest'],['Leg press','squat','g',1,1,1,'feet mid-platform, don’t lock your knees'],['Barbell back squat','squat','g',2,0,0,'brace your core, go as deep as you control'],
+['Glute bridge','hinge','n',1,1,1,'squeeze your glutes at the top'],['Single-leg glute bridge','hinge','n',2,1,1,'keep hips level'],['Dumbbell Romanian deadlift','hinge','d',1,1,0,'soft knees, push hips back, flat back'],
+['Hip thrust','hinge','g',1,1,1,'shoulders on a bench, drive through heels'],['Barbell deadlift','hinge','g',2,1,0,'bar close to your legs, neutral spine'],
+['Reverse lunge','lunge','n',1,0,1,'step back, both knees to 90°'],['Step-ups','lunge','n',1,0,1,'sturdy step, push through the front heel'],['Dumbbell walking lunge','lunge','d',2,0,1,'long steps, upright body'],['Bulgarian split squat','lunge','d',2,0,1,'back foot up on a bench'],
+['Calf raises','calf','n',1,1,1,'slow up, slower down'],
+['Incline push-up','hpush','n',1,1,1,'hands on a table or wall — easier'],['Push-up','hpush','n',2,1,1,'body in one straight line'],['Dumbbell floor press','hpush','d',1,1,1,'elbows at 45°'],['Dumbbell bench press','hpush','d',2,1,1,'feet planted, slow lowering'],['Barbell bench press','hpush','g',2,1,1,'shoulder blades pinched together'],
+['Pike push-up','vpush','n',2,1,1,'hips high, head between hands'],['Dumbbell shoulder press','vpush','d',1,1,0,'ribs down, don’t arch'],['Seated machine shoulder press','vpush','g',1,1,1,'back against the pad'],
+['Chair dips','tri','n',1,1,1,'shoulders down, elbows back'],['Overhead dumbbell extension','tri','d',1,1,1,'elbows point forward'],['Cable triceps pushdown','tri','g',1,1,1,'elbows pinned to your sides'],
+['Table row','hpull','n',2,1,1,'lie under a sturdy table, pull your chest up'],['Superman hold','hpull','n',1,1,1,'lift arms and legs gently, hold'],['One-arm dumbbell row','hpull','d',1,1,1,'pull the weight to your hip'],['Seated cable row','hpull','g',1,1,1,'tall chest, squeeze shoulder blades'],
+['Lat pulldown','vpull','g',1,1,1,'pull to your upper chest'],['Assisted pull-up','vpull','g',2,1,1,'use a band or the machine'],['Dumbbell pullover','vpull','d',1,1,1,'slight elbow bend, long stretch'],
+['Dumbbell curl','bi','d',1,1,1,'no swinging'],['Hammer curl','bi','d',1,1,1,'palms face each other'],['Cable curl','bi','g',1,1,1,'elbows still'],
+['Y-T-W raises','rear','n',1,1,1,'lying face down, thumbs up'],['Dumbbell reverse fly','rear','d',1,1,1,'hinge forward, light weight'],['Face pull','rear','g',1,1,1,'pull the rope towards your eyes'],
+['Plank','core','n',1,1,1,'straight line, squeeze glutes'],['Dead bug','core','n',1,1,1,'lower back pressed down'],['Bird dog','core','n',1,1,1,'reach long, hips square'],['Side plank','core','n',1,1,1,'hips high'],['Bicycle crunch','core','n',1,1,0,'slow and controlled'],['Mountain climbers','core','n',1,1,1,'hands under shoulders, quick feet'],
+['Brisk walk','cardio','n',1,1,1,'a pace where you can talk but not sing'],['Low-impact jumping jacks','cardio','n',1,1,1,'step side to side, arms overhead'],['Cycling','cardio','n',1,1,1,'steady, easy-to-moderate effort'],['Jump rope','cardio','n',2,0,1,'light bounces on the balls of your feet'],['Interval sprints','cardio','n',2,0,1,'30 s fast, 60 s easy'],['Rowing machine','cardio','g',1,1,0,'legs, then body, then arms'],['Incline treadmill walk','cardio','g',1,1,1,'hands off the rails'],
+['Cat–cow','mobility','n',1,1,1,'move slowly with your breath'],['Hip flexor stretch','mobility','n',1,1,1,'tuck your pelvis, gentle lean'],['Hamstring stretch','mobility','n',1,1,1,'hinge from the hips, soft knee'],['World’s greatest stretch','mobility','n',1,1,1,'lunge, elbow down, rotate up'],['Child’s pose','mobility','n',1,1,1,'breathe into your back'],['Thoracic rotation','mobility','n',1,1,1,'on all fours, open the chest'],['Figure-four glute stretch','mobility','n',1,1,1,'cross ankle over knee']
+];
+const FOCUS={full:['squat','hpush','hinge','hpull','lunge','core','vpush','calf'],upper:['hpush','hpull','vpush','vpull','tri','bi','rear','core'],lower:['squat','hinge','lunge','calf','core','hinge','lunge','core'],
+  push:['hpush','vpush','hpush','tri','core','vpush','tri','core'],pull:['hpull','vpull','rear','bi','core','hpull','bi','core'],legs:['squat','hinge','lunge','calf','core','hinge','squat','core'],
+  cardio:['cardio','core','cardio','core','mobility'],mobility:['mobility','mobility','core','mobility','mobility','mobility','core']};
+const FOCUS_NAME={full:'full body',upper:'upper body',lower:'lower body',push:'push — chest, shoulders, triceps',pull:'pull — back & arms',legs:'legs & glutes',cardio:'cardio & core',mobility:'mobility & stretch'};
+const EX_FALLBACK={vpull:'hpull',bi:'hpull',rear:'hpull',tri:'hpush',vpush:'hpush',calf:'squat',lunge:'squat',squat:'hinge'};
+const DAY_SLOTS={2:[0,3],3:[0,2,4],4:[0,1,3,4],5:[0,1,2,4,5],6:[0,1,2,3,4,5]};
+const FIT_DEFAULT={goal:'general',level:1,days:3,minutes:30,equip:'n',knee:false,back:false,seed:1};
+function fitProfile(){return Object.assign({},FIT_DEFAULT,STORE.load('fitness',{}));}
+function setFit(patch){STORE.save('fitness',Object.assign(fitProfile(),patch));renderFitness();}
+function fitSplit(p){
+  const g=p.goal,n=p.days;
+  if(n===2)return ['full','full'];
+  if(n===3)return g==='muscle'&&p.level>1?['push','pull','legs']:g==='flex'?['full','mobility','full']:['full','full','full'];
+  if(n===4)return g==='fat'?['full','cardio','full','cardio']:g==='endurance'?['cardio','full','cardio','full']:g==='flex'?['upper','mobility','lower','mobility']:['upper','lower','upper','lower'];
+  if(n===5)return g==='muscle'?['push','pull','legs','upper','lower']:g==='fat'||g==='endurance'?['full','cardio','full','cardio','full']:['upper','lower','cardio','full','mobility'];
+  return g==='muscle'?['push','pull','legs','push','pull','legs']:['full','cardio','full','cardio','full','mobility'];
+}
+function _rx(ex,p){
+  const pat=ex[1],lvl=p.level;
+  if(pat==='cardio')return Math.max(10,Math.round(p.minutes*(p.goal==='endurance'?.5:.35)))+' min';
+  if(pat==='mobility')return '2 × 30 s'+(/stretch|rotation/i.test(ex[0])?' each side':'');
+  if(/plank|wall sit|superman/i.test(ex[0]))return '3 × '+(lvl===1?'20':lvl===2?'30':'45')+' s';
+  const sets=lvl===1?'2–3':(p.goal==='muscle'&&lvl===3?'3–4':'3');
+  return sets+' × '+({fat:'12–15',muscle:'8–12',general:'10–12',endurance:'15–20',flex:'10–12'}[p.goal]||'10–12');
+}
+function buildWorkoutPlan(p){
+  p=p||fitProfile();
+  const allowed={n:['n'],d:['n','d'],g:['n','d','g']}[p.equip]||['n'];
+  const split=fitSplit(p),slots=DAY_SLOTS[p.days]||DAY_SLOTS[3],week=[];
+  const count=Math.max(4,Math.min(8,Math.round(p.minutes/7)));
+  for(let d=0;d<7;d++){
+    const si=slots.indexOf(d);
+    if(si<0){week.push({day:d,rest:true});continue;}
+    const focus=split[si],rnd=_rng(p.seed*97+d*13+p.days),used=new Set(),list=[];
+    const pats=FOCUS[focus],n=(focus==='cardio'||focus==='mobility')?pats.length:count;
+    for(let i=0;i<n;i++){
+      let pat=pats[i%pats.length],cands=[];
+      for(let tries=0;tries<3&&!cands.length;tries++){
+        cands=EX.filter(e=>e[1]===pat&&allowed.includes(e[2])&&e[3]<=p.level&&(!p.knee||e[4])&&(!p.back||e[5])&&!used.has(e[0]));
+        if(!cands.length)pat=EX_FALLBACK[pat]||'core';
+      }
+      if(!cands.length)continue;
+      // prefer equipment the person has (dumbbells/gym) over bodyweight when available
+      const best=cands.filter(e=>e[2]===p.equip);const pool=best.length&&rnd()<.75?best:cands;
+      const ex=pool[Math.floor(rnd()*pool.length)];used.add(ex[0]);list.push({name:ex[0],how:ex[6],rx:_rx(ex,p)});
+    }
+    if(p.goal==='fat'&&focus!=='cardio'&&focus!=='mobility'){const c=EX.filter(e=>e[1]==='cardio'&&allowed.includes(e[2])&&e[3]<=p.level&&(!p.knee||e[4]));if(c.length){const ex=c[Math.floor(rnd()*c.length)];list.push({name:'Finisher: '+ex[0],how:ex[6],rx:'8–10 min'});}}
+    if(p.goal==='flex'&&focus!=='mobility'){EX.filter(e=>e[1]==='mobility').slice(0,2).forEach(e=>list.push({name:e[0],how:e[6],rx:'2 × 30 s'}));}
+    week.push({day:d,focus,list,rest:false});
+  }
+  return week;
+}
+function fitWeekDates(){const t=new Date(),ws=new Date(t.getFullYear(),t.getMonth(),t.getDate()-((t.getDay()+6)%7));return [...Array(7)].map((_,i)=>{const d=new Date(ws);d.setDate(ws.getDate()+i);return d;});}
+function toggleEx(dateK,name,on){const log=STORE.load('workoutLog',{}),d=log[dateK]=log[dateK]||{};if(on)d[name]=true;else delete d[name];if(!Object.keys(d).length)delete log[dateK];STORE.save('workoutLog',log);renderFitPlan();renderGlance();}
+function markDayDone(dateK,names){const log=STORE.load('workoutLog',{});log[dateK]={};names.forEach(n=>log[dateK][n]=true);STORE.save('workoutLog',log);renderFitPlan();renderGlance();toast('workout done — lovely work 💪');SOUND.goalCheck();}
+function todaysWorkout(){const p=STORE.load('fitness',null);if(!p)return null;const w=buildWorkoutPlan();return w[(new Date().getDay()+6)%7];}
+function renderFitness(){
+  const p=fitProfile();
+  const chip=(k,v,l)=>'<button class="chip'+(String(p[k])===String(v)?' sel':'')+'" onclick="setFit({'+k+':'+(typeof v==='number'?v:'\''+v+'\'')+'})">'+l+'</button>';
+  const sw=(k,l)=>'<button class="chip'+(p[k]?' sel':'')+'" aria-pressed="'+!!p[k]+'" onclick="setFit({'+k+':'+!p[k]+'})">'+l+'</button>';
+  document.getElementById('fit-profile').innerHTML=
+     '<div class="fit-q"><div class="set-label">my goal</div><div class="set-row">'+chip('goal','fat','🔥 lose fat')+chip('goal','muscle','💪 build muscle')+chip('goal','general','🌿 get fitter')+chip('goal','endurance','🏃 stamina')+chip('goal','flex','🧘 flexibility')+'</div></div>'
+    +'<div class="fit-q"><div class="set-label">experience</div><div class="set-row">'+chip('level',1,'beginner')+chip('level',2,'some experience')+chip('level',3,'advanced')+'</div></div>'
+    +'<div class="fit-q"><div class="set-label">days a week</div><div class="set-row">'+[2,3,4,5,6].map(n=>chip('days',n,n+' days')).join('')+'</div></div>'
+    +'<div class="fit-q"><div class="set-label">time per workout</div><div class="set-row">'+[20,30,45,60].map(n=>chip('minutes',n,n+' min')).join('')+'</div></div>'
+    +'<div class="fit-q"><div class="set-label">equipment</div><div class="set-row">'+chip('equip','n','🏠 none')+chip('equip','d','🏋️ dumbbells at home')+chip('equip','g','🏢 full gym')+'</div></div>'
+    +'<div class="fit-q" style="margin-bottom:0"><div class="set-label">go easy on</div><div class="set-row">'+sw('knee','🦵 knees')+sw('back','🔙 lower back')+'</div></div>';
+  renderFitPlan();
+  document.getElementById('diet-toggle').checked=!!STORE.load('diet',{}).on;
+  renderDiet();
+}
+function renderFitPlan(){
+  const p=fitProfile(),week=buildWorkoutPlan(p),dates=fitWeekDates(),log=STORE.load('workoutLog',{}),today=dateKey(new Date());
+  let h='<div class="card" style="margin-bottom:0"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px"><div class="section-label" style="margin:0">📅 my week of workouts</div><button class="mini-btn" onclick="setFit({seed:fitProfile().seed+1})">↻ new variation</button></div>'
+    +'<p class="set-note" style="margin:0 0 10px">every workout: warm up 5 min (easy cardio, arm circles, leg swings) · cool down with 2–3 stretches. stop if anything hurts.</p>';
+  week.forEach(w=>{
+    const d=dates[w.day],k=dateKey(d),isT=k===today;
+    if(w.rest){h+='<div class="wk-day rest'+(isT?' today':'')+'"><div class="wk-head"><b>'+DAYS[d.getDay()]+'</b><span class="tag tag-mint">rest day</span></div><div class="ex-how" style="font-size:12px;color:var(--muted)">rest, a gentle walk, or some light stretching 🌿</div></div>';return;}
+    const done=log[k]||{},nDone=w.list.filter(e=>done[e.name]).length;
+    h+='<div class="wk-day'+(isT?' today':'')+'"><div class="wk-head"><b>'+DAYS[d.getDay()]+(isT?' · today':'')+'</b><span class="tag tag-lav">'+FOCUS_NAME[w.focus]+'</span><span style="font-size:11px;color:var(--muted);margin-left:auto">'+nDone+' / '+w.list.length+' done</span></div>'
+      +w.list.map(e=>'<label class="ex-row'+(done[e.name]?' done':'')+'"><input type="checkbox"'+(done[e.name]?' checked':'')+' onchange="toggleEx(\''+k+'\',\''+esc(e.name).replace(/'/g,'’')+'\',this.checked)" aria-label="'+esc(e.name)+'"><div><div class="ex-n">'+esc(e.name)+'</div><div class="ex-how">'+esc(e.how)+'</div></div><span class="ex-sets">'+esc(e.rx)+'</span></label>').join('')
+      +(nDone<w.list.length?'<button class="mini-btn" style="margin-top:8px" onclick="markDayDone(\''+k+'\','+esc(JSON.stringify(w.list.map(e=>e.name)))+')">✓ mark workout done</button>':'<div style="margin-top:8px;font-size:12px;color:var(--mint-d);font-weight:600">✓ done — well done!</div>')+'</div>';
+  });
+  document.getElementById('fit-plan').innerHTML=h+'</div>';
+}
+
+/* ── diet chart (optional) ── */
+// [name, slot b/l/s/d, kcal, protein g, type v=vegan veg=vegetarian egg nv=non-veg, ingredients]
+const FOODS=[
+['Vegetable poha with peanuts','b',330,9,'v',['1 cup poha','1 onion','2 tbsp peanuts','1/4 cup peas','1 lemon']],['Masala oats with vegetables','b',300,10,'v',['1/2 cup oats','1 cup mixed vegetables']],['Besan chilla with mint chutney','b',320,14,'v',['1/2 cup besan','1 tomato','1 onion','1 bunch coriander']],
+['Moong dal chilla with curd','b',340,18,'veg',['1/2 cup moong dal','1/2 cup curd']],['Greek yogurt with berries & oats','b',320,20,'veg',['1 cup greek yogurt','1/2 cup berries','2 tbsp oats']],['Idli with sambar','b',330,11,'v',['3 idli','1 cup sambar']],
+['Paneer bhurji with 2 rotis','b',420,22,'veg',['100 g paneer','2 roti','1 tomato']],['Peanut butter banana toast','b',380,13,'v',['2 slice whole wheat bread','2 tbsp peanut butter','1 banana']],['Vegetable omelette with toast','b',350,21,'egg',['3 egg','1 slice bread','1 onion','1 capsicum']],
+['Boiled eggs with fruit','b',300,18,'egg',['3 egg','1 apple']],['Overnight oats with chia','b',350,13,'veg',['1/2 cup oats','1 cup milk','1 tbsp chia seeds']],['Tofu scramble on toast','b',330,22,'v',['150 g tofu','1 slice bread']],
+['Dal, brown rice & salad','l',520,20,'v',['1/2 cup dal','3/4 cup brown rice','1 cucumber']],['Rajma chawal with salad','l',560,20,'v',['1 cup rajma','3/4 cup rice','1 cucumber']],['Chole with 2 rotis','l',520,19,'v',['1 cup chole','2 roti','1 onion']],
+['Paneer tikka wrap','l',520,26,'veg',['100 g paneer','1 whole wheat wrap','1 capsicum']],['Quinoa chickpea bowl','l',500,20,'v',['1/2 cup quinoa','1/2 cup chickpeas','1 cucumber','1 tomato']],['Curd rice with vegetable sabzi','l',480,15,'veg',['3/4 cup rice','1 cup curd','1 cup mixed vegetables']],
+['Chicken curry, rice & salad','l',600,38,'nv',['150 g chicken','3/4 cup rice','1 onion','1 tomato']],['Grilled chicken salad bowl','l',480,40,'nv',['150 g chicken','2 cup salad greens','1 cucumber']],['Egg curry with 2 rotis','l',520,24,'egg',['3 egg','2 roti','1 onion','1 tomato']],
+['Fish curry with rice','l',560,34,'nv',['150 g fish','3/4 cup rice','1 tomato']],['Vegetable khichdi with curd','l',480,17,'veg',['1/2 cup moong dal','1/2 cup rice','1 cup mixed vegetables','1/2 cup curd']],
+['Roasted chana','s',160,9,'v',['1/4 cup roasted chana']],['Fruit & a handful of nuts','s',200,5,'v',['1 apple','10 almonds']],['Sprouts chaat','s',180,11,'v',['1 cup sprouts','1 tomato','1 lemon']],['Buttermilk & roasted makhana','s',150,6,'veg',['1 glass buttermilk','1 cup makhana']],
+['Greek yogurt cup','s',150,15,'veg',['1 cup greek yogurt']],['2 boiled eggs','s',140,12,'egg',['2 egg']],['Hummus with carrot sticks','s',180,6,'v',['3 tbsp hummus','2 carrot']],['Banana peanut butter smoothie','s',300,16,'veg',['1 banana','1 glass milk','1 tbsp peanut butter']],
+['Mixed veg sabzi, dal & 2 rotis','d',480,18,'v',['1 cup mixed vegetables','1/2 cup dal','2 roti']],['Palak paneer with 2 rotis','d',520,25,'veg',['100 g paneer','1 bunch spinach','2 roti']],['Tofu vegetable stir-fry with rice','d',480,24,'v',['150 g tofu','1 cup mixed vegetables','1/2 cup rice']],
+['Grilled fish with sautéed vegetables','d',440,36,'nv',['150 g fish','1 cup mixed vegetables']],['Chicken stir-fry with 1 roti','d',470,38,'nv',['150 g chicken','1 capsicum','1 roti']],['Moong dal khichdi','d',430,17,'v',['1/2 cup moong dal','1/2 cup rice']],
+['Egg bhurji, 2 rotis & salad','d',450,24,'egg',['3 egg','2 roti','1 cucumber']],['Lentil soup with whole wheat toast','d',400,20,'v',['1/2 cup lentils','1 carrot','1 slice whole wheat bread']],['Paneer & vegetable stir-fry','d',450,26,'veg',['100 g paneer','1 cup mixed vegetables']],['Chicken soup with salad','d',380,32,'nv',['150 g chicken','1 carrot','2 cup salad greens']]
+];
+const DIET_OK={vegan:['v'],veg:['v','veg'],egg:['v','veg','egg'],nonveg:['v','veg','egg','nv']};
+const SLOT_SHARE={b:.25,l:.35,s:.12,d:.28};
+function setDietOn(on){const d=STORE.load('diet',{});d.on=on;STORE.save('diet',d);renderDiet();}
+function setDiet(k,v){const d=STORE.load('diet',{});d[k]=v;STORE.save('diet',d);renderDietResult();}
+function dietTargets(d,p){
+  let w=+d.weight,h=+d.height;const a=+d.age;if(d.units==='imperial'){w*=0.4536;h*=2.54;}
+  if(!w||!h||!a)return null;
+  const bmr=10*w+6.25*h-5*a+(d.sex==='male'?5:d.sex==='female'?-161:-78);
+  const act=p.days<=1?1.2:p.days<=3?1.375:p.days<=5?1.55:1.725,tdee=bmr*act,bmi=w/((h/100)**2);
+  let goal=p.goal,note='';
+  if(goal==='fat'&&bmi<18.5){goal='general';note='your BMI is in the underweight range, so bloom kept you at maintenance instead of a fat-loss target.';}
+  const floor=d.sex==='male'?1500:d.sex==='female'?1200:1350;
+  const kcal=Math.round(Math.max(floor,tdee+(goal==='fat'?-400:goal==='muscle'?250:0))/10)*10;
+  const protein=Math.round(w*({fat:1.6,muscle:1.8,endurance:1.4}[goal]||1.2)),fat=Math.round(kcal*.27/9),carbs=Math.max(0,Math.round((kcal-protein*4-fat*9)/4));
+  return {kcal,protein,fat,carbs,tdee:Math.round(tdee),bmi:Math.round(bmi*10)/10,note};
+}
+function dietWeek(d,t){
+  const ok=DIET_OK[d.pref||'veg'],rnd=_rng((d.seed||1)*31+7),days=[];
+  const by={};['b','l','s','d'].forEach(s=>{by[s]=FOODS.filter(f=>f[1]===s&&ok.includes(f[4]));for(let i=by[s].length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[by[s][i],by[s][j]]=[by[s][j],by[s][i]];}});
+  for(let i=0;i<7;i++){const meals=[];let kc=0,pr=0;
+    ['b','l','s','d'].forEach(s=>{const list=by[s];if(!list.length)return;const f=list[i%list.length];
+      const serv=Math.min(2,Math.max(.5,Math.round(t.kcal*SLOT_SHARE[s]/f[2]*4)/4));meals.push({slot:s,name:f[0],serv,kcal:Math.round(f[2]*serv),p:Math.round(f[3]*serv),ing:f[5]});kc+=f[2]*serv;pr+=f[3]*serv;});
+    days.push({meals,kcal:Math.round(kc),p:Math.round(pr)});}
+  return days;
+}
+function renderDiet(){
+  const d=STORE.load('diet',{}),box=document.getElementById('diet-area');
+  if(!d.on){box.innerHTML='';return;}
+  const opt=(k,v,l)=>'<button class="chip'+((d[k]||'')===v?' sel':'')+'" onclick="setDiet(\''+k+'\',\''+v+'\');renderDiet()">'+l+'</button>';
+  const num=(k,ph,l)=>'<label style="display:flex;flex-direction:column;gap:4px;font-size:11px;color:var(--muted);font-weight:600">'+l+'<input type="number" class="time-in" style="width:110px" min="0" step="any" value="'+esc(d[k]||'')+'" placeholder="'+ph+'" aria-label="'+l+'" oninput="setDiet(\''+k+'\',this.value)"></label>';
+  const im=d.units==='imperial';
+  box.innerHTML='<div style="margin-top:14px">'
+    +'<div class="fit-q"><div class="set-label">i eat</div><div class="set-row">'+opt('pref','veg','🥗 vegetarian')+opt('pref','egg','🥚 eggetarian')+opt('pref','nonveg','🍗 non-veg')+opt('pref','vegan','🌱 vegan')+'</div></div>'
+    +'<div class="fit-q"><div class="set-label">for your calorie estimate</div><div class="set-row" style="margin-bottom:8px">'+opt('sex','female','female')+opt('sex','male','male')+opt('sex','other','prefer not to say')+'<span style="width:12px"></span>'+opt('units','metric','kg · cm')+opt('units','imperial','lb · in')+'</div>'
+    +'<div class="set-row">'+num('age','years','age')+num('height',im?'in':'cm','height ('+(im?'in':'cm')+')')+num('weight',im?'lb':'kg','weight ('+(im?'lb':'kg')+')')+'</div></div>'
+    +'<div id="diet-result"></div></div>';
+  if(!d.pref){const x=STORE.load('diet',{});x.pref='veg';x.units=x.units||'metric';STORE.save('diet',x);}
+  renderDietResult();
+}
+function renderDietResult(){
+  const box=document.getElementById('diet-result');if(!box)return;
+  const d=STORE.load('diet',{}),p=fitProfile();
+  if(+d.age&&+d.age<18){box.innerHTML='<div class="warn-note">calorie targets aren’t suitable under 18 — growing bodies need enough fuel. aim for balanced plates (half veg & fruit, a quarter protein, a quarter whole grains) and talk to a doctor or dietitian before changing how you eat 🌸</div>';return;}
+  const t=dietTargets(d,p);
+  if(!t){box.innerHTML='<div class="ins-empty">fill in age, height and weight to get your daily targets and a 7-day meal chart.</div>';return;}
+  const week=dietWeek(d,t),SL={b:'breakfast',l:'lunch',s:'snack',d:'dinner'};
+  const dates=fitWeekDates();
+  box.innerHTML='<div class="grid4" style="margin:4px 0 10px">'
+    +[[t.kcal,'kcal / day','var(--peach-l)','var(--peach-d)'],[t.protein+' g','protein','var(--mint-l)','var(--mint-d)'],[t.carbs+' g','carbs','var(--lav-l)','var(--lav-d)'],[t.fat+' g','fat','var(--sky-l)','var(--sky-d)']]
+      .map(([n,l,bg,c])=>'<div class="stat-card" style="background:'+bg+'"><div class="stat-num" style="color:'+c+';font-size:22px">'+n+'</div><div class="stat-lbl">'+l+'</div></div>').join('')+'</div>'
+    +'<p class="set-note" style="margin:0">based on your goal (“'+({fat:'lose fat',muscle:'build muscle',general:'get fitter',endurance:'stamina',flex:'flexibility'}[p.goal])+'”) and '+p.days+' workouts a week · maintenance ≈ '+t.tdee+' kcal · BMI '+t.bmi+'</p>'
+    +(t.note?'<div class="warn-note">'+t.note+'</div>':'')
+    +(()=>{const avgP=Math.round(week.reduce((s,x)=>s+x.p,0)/7);if(avgP>=t.protein*.85)return '';
+      const adds={vegan:'tofu, tempeh, soy chunks, lentils, chickpeas or a pea-protein shake',veg:'greek yogurt, paneer, sprouts, soy chunks or a protein shake',egg:'eggs, greek yogurt, paneer or a protein shake',nonveg:'eggs, chicken, fish, greek yogurt or a protein shake'}[d.pref||'veg'];
+      return '<div class="warn-note">💡 these meals give about <b>'+avgP+' g</b> protein a day — '+(t.protein-avgP)+' g short of your '+t.protein+' g goal. easy top-ups: '+adds+'.</div>';})()
+    +'<div class="diet-wrap"><table class="diet-table"><thead><tr><th>day</th>'+['b','l','s','d'].map(s=>'<th>'+SL[s]+'</th>').join('')+'<th>total</th></tr></thead><tbody>'
+    +week.map((day,i)=>'<tr><td><b>'+DAYS[dates[i].getDay()].slice(0,3)+'</b></td>'+['b','l','s','d'].map(s=>{const m=day.meals.find(x=>x.slot===s);return '<td>'+(m?esc(m.name)+(m.serv!==1?' ×'+m.serv:'')+'<small>'+m.kcal+' kcal · '+m.p+' g protein</small>':'')+'</td>';}).join('')+'<td><b>'+day.kcal+'</b><small>'+day.p+' g protein</small></td></tr>').join('')
+    +'</tbody></table></div>'
+    +'<div class="set-row" style="margin-top:12px"><button class="mini-btn" onclick="dietToMeals()">🍽️ add this week to my meal planner + grocery list</button><button class="mini-btn" onclick="setDiet(\'seed\',(STORE.load(\'diet\',{}).seed||1)+1)">↻ swap meals</button></div>'
+    +'<div class="warn-note">this is general guidance, not medical or nutrition advice. if you’re pregnant or breastfeeding, have a health condition, or have a history of disordered eating, please check with a doctor or registered dietitian first.</div>';
+}
+function dietToMeals(){
+  const d=STORE.load('diet',{}),t=dietTargets(d,fitProfile());if(!t)return;
+  const week=dietWeek(d,t),all=STORE.load('mealPlan',{}),wk=dateKey(fitWeekDates()[0]),plan=all[wk]=all[wk]||{},recs=STORE.load('recipes',[]);let n=0;
+  week.forEach((day,i)=>day.meals.forEach(m=>{const slot=i+'_'+m.slot;if(!plan[slot]){plan[slot]=m.name;n++;}
+    if(!recs.some(r=>(r.name||'').toLowerCase()===m.name.toLowerCase()))recs.push({id:_id(),name:m.name,servings:1,ingredients:m.ing.join('\n')});}));
+  STORE.save('mealPlan',all);STORE.save('recipes',recs);
+  mealWeekOffset=0;renderGlist('recipe-list');renderMeals();
+  toast(n?'added '+n+' meals — your grocery list is ready 🛒':'your meal planner already had meals in every slot');
+  goToPage('meals');
+}
+
+/* ════════ DATES & GIFTS ════════ */
+function nextOccurrence(dt,repeat){
+  if(!dt)return null;const p=parseKey(dt),t=dk0(new Date());
+  if(repeat==='once')return p>=t?p:null;
+  const mk=y=>{const leap=(y%4===0&&y%100!==0)||y%400===0;return new Date(y,p.getMonth(),p.getMonth()===1&&p.getDate()===29&&!leap?28:p.getDate());};
+  let n=mk(t.getFullYear());if(n<t)n=mk(t.getFullYear()+1);return n;
+}
+function upcomingDates(withinDays){
+  const t=dk0(new Date());
+  return STORE.load('dates',[]).filter(x=>x.name&&x.date).map(x=>{const n=nextOccurrence(x.date,x.repeat);if(!n)return null;
+    const y0=parseKey(x.date).getFullYear(),years=n.getFullYear()-y0;return {x,next:n,days:daysBetween(t,n),years:x.repeat!=='once'&&y0>1900&&years>0?years:null};})
+    .filter(Boolean).filter(u=>u.days<=withinDays).sort((a,b)=>a.days-b.days);
+}
+function _ord(n){const s=['th','st','nd','rd'],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0]);}
+function renderDates(){
+  const up=upcomingDates(60),gifts=STORE.load('gifts',[]);
+  const icon={birthday:'🎂',anniversary:'💞',holiday:'🎉',other:'📌'};
+  document.getElementById('dates-upcoming').innerHTML=up.length?up.map(u=>{
+    const g=gifts.filter(x=>x.person&&x.person.trim().toLowerCase()===u.x.name.trim().toLowerCase());
+    const sorted=g.some(x=>x.status&&x.status!=='idea');
+    const what=u.years!=null?(u.x.type==='birthday'?'turns '+u.years:u.x.type==='anniversary'?_ord(u.years)+' anniversary':''):'';
+    return '<div class="up-item"><div class="up-badge'+(u.days<=3?' hot':'')+'">'+(u.days===0?'🎉':u.days)+'<small>'+(u.days===0?'today':u.days===1?'day':'days')+'</small></div><div class="up-main">'+(icon[u.x.type]||'📌')+' '+esc(u.x.name)+(what?' · '+what:'')
+      +'<span>'+fmtDay(dateKey(u.next))+' · '+(g.length?(sorted?'🎁 gift sorted':'💡 '+g.length+' gift idea'+(g.length>1?'s':'')+', not bought yet'):'no gift planned yet')+'</span></div></div>';}).join('')
+    :'<div class="ins-empty">nothing in the next 60 days — add birthdays and anniversaries below 🎂</div>';
+  document.getElementById('people-names').innerHTML=STORE.load('dates',[]).filter(x=>x.name).map(x=>'<option value="'+esc(x.name)+'">').join('');
+  const planned=gifts.reduce((s,x)=>s+(+x.budget||0),0),spent=gifts.filter(x=>x.status&&x.status!=='idea').reduce((s,x)=>s+(+x.budget||0),0);
+  document.getElementById('gift-stats').innerHTML=gifts.length?'<span class="tag tag-peach">'+fmt(planned)+' planned</span> <span class="tag tag-mint">'+fmt(spent)+' bought</span> <span class="tag tag-lav">'+gifts.filter(x=>!x.status||x.status==='idea').length+' still ideas</span>':'';
+}
+function initDates(){
+  glist({el:'dates-list',key:'dates',addLabel:'add date',empty:'add birthdays, anniversaries and other days you don’t want to forget.',
+    sort:(a,b)=>{const x=nextOccurrence(a.date,a.repeat),y=nextOccurrence(b.date,b.repeat);return (x?x.getTime():9e15)-(y?y.getTime():9e15);},
+    fields:[{k:'name',label:'who / what',w:2,ph:'e.g. Mum'},{k:'type',label:'type',type:'select',opts:[['birthday','🎂 birthday'],['anniversary','💞 anniversary'],['holiday','🎉 holiday'],['other','📌 other']]},
+      {k:'date',label:'date',type:'date',w:1.3},{k:'repeat',label:'repeats',type:'select',opts:[['yearly','every year'],['once','just once']]},{k:'remind',label:'remind (days before)',type:'number',w:.8}],
+    add:{name:'',type:'birthday',date:'',repeat:'yearly',remind:3},
+    extra:x=>{const n=nextOccurrence(x.date,x.repeat);return n?'next: '+fmtDay(dateKey(n))+' · '+inDays(daysBetween(new Date(),n)):'';},
+    onChange:()=>{renderDates();renderGlance();}});
+  glist({el:'gift-list',key:'gifts',addLabel:'add gift idea',empty:'jot down gift ideas the moment you think of them 💡',
+    fields:[{k:'person',label:'for',list:'people-names',ph:'person'},{k:'idea',label:'gift idea',w:2},{k:'budget',label:'budget',type:'number',w:.8},
+      {k:'status',label:'status',type:'select',opts:[['idea','💡 idea'],['bought','🛍️ bought'],['wrapped','🎀 wrapped'],['given','💝 given']]},{k:'link',label:'link / where',w:1.2}],
+    add:{person:'',idea:'',budget:'',status:'idea',link:''},rowClass:x=>x.status==='given'?'done':'',onChange:()=>renderDates()});
+  renderDates();
+}
+
+/* ════════ STUDY ════════ */
+const STUDY_DAYS=['Mon','Tue','Wed','Thu','Fri','Sat'];
+function showStudy(sub,btn){
+  document.querySelectorAll('#page-study .sub-page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('#study-subnav .sub-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('study-'+sub).classList.add('active');btn.classList.add('active');
+  if(sub==='exams')renderExams();if(sub==='grades')renderGrades();
+}
+function studyData(){return Object.assign({periods:['8:00','9:00','10:00','11:00','12:00','1:00','2:00','3:00'],tt:{}},STORE.load('study',{}));}
+function renderTimetable(){
+  const s=studyData(),today=STUDY_DAYS[(new Date().getDay()+6)%7];
+  let h='<table class="tt"><thead><tr><th>time</th>'+STUDY_DAYS.map(d=>'<th>'+d+'</th>').join('')+'</tr></thead><tbody>';
+  s.periods.forEach((p,i)=>{h+='<tr><td class="tlabel"><input type="text" value="'+esc(p)+'" aria-label="period '+(i+1)+' time" onchange="setPeriod('+i+',this.value)"></td>'
+    +STUDY_DAYS.map(d=>'<td'+(d===today?' class="now"':'')+'><input type="text" value="'+esc(s.tt[d+'_'+i]||'')+'" placeholder="·" aria-label="'+d+' period '+(i+1)+'" onchange="setClass(\''+d+'_'+i+'\',this.value)"></td>').join('')+'</tr>';});
+  document.getElementById('timetable').innerHTML=h+'</tbody></table><div class="set-row" style="margin-top:8px"><button class="mini-btn" onclick="addPeriod()">+ add a period</button>'+(s.periods.length>1?'<button class="mini-btn" onclick="removePeriod()">− remove last</button>':'')+'</div>';
+}
+function _saveStudy(s){STORE.save('study',s);showSaved();}
+function setPeriod(i,v){const s=studyData();s.periods[i]=v;_saveStudy(s);}
+function setClass(k,v){const s=studyData();if(v.trim())s.tt[k]=v.trim();else delete s.tt[k];_saveStudy(s);renderGlance();}
+function addPeriod(){const s=studyData();s.periods.push('');_saveStudy(s);renderTimetable();}
+function removePeriod(){const s=studyData(),i=s.periods.length-1;s.periods.pop();STUDY_DAYS.forEach(d=>delete s.tt[d+'_'+i]);_saveStudy(s);renderTimetable();}
+function todaysClasses(){const s=studyData(),d=STUDY_DAYS[(new Date().getDay()+6)%7];if(!d)return [];return s.periods.map((p,i)=>s.tt[d+'_'+i]?{time:p,subject:s.tt[d+'_'+i]}:null).filter(Boolean);}
+function dueInfo(it){if(!it.due)return null;return daysBetween(new Date(),parseKey(it.due));}
+function renderExams(){
+  const ex=STORE.load('exams',[]).filter(e=>e.date&&daysBetween(new Date(),parseKey(e.date))>=0).sort((a,b)=>a.date<b.date?-1:1);
+  document.getElementById('exam-cards').innerHTML=ex.length?'<div class="grid3">'+ex.slice(0,6).map(e=>{const n=daysBetween(new Date(),parseKey(e.date));return '<div class="stat-card" style="background:'+(n<=7?'var(--blush-l)':'var(--lav-l)')+'"><div class="stat-num" style="color:'+(n<=7?'var(--blush-d)':'var(--lav-d)')+'">'+(n===0?'today':n)+'</div><div class="stat-lbl">'+(n===0?'':'days · ')+esc(e.name||e.subject||'exam')+'<br>'+fmtDay(e.date)+'</div></div>';}).join('')+'</div>':'';
+}
+function renderGrades(){
+  const g=STORE.load('grades',[]),by={};
+  g.forEach(x=>{if(!x.subject||!(+x.max))return;const s=by[x.subject]=by[x.subject]||{sc:0,mx:0};s.sc+=+x.score||0;s.mx+=+x.max;});
+  const rows=Object.entries(by).map(([k,v])=>({label:k,v:Math.round(v.sc/v.mx*1000)/10})).sort((a,b)=>b.v-a.v);
+  document.getElementById('grade-avg').innerHTML=rows.length?_hbars(rows,'var(--lav)',v=>v+'%'):'<div class="ins-empty">add scores below — averages per subject appear here automatically.</div>';
+}
+function renderCornell(){
+  const notes=STORE.load('cornell',[]).slice().sort((a,b)=>(b.date||'')<(a.date||'')?-1:1);
+  document.getElementById('cornell').innerHTML='<p class="set-note" style="margin:0 0 10px">cornell method: key questions & cues on the left, notes on the right, a short summary at the bottom.</p>'
+    +notes.map(n=>'<div class="card" style="margin-bottom:12px"><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">'
+      +'<input type="text" data-nolegacy="1" class="time-in" style="flex:2;min-width:140px;font-weight:600" value="'+esc(n.title||'')+'" placeholder="topic" aria-label="note topic" onchange="setCornell('+n.id+',\'title\',this.value)">'
+      +'<input type="text" data-nolegacy="1" class="time-in" style="flex:1;min-width:100px" value="'+esc(n.subject||'')+'" placeholder="subject" aria-label="subject" onchange="setCornell('+n.id+',\'subject\',this.value)">'
+      +'<input type="date" class="time-in" value="'+esc(n.date||'')+'" aria-label="date" onchange="setCornell('+n.id+',\'date\',this.value)">'
+      +'<button class="del-btn" onclick="if(confirm(\'delete this note?\'))delCornell('+n.id+')" aria-label="delete note">×</button></div>'
+      +'<div class="cornell"><textarea data-nolegacy="1" placeholder="cues & questions" aria-label="cues" onchange="setCornell('+n.id+',\'cue\',this.value)">'+esc(n.cue||'')+'</textarea>'
+      +'<textarea data-nolegacy="1" placeholder="notes" aria-label="notes" onchange="setCornell('+n.id+',\'notes\',this.value)">'+esc(n.notes||'')+'</textarea>'
+      +'<div class="sum"><textarea data-nolegacy="1" placeholder="summary in your own words" aria-label="summary" onchange="setCornell('+n.id+',\'summary\',this.value)">'+esc(n.summary||'')+'</textarea></div></div></div>').join('')
+    +'<button class="add-btn" onclick="addCornell()">+ new note</button>';
+}
+function addCornell(){const n=STORE.load('cornell',[]);n.push({id:_id(),title:'',subject:'',date:dateKey(new Date()),cue:'',notes:'',summary:''});STORE.save('cornell',n);renderCornell();}
+function setCornell(id,k,v){const n=STORE.load('cornell',[]),x=n.find(e=>e.id===id);if(x){x[k]=v;STORE.save('cornell',n);showSaved();}}
+function delCornell(id){STORE.save('cornell',STORE.load('cornell',[]).filter(e=>e.id!==id));renderCornell();}
+function initStudy(){
+  renderTimetable();
+  glist({el:'assign-list',key:'assignments',addLabel:'add assignment',empty:'add homework, projects and essays — overdue ones turn pink.',
+    sort:(a,b)=>((a.status==='done')-(b.status==='done'))||((a.due||'9')<(b.due||'9')?-1:1),
+    fields:[{k:'subject',label:'subject'},{k:'title',label:'assignment',w:2},{k:'due',label:'due',type:'date',w:1.2},{k:'status',label:'status',type:'select',opts:[['todo','📝 to do'],['doing','⏳ in progress'],['done','✅ done']]}],
+    add:{subject:'',title:'',due:'',status:'todo'},
+    rowClass:a=>{if(a.status==='done')return 'done';const n=dueInfo(a);return n==null?'':n<0?'overdue':n<=2?'soon':'';},
+    extra:a=>{const n=dueInfo(a);return n==null||a.status==='done'?'':(n<0?'overdue by '+(-n)+' day'+(n<-1?'s':''):'due '+inDays(n));},
+    onChange:()=>renderGlance()});
+  glist({el:'exam-list',key:'exams',addLabel:'add exam',empty:'add your exams to start a countdown ⏳',sort:(a,b)=>(a.date||'9')<(b.date||'9')?-1:1,
+    fields:[{k:'name',label:'exam',w:2},{k:'subject',label:'subject'},{k:'date',label:'date',type:'date',w:1.2}],
+    add:{name:'',subject:'',date:''},extra:e=>{const n=e.date?daysBetween(new Date(),parseKey(e.date)):null;return n==null?'':n<0?'done ✓':inDays(n);},
+    onChange:()=>{renderExams();renderGlance();}});
+  glist({el:'grade-list',key:'grades',addLabel:'add score',empty:'log test and assignment scores.',
+    fields:[{k:'subject',label:'subject'},{k:'item',label:'test / assignment',w:2},{k:'score',label:'score',type:'number',w:.7},{k:'max',label:'out of',type:'number',w:.7}],
+    add:{subject:'',item:'',score:'',max:100},extra:x=>+x.max?Math.round((+x.score||0)/(+x.max)*1000)/10+'%':'',onChange:()=>renderGrades()});
+  renderExams();renderGrades();renderCornell();
+}
+
+/* ════════ HEALTH ════════ */
+function medTimes(m){return (m.times||'').split(/[,;\s]+/).map(t=>t.trim()).filter(t=>/^\d{1,2}:\d{2}$/.test(t)).map(t=>t.padStart(5,'0')).sort();}
+function medActive(m){const t=dateKey(new Date());return m.name&&(!m.start||m.start<=t)&&(!m.end||m.end>=t);}
+function medTaken(){return STORE.load('medTaken',{})[dateKey(new Date())]||{};}
+function toggleDose(key){const all=STORE.load('medTaken',{}),t=dateKey(new Date()),d=all[t]=all[t]||{};if(d[key])delete d[key];else d[key]=true;
+  Object.keys(all).forEach(k=>{if(daysBetween(parseKey(k),new Date())>90)delete all[k];});STORE.save('medTaken',all);renderMedToday();renderGlance();}
+function renderMedToday(){
+  const meds=STORE.load('meds',[]).filter(medActive),tk=medTaken();
+  const doses=[];meds.forEach(m=>{const ts=medTimes(m);(ts.length?ts:['any']).forEach(t=>doses.push({m,t,key:m.id+'@'+t}));});
+  doses.sort((a,b)=>a.t<b.t?-1:1);
+  document.getElementById('med-today').innerHTML=doses.length?doses.map(d=>'<button class="dose'+(tk[d.key]?' taken':'')+'" aria-pressed="'+!!tk[d.key]+'" onclick="toggleDose(\''+d.key+'\')">'+(tk[d.key]?'✓':'💊')+' '+esc(d.m.name)+(d.t!=='any'?' · '+d.t:'')+(d.m.dose?' · '+esc(d.m.dose):'')+'</button>').join('')
+    +'<p class="set-note" style="margin:6px 0 0">'+doses.filter(d=>tk[d.key]).length+' of '+doses.length+' taken today</p>'
+    :'<div class="ins-empty">add a medicine below and today’s doses show up here to tick off.</div>';
+}
+function initHealth(){
+  glist({el:'med-list',key:'meds',addLabel:'add medicine',empty:'medicines, vitamins, supplements…',
+    fields:[{k:'name',label:'name',w:1.5},{k:'dose',label:'dose',ph:'e.g. 500 mg'},{k:'times',label:'times',w:1.3,ph:'08:00, 20:00'},{k:'start',label:'from',type:'date',w:1.2},{k:'end',label:'until',type:'date',w:1.2},{k:'remind',label:'remind',type:'check'}],
+    add:{name:'',dose:'',times:'08:00',start:dateKey(new Date()),end:'',remind:true},rowClass:m=>medActive(m)?'':'done',onChange:()=>{renderMedToday();renderGlance();}});
+  glist({el:'symptom-list',key:'symptoms',addLabel:'log a symptom',empty:'note symptoms as they happen — handy to show a doctor.',sort:(a,b)=>(b.date||'')<(a.date||'')?-1:1,
+    fields:[{k:'date',label:'date',type:'date',w:1.2},{k:'name',label:'symptom',w:1.5},{k:'severity',label:'how bad',type:'select',opts:[['1','1 · mild'],['2','2'],['3','3 · moderate'],['4','4'],['5','5 · severe']]},{k:'notes',label:'notes',w:2}],
+    add:()=>({date:dateKey(new Date()),name:'',severity:'2',notes:''})});
+  glist({el:'visit-list',key:'visits',addLabel:'add visit',empty:'keep a record of appointments and what the doctor said.',sort:(a,b)=>(b.date||'')<(a.date||'')?-1:1,
+    fields:[{k:'date',label:'date',type:'date',w:1.2},{k:'doctor',label:'doctor / clinic',w:1.4},{k:'reason',label:'reason',w:1.4},{k:'notes',label:'notes & advice',w:2},{k:'follow',label:'follow-up',type:'date',w:1.2}],
+    add:()=>({date:dateKey(new Date()),doctor:'',reason:'',notes:'',follow:''}),
+    extra:v=>{if(!v.follow)return '';const n=daysBetween(new Date(),parseKey(v.follow));return n>=0?'follow-up '+inDays(n)+' · '+fmtDay(v.follow):'';},onChange:()=>renderGlance()});
+  glist({el:'vaccine-list',key:'vaccines',addLabel:'add record',empty:'vaccines, boosters, yearly check-ups…',
+    fields:[{k:'name',label:'vaccine / check-up',w:2},{k:'date',label:'done on',type:'date',w:1.2},{k:'next',label:'next due',type:'date',w:1.2}],
+    add:{name:'',date:'',next:''},extra:v=>{if(!v.next)return '';const n=daysBetween(new Date(),parseKey(v.next));return n<0?'overdue since '+fmtDay(v.next):'next '+inDays(n);},
+    rowClass:v=>v.next&&daysBetween(new Date(),parseKey(v.next))<0?'overdue':''});
+  renderMedToday();
+}
+
+/* ════════ CYCLE (optional — switched on in customise) ════════ */
+function sectionsCfg(){return Object.assign({hidden:[],cycle:false},STORE.load('sections',{}));}
+function cycleOn(){return !!sectionsCfg().cycle;}
+function cycleData(){return Object.assign({periods:[],days:{},len:28,plen:5},STORE.load('cycle',{}));}
+function cycleStats(){
+  const c=cycleData(),ps=c.periods.filter(p=>p.start).sort((a,b)=>a.start<b.start?-1:1),lens=[];
+  for(let i=1;i<ps.length;i++){const d=daysBetween(parseKey(ps[i-1].start),parseKey(ps[i].start));if(d>=15&&d<=60)lens.push(d);}
+  const recent=lens.slice(-6),L=recent.length?Math.round(recent.reduce((s,x)=>s+x,0)/recent.length):(+c.len||28);
+  const pl=ps.filter(p=>p.end).map(p=>daysBetween(parseKey(p.start),parseKey(p.end))+1).filter(x=>x>0&&x<=12).slice(-6);
+  const P=pl.length?Math.round(pl.reduce((s,x)=>s+x,0)/pl.length):(+c.plen||5);
+  return {ps,L,P,last:ps[ps.length-1]||null,learned:recent.length,range:recent.length>=3?[Math.min(...recent),Math.max(...recent)]:null};
+}
+function cyclePhaseOn(date,st){
+  st=st||cycleStats();if(!st.ps.length)return null;
+  const k=dateKey(date);let p=null;for(const x of st.ps)if(x.start<=k)p=x;if(!p)return null;
+  const day=daysBetween(parseKey(p.start),date)+1,plen=p.end?daysBetween(parseKey(p.start),parseKey(p.end))+1:st.P,ovu=st.L-14;
+  let phase=day<=plen?'menstrual':day<ovu-1?'follicular':day<=ovu+1?'ovulation':day<=st.L?'luteal':'late';
+  return {day,phase,fertile:day>=ovu-5&&day<=ovu+1,ovu:day===ovu};
+}
+const PHASE_INFO={menstrual:['🩸 period','rest, warmth, gentle movement'],follicular:['🌱 follicular','energy usually rising — great for new things'],ovulation:['✨ ovulation (est.)','often the most energetic, social days'],luteal:['🍂 luteal','energy may dip — be kind to yourself'],late:['⏳ period may be late','cycles vary; stress and travel can shift them']};
+function cyclePredict(st){
+  st=st||cycleStats();if(!st.last)return null;
+  const t=dk0(new Date()),last=parseKey(st.last.start);let next=new Date(last);next.setDate(last.getDate()+st.L);
+  const late=daysBetween(next,t)>0?daysBetween(next,t):0;
+  const ovu=new Date(next);ovu.setDate(next.getDate()-14);const fs=new Date(ovu);fs.setDate(ovu.getDate()-5);const fe=new Date(ovu);fe.setDate(ovu.getDate()+1);
+  return {next,inDays:daysBetween(t,next),late,ovu,fertileStart:fs,fertileEnd:fe};
+}
+let cycleMonthOffset=0;
+function navCycleMonth(d){cycleMonthOffset+=d;renderCycleCal();}
+function logPeriodStart(){
+  const v=document.getElementById('cy-start').value||dateKey(new Date()),c=cycleData();
+  if(c.periods.some(p=>p.start===v)){toast('that start date is already logged');return;}
+  c.periods.push({id:_id(),start:v,end:''});STORE.save('cycle',c);renderCycle();renderGlance();toast('period logged 🌙 predictions updated');
+}
+function logPeriodEnd(){
+  const v=document.getElementById('cy-end').value||dateKey(new Date()),c=cycleData(),ps=c.periods.filter(p=>p.start&&p.start<=v).sort((a,b)=>a.start<b.start?-1:1),p=ps[ps.length-1];
+  if(!p){toast('log when it started first');return;}p.end=v;STORE.save('cycle',c);renderCycle();toast('saved ✓');
+}
+function delPeriod(id){const c=cycleData();c.periods=c.periods.filter(p=>p.id!==id);STORE.save('cycle',c);renderCycle();renderGlance();}
+function setCycleSetting(k,v){const c=cycleData();c[k]=+v||'';STORE.save('cycle',c);renderCycle();}
+const CY_FLOW=['spotting','light','medium','heavy'],CY_SYM=['cramps','headache','bloating','acne','tired','cravings','tender breasts','back pain','mood swings','trouble sleeping'];
+function toggleCyDay(kind,val){const c=cycleData(),t=dateKey(new Date()),d=c.days[t]=c.days[t]||{flow:'',sym:[]};
+  if(kind==='flow')d.flow=d.flow===val?'':val;else{d.sym=d.sym||[];d.sym=d.sym.includes(val)?d.sym.filter(x=>x!==val):d.sym.concat(val);}
+  STORE.save('cycle',c);renderCycleLog();}
+function renderCycle(){if(!document.getElementById('cycle-hero'))return;renderCycleHero();renderCycleLog();renderCycleCal();renderCycleMood();renderCycleHistory();}
+function renderCycleHero(){
+  const st=cycleStats(),pr=cyclePredict(st),ph=cyclePhaseOn(new Date(),st),box=document.getElementById('cycle-hero');
+  if(!pr){box.innerHTML='<div class="cy-big">hello 🌙</div><p class="set-note" style="margin:6px 0 0">log the first day of your last period below — bloom will start predicting from there, and gets more accurate with every cycle you log.</p>';return;}
+  const info=ph?PHASE_INFO[ph.phase]:null;
+  box.innerHTML='<div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center"><div><div class="cy-big">day '+(ph?ph.day:'–')+'</div>'+(info?'<span class="cy-phase">'+info[0]+'</span><div class="set-note" style="margin:0">'+info[1]+'</div>':'')+'</div>'
+    +'<div style="flex:1;min-width:200px;font-size:13px;line-height:1.8;color:var(--text)">'
+    +(pr.late?'⏳ period expected '+pr.late+' day'+(pr.late>1?'s':'')+' ago':'🩸 next period <b>'+inDays(pr.inDays)+'</b> · '+fmtDay(dateKey(pr.next)))
+    +'<br>🌿 fertile window (estimate): '+shortDate(pr.fertileStart)+' – '+shortDate(pr.fertileEnd)
+    +'<br>📏 your cycle: ~'+st.L+' days · period ~'+st.P+' days'+(st.range?' · varies '+st.range[0]+'–'+st.range[1]:'')
+    +(st.learned<2?'<br><span style="color:var(--muted)">using your typical lengths until 2+ cycles are logged</span>':'')+'</div></div>';
+}
+function renderCycleLog(){
+  const t=dateKey(new Date()),d=cycleData().days[t]||{flow:'',sym:[]};
+  document.getElementById('cycle-log').innerHTML='<div class="set-label">my period…</div>'
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px"><input type="date" id="cy-start" class="time-in" value="'+t+'" aria-label="period start date"><button class="mini-btn" onclick="logPeriodStart()">🩸 started</button></div>'
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px"><input type="date" id="cy-end" class="time-in" value="'+t+'" aria-label="period end date"><button class="mini-btn" onclick="logPeriodEnd()">✓ ended</button></div>'
+    +'<div class="set-label">today’s flow</div><div class="set-row" style="margin-bottom:10px">'+CY_FLOW.map(f=>'<button class="chip'+(d.flow===f?' sel':'')+'" aria-pressed="'+(d.flow===f)+'" onclick="toggleCyDay(\'flow\',\''+f+'\')">'+f+'</button>').join('')+'</div>'
+    +'<div class="set-label">how i feel</div><div class="set-row">'+CY_SYM.map(s=>'<button class="chip'+((d.sym||[]).includes(s)?' sel':'')+'" aria-pressed="'+(d.sym||[]).includes(s)+'" onclick="toggleCyDay(\'sym\',\''+s+'\')">'+s+'</button>').join('')+'</div>';
+}
+function cycleDayClass(date,st,pr){
+  const k=dateKey(date),t=dateKey(new Date());
+  for(const p of st.ps){const s=parseKey(p.start),e=p.end?parseKey(p.end):new Date(s.getFullYear(),s.getMonth(),s.getDate()+st.P-1);if(date>=s&&date<=e&&(p.end||k<=t||p===st.last))return 'period';}
+  if(!pr)return '';
+  if(k>t||!st.last)for(let i=0;i<4;i++){const s=new Date(pr.next);s.setDate(pr.next.getDate()+i*st.L);const e=new Date(s);e.setDate(s.getDate()+st.P-1);if(date>=s&&date<=e&&k>t)return 'pred';}
+  const ph=cyclePhaseOn(date,st);
+  for(let i=-1;i<4;i++){const s=new Date(pr.next);s.setDate(pr.next.getDate()+i*st.L);const o=new Date(s);o.setDate(s.getDate()-14);const fs=new Date(o);fs.setDate(o.getDate()-5);const fe=new Date(o);fe.setDate(o.getDate()+1);
+    if(date>=fs&&date<=fe)return 'fertile'+(dateKey(o)===k?' ovu':'');}
+  return ph&&ph.fertile?'fertile'+(ph.ovu?' ovu':''):'';
+}
+function renderCycleCal(){
+  const st=cycleStats(),pr=cyclePredict(st),t=new Date(),m=new Date(t.getFullYear(),t.getMonth()+cycleMonthOffset,1),dim=new Date(m.getFullYear(),m.getMonth()+1,0).getDate(),ml=STORE.load('moodLog',{});
+  document.getElementById('cycle-month-label').textContent=MONTHS[m.getMonth()]+' '+m.getFullYear();
+  let h='<div class="cy-cal">'+['S','M','T','W','T','F','S'].map(d=>'<div class="hd">'+d+'</div>').join('')+'<div></div>'.repeat(m.getDay());
+  for(let d=1;d<=dim;d++){const date=new Date(m.getFullYear(),m.getMonth(),d),cls=cycleDayClass(date,st,pr),mood=ml[date.getFullYear()+'-'+(date.getMonth()+1)+'-'+d];
+    h+='<div class="cy-day '+cls+(dateKey(date)===dateKey(t)?' today':'')+'" title="'+shortDate(date)+(cls?' · '+cls.replace('pred','predicted period').replace(' ovu',', ovulation estimate'):'')+(mood?' · '+esc(mood):'')+'">'+d+(mood?'<span class="mood">'+mood.split(' ')[0]+'</span>':'')+'</div>';}
+  document.getElementById('cycle-cal').innerHTML=h+'</div>';
+}
+function renderCycleMood(){
+  const st=cycleStats(),ml=STORE.load('moodLog',{}),by={};
+  if(!st.ps.length){document.getElementById('cycle-mood').innerHTML='<div class="ins-empty">once you’ve logged a period and a few moods, bloom shows how your mood tends to change through your cycle 💜</div>';return;}
+  Object.entries(ml).forEach(([k,m])=>{const [y,mo,d]=k.split('-').map(Number),ph=cyclePhaseOn(new Date(y,mo-1,d),st);if(!ph||ph.phase==='late')return;const b=by[ph.phase]=by[ph.phase]||{};b[m]=(b[m]||0)+1;});
+  const order=['menstrual','follicular','ovulation','luteal'];
+  const rows=order.filter(p=>by[p]).map(p=>{const e=Object.entries(by[p]).sort((a,b)=>b[1]-a[1]);const tot=e.reduce((s,x)=>s+x[1],0);
+    return '<div class="up-item"><div class="up-badge" style="min-width:44px;font-size:20px">'+e[0][0].split(' ')[0]+'</div><div class="up-main">'+PHASE_INFO[p][0]+'<span>mostly '+esc(e[0][0].split(' ').slice(1).join(' '))+' ('+e[0][1]+' of '+tot+' days)'+(e[1]?' · then '+esc(e[1][0].split(' ').slice(1).join(' ')):'')+'</span></div></div>';});
+  document.getElementById('cycle-mood').innerHTML=rows.length?rows.join('')+'<p class="set-note" style="margin-top:8px">from your 💜 mood log — keep logging daily and patterns get clearer.</p>'
+    :'<div class="ins-empty">log your mood on the 💜 mood page each day — your mood-by-phase pattern will appear here.</div>';
+}
+function renderCycleHistory(){
+  const st=cycleStats(),c=cycleData(),ps=st.ps.slice().reverse();
+  document.getElementById('cycle-history').innerHTML=(ps.length?ps.map((p,i)=>{const nxt=st.ps[st.ps.length-1-i+1];const cl=nxt?daysBetween(parseKey(p.start),parseKey(nxt.start)):null;
+    return '<div class="up-item"><div class="up-main">'+fmtDay(p.start)+(p.end?' → '+fmtDay(p.end):' · ongoing / end not logged')+'<span>'+(p.end?(daysBetween(parseKey(p.start),parseKey(p.end))+1)+'-day period':'')+(cl?' · '+cl+'-day cycle':'')+'</span></div><button class="del-btn" onclick="if(confirm(\'remove this period?\'))delPeriod('+p.id+')" aria-label="remove">×</button></div>';}).join(''):'<div class="ins-empty">no periods logged yet.</div>')
+    +'<div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--muted)"><label>typical cycle <input type="number" class="time-in" style="width:64px" min="15" max="60" value="'+esc(c.len||28)+'" aria-label="typical cycle length in days" onchange="setCycleSetting(\'len\',this.value)"> days</label>'
+    +'<label>typical period <input type="number" class="time-in" style="width:64px" min="1" max="12" value="'+esc(c.plen||5)+'" aria-label="typical period length in days" onchange="setCycleSetting(\'plen\',this.value)"> days</label></div>';
+}
+
+/* ════════ SECTION SWITCHES ════════ */
+const OPTIONAL_SECTIONS=['weekly','monthly','quarterly','habits','wellness','budget','reading','goals','mood','notes','vision','travel','meals','fitness','dates','study','health','review'];
+function setSection(id,on){const s=sectionsCfg();s.hidden=s.hidden.filter(x=>x!==id);if(!on)s.hidden.push(id);STORE.save('sections',s);applySections();}
+function setCycleOn(on){const s=sectionsCfg();s.cycle=on;STORE.save('sections',s);applySections();if(on){renderCycle();toast('cycle tracking is on — find it in your sections 🌙');}renderGlance();}
+function applySections(){
+  const s=sectionsCfg();
+  document.querySelectorAll('.tab-btn').forEach(b=>{const id=((b.getAttribute('onclick')||'').match(/'([^']+)'/)||[])[1];const hide=id==='cycle'?!s.cycle:s.hidden.includes(id);b.style.display=hide?'none':'';});
+  document.querySelectorAll('.bb-item[data-page]').forEach(b=>{b.style.display=s.hidden.includes(b.dataset.page)?'none':'';});
+  const act=document.querySelector('.page.active');
+  if(act){const id=act.id.slice(5);if((id==='cycle'&&!s.cycle)||s.hidden.includes(id))goToPage('daily');}
+  updateNavFade();
+}
+function renderSectionsGroup(){
+  const s=sectionsCfg(),names={};document.querySelectorAll('.tab-btn').forEach(b=>{const id=((b.getAttribute('onclick')||'').match(/'([^']+)'/)||[])[1];names[id]=b.textContent.trim();});
+  return '<div class="set-group"><div class="set-label">sections</div>'
+    +'<div class="toggle"><div class="tl"><b>🌙 cycle tracking</b><span>adds a cycle page that predicts your next period and links it to your mood charts — off unless you turn it on</span></div><label class="switch"><input type="checkbox" '+(s.cycle?'checked':'')+' onchange="setCycleOn(this.checked)" aria-label="cycle tracking"><span></span></label></div>'
+    +'<p class="set-note" style="margin:10px 0 6px">show only what you use — hidden sections keep their data.</p><div class="set-row">'
+    +OPTIONAL_SECTIONS.map(id=>{const on=!s.hidden.includes(id);return '<button class="chip'+(on?' sel':'')+'" aria-pressed="'+on+'" onclick="setSection(\''+id+'\','+!on+');renderLookSec()">'+esc(names[id]||id)+'</button>';}).join('')+'</div></div>';
+}
+
+/* ════════ YEAR IN REVIEW ════════ */
+let reviewYear=new Date().getFullYear();
+const REVIEW_PROMPTS=['my proudest moment this year','what made this year special','a challenge i got through','lessons i’m taking with me','people i’m grateful for','what i’m letting go of','my word for next year','3 things i want next year'];
+function navReviewYear(d){flushStaticSave();reviewYear+=d;renderReview();}
+function renderReview(){
+  const y=reviewYear,ys=String(y),sf=STORE.load('staticFields',{}),ml=STORE.load('moodLog',{}),fl=STORE.load('focusLog',{}),wl=STORE.load('workoutLog',{});
+  document.getElementById('review-year-label').textContent=ys;document.getElementById('review-title').textContent=ys+' in review ✦';
+  const dayKeys=new Set(Object.keys(sf).filter(k=>k.startsWith('d_'+ys)&&sf[k]).map(k=>k.slice(2,12)));
+  const journal=Object.keys(sf).filter(k=>k.startsWith('j_'+ys)&&sf[k]).length;
+  const moods=Object.entries(ml).filter(([k])=>k.startsWith(ys+'-'));
+  const focusMin=Object.entries(fl).filter(([k])=>k.startsWith(ys)).reduce((s,[,a])=>s+a.reduce((x,e)=>x+e.mins,0),0);
+  const workouts=Object.keys(wl).filter(k=>k.startsWith(ys)).length;
+  const booksDone=books.filter(b=>b.status==='read'&&b.finished&&b.finished.startsWith(ys));
+  const meals=Object.entries(STORE.load('mealPlan',{})).filter(([k])=>k.startsWith(ys)).reduce((s,[,p])=>s+Object.keys(p).length,0);
+  const gratitude=Object.keys(sf).filter(k=>k.startsWith('d_'+ys)&&k.includes('_grateful_')&&sf[k]).length;
+  const assignDone=STORE.load('assignments',[]).filter(a=>a.status==='done'&&(a.due||'').startsWith(ys)).length;
+  const tile=(n,l,bg,c)=>'<div class="stat-card" style="background:'+bg+'"><div class="stat-num" style="color:'+c+'">'+n+'</div><div class="stat-lbl">'+l+'</div></div>';
+  document.getElementById('review-stats').innerHTML=tile(dayKeys.size,'days planned','var(--lav-l)','var(--lav-d)')+tile(journal,'journal entries','var(--blush-l)','var(--blush-d)')+tile(moods.length,'moods logged','var(--mint-l)','var(--mint-d)')+tile(booksDone.length,'books finished','var(--sky-l)','var(--sky-d)')
+    +tile(workouts,'workout days','var(--peach-l)','var(--peach-d)')+tile(focusMin>=60?Math.round(focusMin/6)/10+'h':focusMin+'m','focused','var(--butter-l)','var(--butter-d)')+tile(meals,'meals planned','var(--mint-l)','var(--mint-d)')+tile(gratitude,'gratitude notes','var(--blush-l)','var(--blush-d)');
+  const counts={};moods.forEach(([,m])=>counts[m]=(counts[m]||0)+1);
+  const moodRows=Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([m,v])=>({label:m,v}));
+  const months=[...Array(12)].map((_,i)=>{const p=ys+'-'+String(i+1).padStart(2,'0');const v=[...dayKeys].filter(k=>k.startsWith(p)).length;return {label:MONTHS[i].slice(0,1),v,tip:MONTHS[i]+' · '+v+' days planned'};});
+  document.getElementById('review-highlights').innerHTML=
+     '<div class="card al"><div class="section-label">💜 how the year felt</div>'+(moodRows.length?_hbars(moodRows,'var(--lav)',v=>v+' days'):'<div class="ins-empty">no moods logged in '+ys+'.</div>')+'</div>'
+    +'<div class="card am"><div class="section-label">🗓️ days planned each month</div>'+_vbars(months,'var(--mint-d)')+'</div>'
+    +'<div class="card as"><div class="section-label">📚 books finished</div>'+(booksDone.length?booksDone.map(b=>'<div class="row-item"><span>'+esc(b.title)+'</span><span style="margin-left:auto;font-size:11px;color:var(--muted)">'+esc(b.author||'')+'</span></div>').join(''):'<div class="ins-empty">none marked as read in '+ys+'.</div>')+'</div>'
+    +'<div class="card ap"><div class="section-label">✈️ trips & milestones</div>'+(trips.filter(t=>t.status==='done').map(t=>'<div class="row-item">📍 '+esc(t.dest)+'<span style="margin-left:auto;font-size:11px;color:var(--muted)">'+esc(t.dates||'')+'</span></div>').join('')||'<div class="ins-empty">no trips marked done.</div>')
+      +(assignDone?'<div class="row-item">🎓 '+assignDone+' assignments completed</div>':'')+'</div>';
+  document.getElementById('review-prompts').innerHTML=REVIEW_PROMPTS.map((q,i)=>'<div style="margin-bottom:12px"><div style="font-family:var(--font-head);font-size:16px;color:var(--lav-d);margin-bottom:4px">'+q+'</div><textarea data-sid="f_review_'+ys+'_'+(i+1)+'" style="min-height:60px" placeholder="write freely…">'+esc(sf['f_review_'+ys+'_'+(i+1)]||'')+'</textarea></div>').join('')
+    +'<button class="mini-btn" onclick="window.print()">🖨️ print my year</button>';
+}
+
+/* ════════ TODAY AT A GLANCE (daily page) ════════ */
+function renderGlance(){
+  const box=document.getElementById('glance');if(!box)return;
+  if(typeof dayOffset!=='undefined'&&dayOffset!==0){box.style.display='none';return;}
+  const s=sectionsCfg(),hid=id=>s.hidden.includes(id),chips=[],t=dk0(new Date());
+  const add=(icon,html,page,hot)=>chips.push('<button class="gl-chip'+(hot?' hot':'')+'" onclick="goToPage(\''+page+'\')">'+icon+' <span>'+html+'</span></button>');
+  if(!hid('fitness')){const w=todaysWorkout();if(w&&!w.rest){const done=Object.keys((STORE.load('workoutLog',{})[dateKey(t)])||{}).length;add('🏋️','<b>'+FOCUS_NAME[w.focus]+'</b> · '+(done>=w.list.length?'done ✓':done+'/'+w.list.length),'fitness');}}
+  if(!hid('meals')){const ws=new Date(t.getFullYear(),t.getMonth(),t.getDate()-((t.getDay()+6)%7)),plan=(STORE.load('mealPlan',{})[dateKey(ws)])||{},i=(t.getDay()+6)%7;
+    const m=MEAL_SLOTS.map(([k])=>plan[i+'_'+k]).filter(Boolean);if(m.length)add('🍽️','<b>'+esc(m.slice(0,2).join(' · '))+'</b>'+(m.length>2?' +'+(m.length-2):''),'meals');}
+  if(!hid('budget'))billAlerts().filter(x=>x.days<=3).forEach(({b,days})=>add('💸','<b>'+esc(b.name)+'</b> '+fmt(+b.amount||0)+' · '+(days<0?'overdue':'due '+inDays(days)),'budget',days<=1));
+  if(!hid('dates'))upcomingDates(14).filter(u=>u.days<=Math.max(7,+u.x.remind||0)).slice(0,3).forEach(u=>add(u.x.type==='birthday'?'🎂':'💞','<b>'+esc(u.x.name)+'</b> '+inDays(u.days),'dates',u.days<=1));
+  if(!hid('study')){const cls=todaysClasses();if(cls.length)add('🎓','<b>'+cls.length+' class'+(cls.length>1?'es':'')+'</b> · '+esc(cls.slice(0,2).map(c=>c.subject).join(', ')),'study');
+    STORE.load('assignments',[]).filter(a=>a.status!=='done'&&a.due).map(a=>({a,n:dueInfo(a)})).filter(x=>x.n<=2).slice(0,3).forEach(({a,n})=>add('📝','<b>'+esc(a.title||a.subject||'assignment')+'</b> '+(n<0?'overdue':'due '+inDays(n)),'study',n<=0));
+    STORE.load('exams',[]).filter(e=>e.date).map(e=>({e,n:daysBetween(t,parseKey(e.date))})).filter(x=>x.n>=0&&x.n<=7).forEach(({e,n})=>add('⏳','<b>'+esc(e.name||e.subject||'exam')+'</b> '+inDays(n),'study',n<=1));}
+  if(!hid('health')){const meds=STORE.load('meds',[]).filter(medActive);if(meds.length){const tk=medTaken();let tot=0,tak=0;meds.forEach(m=>{const ts=medTimes(m);(ts.length?ts:['any']).forEach(x=>{tot++;if(tk[m.id+'@'+x])tak++;});});add('💊','<b>medicines</b> '+tak+'/'+tot+' taken','health',false);}
+    STORE.load('visits',[]).filter(v=>v.follow).map(v=>({v,n:daysBetween(t,parseKey(v.follow))})).filter(x=>x.n>=0&&x.n<=3).forEach(({v,n})=>add('👩‍⚕️','<b>'+esc(v.doctor||'follow-up')+'</b> '+inDays(n),'health',n<=1));}
+  if(s.cycle){const st=cycleStats(),pr=cyclePredict(st),ph=cyclePhaseOn(t,st);if(pr)add('🌙','<b>day '+(ph?ph.day:'–')+'</b> · '+(ph?PHASE_INFO[ph.phase][0].replace(/^\S+\s/,''):'')+' · '+(pr.late?'period late '+pr.late+'d':'period '+inDays(pr.inDays)),'cycle',pr.inDays<=2&&!pr.late);}
+  box.style.display=chips.length?'':'none';
+  box.innerHTML='<div class="section-label">☀️ today at a glance</div><div class="gl-items">'+chips.join('')+'</div>';
+}
+
+/* ════════ reminders for bills, dates, deadlines, periods + medicines ════════ */
+function lifeAlerts(){
+  const s=sectionsCfg(),out=[],t=dk0(new Date());
+  if(!s.hidden.includes('budget'))billAlerts().filter(x=>x.days===0||x.days===1).forEach(({b,days})=>out.push(['💸 '+b.name+' is due '+inDays(days),fmt(+b.amount||0)+(b.autopay?' · autopay':' · don’t forget to pay')]));
+  if(!s.hidden.includes('dates'))upcomingDates(60).filter(u=>u.days===0||u.days===(+u.x.remind||0)).forEach(u=>out.push([(u.x.type==='birthday'?'🎂 ':'💞 ')+u.x.name+' '+inDays(u.days),u.days?'time to sort a gift? 🎁':'send some love today 💌']));
+  if(!s.hidden.includes('study')){STORE.load('assignments',[]).filter(a=>a.status!=='done'&&dueInfo(a)===1).forEach(a=>out.push(['📝 '+(a.title||a.subject)+' is due tomorrow','you’ve got this ✨']));
+    STORE.load('exams',[]).filter(e=>e.date&&daysBetween(t,parseKey(e.date))===1).forEach(e=>out.push(['⏳ '+(e.name||e.subject)+' exam tomorrow','early night & a calm morning 🌙']));}
+  if(s.cycle){const pr=cyclePredict();if(pr&&!pr.late&&(pr.inDays===2||pr.inDays===0))out.push(['🌙 period '+inDays(pr.inDays),'maybe pack some supplies 🌸']);}
+  return out;
+}
+
+const LIFE_RENDER={meals:()=>renderMeals(),fitness:()=>renderFitness(),dates:()=>renderDates(),cycle:()=>renderCycle(),review:()=>renderReview(),daily:()=>renderGlance(),health:()=>renderMedToday()};
+function initLife(){
+  initMeals();initBills();initDebts();initDates();initStudy();initHealth();
+  renderFitness();renderCycle();renderReview();applySections();renderGlance();
+}
+
 /* ════════════ CURRENCY ════════════
    Every currency in current use (ISO 4217), formatted by the browser's own
    rules (right symbol, decimals and grouping). New users get their country's
@@ -3663,6 +4697,7 @@ function refreshMoney(){
   if(!appOpen())return;
   renderExpenses();renderIncomes();renderSavings();renderSubs();updateBudgetOverview();updateTravelOverview();updateTravelFund();renderTripExps();
   if(document.getElementById('trips-list').children.length)renderTrips();
+  renderBills();renderDebts();renderDates();renderGlist('gift-list');renderGlance();
   if(document.getElementById('page-insights').classList.contains('active'))buildInsights();
 }
 function openCurrency(){
